@@ -1,0 +1,29 @@
+%h4
+  File name:
+  = @file_upload.name
+
+%h4
+  File type:
+  = @file_upload.file_type
+
+%h4
+  File size:
+  = @file_upload.file_size
+
+
+%table
+  %thead
+    %tr
+      - @file_upload.csv_headers.each do |header|
+        %th
+          = header.name
+
+  %tbody
+    - @file_upload.csv_rows.each do |row|
+      %tr
+        - @file_upload.csv_headers.each do |header|
+          %td
+            = row.csv_row[header.name]
+
+
+= link_to t('.back'), file_uploads_path

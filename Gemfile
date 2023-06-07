@@ -28,7 +28,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -70,3 +70,13 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "carrierwave", "~> 2.2"
+
+gem "sidekiq", "~> 7.1"
+
+gem "sidekiq-history", "~> 0.0.13"
+
+gem "haml-rails", "~> 2.1"
+
+gem "simple_form", "~> 5.2"

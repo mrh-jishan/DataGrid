@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  home:
+    index:
+      file_upload: File Upload
