@@ -1,4 +1,5 @@
 class FileUploadsController < ApplicationController
+  include Pagy::Backend
 
   def index
     @file_uploads = FileUpload.all
@@ -22,7 +23,7 @@ class FileUploadsController < ApplicationController
   def show
     @file_upload = FileUpload.find(params[:id])
     @csv_headers = @file_upload.csv_headers
-    @csv_rows = @file_upload.csv_rows
+    @pagy, @csv_rows = pagy(@file_upload.csv_rows)
   end
 
   def edit

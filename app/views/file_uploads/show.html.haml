@@ -17,7 +17,7 @@
     - @csv_rows.each do |row|
       %tr{"data-id" => "#{row.id}", "data-item-id" => "#{row.file_upload_id}"}
         - @csv_headers.each do |header|
-          %td{"data-action" => "click->editable#edit", "data-column-name" => header.name, "data-controller" => "editable", "data-turbo-frame" => "item-frame"}
+          %td.align-middle{"data-action" => "click->editable#edit", "data-column-name" => header.name, "data-controller" => "editable", "data-turbo-frame" => "item-frame"}
             = row.csv_row[header.name]
-
+!= pagy_bootstrap_nav(@pagy)
 = link_to t('.back'), file_uploads_path
