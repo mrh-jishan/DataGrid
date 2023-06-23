@@ -34,3 +34,4 @@ en:
   home:
     index:
       file_upload: File Upload
+      uploaded_files: Uploaded Files

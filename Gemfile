@@ -91,3 +91,7 @@ gem "bullet", "~> 7.0"
 gem "cssbundling-rails", "~> 1.1"
 
 gem "jsbundling-rails", "~> 1.1"
+
+gem "cable_ready", "~> 5.0"
+
+gem "pagy", "~> 6.0"

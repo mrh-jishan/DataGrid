@@ -21,12 +21,34 @@ class FileUploadsController < ApplicationController
 
   def show
     @file_upload = FileUpload.find(params[:id])
+    @csv_headers = @file_upload.csv_headers
+    @csv_rows = @file_upload.csv_rows
+  end
+
+  def edit
+
+  end
+
+  def update
+    @file_upload = FileUpload.find(params[:id])
+    @csv_row = @file_upload.csv_rows.find(params[:csv_row_id])
+    if @csv_row.update(file_upload_params)
+      respond_to do |format|
+        # format.html { redirect_to @file_upload, notice: 'Item was successfully updated.' }
+        format.json { render json: { success: true } }
+      end
+    else
+      respond_to do |format|
+        # format.html { render :edit }
+        format.json { render json: { success: false, errors: @file_upload.errors.full_messages }, status: :unprocessable_entity }
+      end
+    end
   end
 
   protected
 
   def file_upload_params
-    params.require(:file_upload).permit(:file)
+    params.require(:file_upload).permit(:file, :City)
   end
 
 end

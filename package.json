@@ -2,11 +2,14 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.0",
     "bootstrap-icons": "^1.10.5",
+    "cable_ready": "^5.0.0",
     "esbuild": "^0.17.19",
+    "mrujs": "^1.0.0",
     "sass": "^1.63.2"
   },
   "scripts": {

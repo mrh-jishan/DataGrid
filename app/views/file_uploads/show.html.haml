@@ -1,29 +1,23 @@
 %h4
   File name:
   = @file_upload.name
-
 %h4
   File type:
   = @file_upload.file_type
-
 %h4
   File size:
   = @file_upload.file_size
 
-
-%table
+%table.table.table-bordered.table-hover.table-striped
   %thead
-    %tr
-      - @file_upload.csv_headers.each do |header|
-        %th
-          = header.name
-
+    %tr.table-secondary
+      - @csv_headers.each do |header|
+        %th.text-center.align-middle= header.name
   %tbody
-    - @file_upload.csv_rows.each do |row|
-      %tr
-        - @file_upload.csv_headers.each do |header|
-          %td
+    - @csv_rows.each do |row|
+      %tr{"data-id" => "#{row.id}", "data-item-id" => "#{row.file_upload_id}"}
+        - @csv_headers.each do |header|
+          %td{"data-action" => "click->editable#edit", "data-column-name" => header.name, "data-controller" => "editable", "data-turbo-frame" => "item-frame"}
             = row.csv_row[header.name]
-
 
 = link_to t('.back'), file_uploads_path
