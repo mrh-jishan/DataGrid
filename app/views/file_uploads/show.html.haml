@@ -8,7 +8,7 @@
   File size:
   = @file_upload.file_size
 
-%table.table.table-bordered.table-hover.table-striped
+%table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
     %tr.table-secondary
       - @csv_headers.each do |header|
@@ -19,5 +19,7 @@
         - @csv_headers.each do |header|
           %td.align-middle{"data-action" => "click->editable#edit", "data-column-name" => header.name, "data-controller" => "editable", "data-turbo-frame" => "item-frame"}
             = row.csv_row[header.name]
-!= pagy_bootstrap_nav(@pagy)
+.d-flex.justify-content-end!= pagy_bootstrap_nav(@pagy)
 = link_to t('.back'), file_uploads_path
+
+%div{"data-controller" => "tabulator", "data-tabulator-target" => "table", "data-index" => "#{params[:id]}"}

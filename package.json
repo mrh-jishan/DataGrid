@@ -10,7 +10,8 @@
     "cable_ready": "^5.0.0",
     "esbuild": "^0.17.19",
     "mrujs": "^1.0.0",
-    "sass": "^1.63.2"
+    "sass": "^1.63.2",
+    "tabulator-tables": "^5.5.0"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",

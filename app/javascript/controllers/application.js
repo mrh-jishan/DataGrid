@@ -1,7 +1,6 @@
 import {Application} from "@hotwired/stimulus"
 import mrujs from "mrujs";
-import * as bootstrap from "bootstrap"
-
+// import * as bootstrap from "bootstrap"
 const application = Application.start()
 
 // Configure Stimulus development experience
