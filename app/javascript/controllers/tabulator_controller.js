@@ -4,12 +4,12 @@ import mrujs from 'mrujs';
 
 // Connects to data-controller="tabulator"
 export default class extends Controller {
-    static targets = ["table"]
+    // static targets = ["table"]
 
     connect() {
         (async () => {
             const id = this.element.dataset.index;
-            new Tabulator(this.tableTarget, {
+            new Tabulator(this.element, {
                 layout: "fitData",
                 pagination: true, //enable pagination
                 paginationMode: "remote",
@@ -22,13 +22,5 @@ export default class extends Controller {
     fetchColumns = (id) => {
         return mrujs.fetch(`/file_uploads/${id}/csv_headers.json`)
             .then((response) => response.json())
-            .then((data) => {
-                console.log("data: ", data)
-                return data;
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-                return []
-            });
     }
 }

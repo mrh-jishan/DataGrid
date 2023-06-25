@@ -1,0 +1,9 @@
+%h1 Dashboard#index
+%p Find me in app/views/dashboard/index.html.haml
+
+
+%select{ "data-controller": "choices", "data-choices-items-value": @choices_data.to_json }
+
+%canvas{data: {controller: "chart", chart: {"data-value" => @chart_data.to_json, "options-value" => @chart_options.to_json} } }
+
+-# %canvas{"data-chart-data-value" => "#{@chart_data.to_json}", "data-chart-options-value" => "#{@chart_options.to_json}", "data-controller" => "chart"}

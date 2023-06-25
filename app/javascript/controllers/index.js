@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChoicesController from "./choices_controller"
+application.register("choices", ChoicesController)
+
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
 
