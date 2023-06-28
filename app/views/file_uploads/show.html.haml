@@ -7,6 +7,9 @@
 %h4
   File size:
   = @file_upload.file_size
+%h4
+  Row count:
+  = @file_upload.csv_rows.count
 
 -# %table.table.table-bordered.table-hover.table-striped.table-responsive
 -#   %thead
@@ -22,5 +25,6 @@
 -# .d-flex.justify-content-end!= pagy_bootstrap_nav(@pagy)
 
 = link_to t('.back'), file_uploads_path
+= link_to t('.dashboard'), file_upload_dashboards_path(params[:id])
 
 %div{ data: { controller: "tabulator", index: params[:id] } }

@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardsController < ApplicationController
   def index
     @chart_data = {
       labels: %w[January February March April May June July AUG],
@@ -41,4 +41,5 @@ class DashboardController < ApplicationController
                      }]
 
   end
+
 end

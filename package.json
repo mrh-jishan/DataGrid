@@ -12,6 +12,7 @@
     "esbuild": "^0.17.19",
     "mrujs": "^1.0.0",
     "sass": "^1.63.2",
+    "sortablejs": "^1.15.0",
     "stimulus-chartjs": "^5.0.0",
     "tabulator-tables": "^5.5.0"
   },

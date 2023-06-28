@@ -1,7 +1,6 @@
 %h1 FileUpload#new
 %p Find me in app/views/file_upload/new.html.haml
 
-
 = simple_form_for @file_upload, url: file_uploads_path, html: { multipart: true } do |f|
   = f.input :file, as: :file
-  = f.button :submit
+  = f.button :submit, class: 'btn btn-primary'
