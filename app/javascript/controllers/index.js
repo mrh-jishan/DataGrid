@@ -15,3 +15,6 @@ application.register("hello", HelloController)
 
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
+
+import Chart from 'stimulus-chartjs'
+application.register('chart', Chart)

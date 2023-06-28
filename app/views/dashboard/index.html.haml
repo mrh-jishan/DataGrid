@@ -4,6 +4,16 @@
 
 %select{ "data-controller": "choices", "data-choices-items-value": @choices_data.to_json }
 
+%select{ multiple: true, "data-controller": "choices", "data-choices-items-value": @choices_data.to_json }
+
 %canvas{data: {controller: "chart", chart: {"data-value" => @chart_data.to_json, "options-value" => @chart_options.to_json} } }
 
 -# %canvas{"data-chart-data-value" => "#{@chart_data.to_json}", "data-chart-options-value" => "#{@chart_options.to_json}", "data-controller" => "chart"}
+
+
+-# = simple_form_for :dashboard_index_path do |f|
+-#   = f.input :username, as: :select
+-#   = f.button :submit, 'Search'
+  -# = f.input :username
+  -# = f.input :password
+  -# = f.button :submit
