@@ -1,12 +1,11 @@
-import {Application} from "@hotwired/stimulus"
+import { Application } from "@hotwired/stimulus"
 import mrujs from "mrujs";
-// import * as bootstrap from "bootstrap"
+
 const application = Application.start()
+mrujs.start();
 
 // Configure Stimulus development experience
 application.debug = false
-window.Stimulus = application
-mrujs.start();
+window.Stimulus   = application
 
-
-export {application}
+export { application }

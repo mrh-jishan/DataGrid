@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
+import ChartController from "./chart_controller"
+application.register("chart", ChartController)
+
 import ChoicesController from "./choices_controller"
 application.register("choices", ChoicesController)
+
+import DashboardsController from "./dashboards_controller"
+application.register("dashboards", DashboardsController)
 
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
@@ -15,6 +21,3 @@ application.register("hello", HelloController)
 
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
-
-import Chart from 'stimulus-chartjs'
-application.register('chart', Chart)
