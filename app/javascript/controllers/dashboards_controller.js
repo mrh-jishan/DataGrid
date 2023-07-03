@@ -1,8 +1,11 @@
 import {Controller} from "@hotwired/stimulus"
 import Chart from 'chart.js/auto';
+import SlimSelect from 'slim-select'
 
 // Connects to data-controller="dashboards"
 export default class extends Controller {
+
+    static targets = ['canvas', 'singleSelect', 'multiSelect']
 
     static values = {
         type: {
@@ -10,16 +13,36 @@ export default class extends Controller {
             default: 'line'
         },
         data: Object,
-        options: Object
+        options: Object,
+        singleSelectItems: []
     }
 
     connect() {
-        // Create a new chart using the chart data
-        const ctx = this.element.getContext('2d');
+
+        // console.log('this.singleSelectItemsValue: ', this.singleSelectTarget.dataset.dashboardsSingleSelectItemsValue)
+
+        const ctx = this.canvasTarget.getContext('2d');
         new Chart(ctx, {
             type: this.typeValue,
             data: this.dataValue,
             options: this.optionsValue,
         });
+
+        new SlimSelect({
+            select: this.singleSelectTarget,
+        })
+
+        new SlimSelect({
+            select: this.multiSelectTarget,
+        })
+
+        // this.choices = new Choices(this.singleSelectTarget);
+        // console.log("choices: ", this.choices)
+
+        // this.choices = new Choices(this.singleSelectTarget, {
+        //     choices: JSON.parse(this.singleSelectTarget.dataset.dashboardsSingleSelectItemsValue),
+        //     items: []
+        // })
+
     }
 }
