@@ -2,9 +2,12 @@
 %p Find me in app/views/dashboard/index.html.haml
 
 
-%div{"data-dashboards-data-value": @chart_data.to_json, "data-dashboards-options-value": @chart_options.to_json, "data-controller": "dashboards"}
-  = select_tag :single_select, options_from_collection_for_select(@headers, :id, :name), include_blank: true, data: { dashboards_target: 'singleSelect' }
+%div{"data-dashboards-type-value": 'bar', "data-dashboards-data-value": @chart_data.to_json, "data-dashboards-options-value": @chart_options.to_json, "data-dashboards-headers-value": @headers.to_json, "data-dashboards-rows-value": @rows.to_json, "data-controller": "dashboards"}
+  = label_tag :select_items
   = select_tag :multi_select, options_from_collection_for_select(@headers, :id, :name), include_blank: true, multiple: true, "data-dashboards-target":  "multiSelect"
+
+  = label_tag :group_by
+  = select_tag :select_items, options_from_collection_for_select(@headers, :id, :name), include_blank: true, data: { dashboards_target: 'singleSelect' }
   %canvas{ "data-dashboards-target":  "canvas"}
 
 

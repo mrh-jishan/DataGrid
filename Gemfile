@@ -92,3 +92,5 @@ gem "jsbundling-rails", "~> 1.1"
 gem "cable_ready", "~> 5.0"
 
 gem "pagy", "~> 6.0"
+
+gem "scenic", "~> 1.7"
