@@ -10,8 +10,5 @@ application.register("dashboards", DashboardsController)
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
