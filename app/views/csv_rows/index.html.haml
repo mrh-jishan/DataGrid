@@ -2,5 +2,5 @@
 %p Find me in app/views/csv_rows/index.html.haml
 
 - @rows.each do |row|
-  = row.email
+  = row.as_json
   %br
