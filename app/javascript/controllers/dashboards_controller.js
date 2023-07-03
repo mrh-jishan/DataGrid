@@ -30,10 +30,20 @@ export default class extends Controller {
 
         new SlimSelect({
             select: this.singleSelectTarget,
+            events: {
+                afterChange: (newVal) => {
+                    console.log(newVal)
+                }
+            }
         })
 
         new SlimSelect({
             select: this.multiSelectTarget,
+            events: {
+                afterChange: (newVal) => {
+                    console.log(newVal)
+                }
+            }
         })
 
         // this.choices = new Choices(this.singleSelectTarget);

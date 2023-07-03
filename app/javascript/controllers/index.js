@@ -4,12 +4,6 @@
 
 import { application } from "./application"
 
-import ChartController from "./chart_controller"
-application.register("chart", ChartController)
-
-import ChoicesController from "./choices_controller"
-application.register("choices", ChoicesController)
-
 import DashboardsController from "./dashboards_controller"
 application.register("dashboards", DashboardsController)
 
