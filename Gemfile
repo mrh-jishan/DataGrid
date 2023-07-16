@@ -94,3 +94,7 @@ gem "cable_ready", "~> 5.0"
 gem "pagy", "~> 6.0"
 
 gem "scenic", "~> 1.7"
+
+gem "groupdate", "~> 6.3"
+
+gem "chartkick", "~> 5.0"

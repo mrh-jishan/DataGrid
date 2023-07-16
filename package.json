@@ -9,6 +9,7 @@
     "bootstrap-icons": "^1.10.5",
     "cable_ready": "^5.0.0",
     "chart.js": "^4.3.0",
+    "chartkick": "^5.0.1",
     "esbuild": "^0.18.11",
     "mrujs": "^1.0.0",
     "sass": "^1.63.6",
