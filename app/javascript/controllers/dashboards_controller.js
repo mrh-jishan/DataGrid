@@ -6,7 +6,7 @@ import mrujs from "mrujs";
 // Connects to data-controller="dashboards"
 export default class extends Controller {
 
-    static targets = ['canvas', 'columnNames']
+    static targets = ['canvas', 'columnNames', 'groupBy']
 
     static values = {
         type: {
@@ -103,6 +103,20 @@ export default class extends Controller {
                         const columnNames = newVal.map(res => res.text)
                         const csvRows = await this.fetchCsvRows(id, columnNames)
                         console.log("csv rows: ", csvRows)
+                        // this.dropdownChanged(newVal)
+                    }
+                }
+            })
+
+
+            new SlimSelect({
+                select: this.groupByTarget,
+                events: {
+                    afterChange: async (newVal) => {
+                        console.log(newVal)
+                        // const groupBy = newVal.map(res => res.text)
+                        // const csvRows = await this.fetchCsvRows(id, columnNames)
+                        // console.log("csv rows: ", csvRows)
                     }
                 }
             })
@@ -127,5 +141,37 @@ export default class extends Controller {
         return mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
             .then((response) => response.json())
 
+    }
+
+
+    dropdownChanged(newVals) {
+        this.removeDropdownContainers();
+
+        // Loop through the selected fields
+        newVals.forEach((newVal) => {
+            const field = newVal.value;
+            const dropdownOptions = ['sum', 'count', 'max', 'min'];
+            const dropdownHtml = `
+                <select>
+                  ${dropdownOptions.map((option) => `<option value="${option}">${option}</option>`).join('')}
+                </select>
+              `;
+
+            // console.log(this.element)
+            // Create a new container and append the dropdown to it
+            const container = document.createElement('div');
+            container.id = `${field}-dropdown-container`;
+            container.innerHTML = dropdownHtml;
+            console.log("this.columnNamesTarget: ", this.columnNamesTarget)
+            // this.element.appendChild(container); // Append the container after the multi-select element
+            // this.columnNamesTarget.insertAdjacentElement('afterend', container);
+            this.columnNamesTarget.parentElement.appendChild(container);
+        });
+    }
+
+    removeDropdownContainers() {
+        // Remove all existing dropdown containers
+        const existingContainers = this.element.querySelectorAll('[id$="-dropdown-container"]');
+        existingContainers.forEach((container) => container.remove());
     }
 }
