@@ -1,12 +1,12 @@
 import {Controller} from "@hotwired/stimulus"
 import Chart from 'chart.js/auto';
-import SlimSelect from 'slim-select'
 import mrujs from "mrujs";
+import Sortable from "sortablejs";
 
 // Connects to data-controller="dashboards"
 export default class extends Controller {
 
-    static targets = ['canvas', 'columnNames', 'groupBy']
+    static targets = ['canvas', 'headers', 'columnNames', 'groupBy']
 
     static values = {
         type: {
@@ -31,8 +31,8 @@ export default class extends Controller {
             //         console.log("data: ", data)
             //     })
             //
-            console.log("headers: ", this.headersValue)
-            console.log("rows: ", this.rowsValue)
+            // console.log("headers: ", this.headersValue)
+            // console.log("rows: ", this.rowsValue)
 
             const id = this.element.dataset.index;
 
@@ -86,6 +86,81 @@ export default class extends Controller {
                 // this.optionsValue,
             });
 
+
+            const sortable1 = new Sortable(this.headersTarget, {
+                animation: 150,
+                group: 'shared',
+                onEnd: (evt) => {
+                    // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
+                    // console.log('Sorted fields:', evt);
+                    // const allItems = Array.from(evt.from.children)
+                    // console.log('1  const allItems = Array.from(evt.from.children): ', allItems)
+                    // console.log('Sorted fieldst:', sortable1.toArray());
+                },
+                // Add any other SortableJS options you may need
+            });
+
+
+            const sortable2 = new Sortable(this.columnNamesTarget, {
+                animation: 150,
+                group: 'shared',
+                onEnd: (evt) => {
+                    // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
+                    // console.log('Sorted fields:', evt);
+                },
+                onAdd: (evt) => {
+                    console.log('Sorted fields:', evt);
+                    const allItems = Array.from(evt.to.children).map(item => {
+                        return {
+                            id: item.dataset.id,
+                            name: item.innerText.trim(),
+                        };
+                    });
+                    console.log('2---------:', allItems)
+                }
+                // Add any other SortableJS options you may need
+            });
+
+            const sortable3 = new Sortable(this.groupByTarget, {
+                animation: 150,
+                group: 'shared',
+                onEnd: (evt) => {
+                    // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
+                    // const allItems = Array.from(evt.from.children)
+                    // console.log('3  const allItems = Array.from(evt.from.children): ', allItems)
+                    // console.log('Sorted fields:', evt);
+                },
+                onAdd: (evt) => {
+                    const allItems = Array.from(evt.to.children).map(item => {
+                        return {
+                            id: item.dataset.id,
+                            name: item.innerText.trim(),
+                        };
+                    });
+                    console.log('3-------------:', allItems)
+                }
+                // Add any other SortableJS options you may need
+            });
+
+
+            // sortable1.on('end', () => {
+            //     const allItems = sortable1.toArray();
+            //     console.log('1All items:', allItems);
+            //     // Perform any actions with the array of all items here
+            // });
+            //
+            // sortable2.on('end', () => {
+            //     const allItems = sortable.toArray();
+            //     console.log('2All items:', allItems);
+            //     // Perform any actions with the array of all items here
+            // });
+            //
+            // sortable3.on('end', () => {
+            //     const allItems = sortable.toArray();
+            //     console.log('3All items:', allItems);
+            //     // Perform any actions with the array of all items here
+            // });
+
             // new SlimSelect({
             //     select: this.singleSelectTarget,
             //     events: {
@@ -95,31 +170,31 @@ export default class extends Controller {
             //     }
             // })
 
-            new SlimSelect({
-                select: this.columnNamesTarget,
-                events: {
-                    afterChange: async (newVal) => {
-                        console.log(newVal)
-                        const columnNames = newVal.map(res => res.text)
-                        const csvRows = await this.fetchCsvRows(id, columnNames)
-                        console.log("csv rows: ", csvRows)
-                        // this.dropdownChanged(newVal)
-                    }
-                }
-            })
-
-
-            new SlimSelect({
-                select: this.groupByTarget,
-                events: {
-                    afterChange: async (newVal) => {
-                        console.log(newVal)
-                        // const groupBy = newVal.map(res => res.text)
-                        // const csvRows = await this.fetchCsvRows(id, columnNames)
-                        // console.log("csv rows: ", csvRows)
-                    }
-                }
-            })
+            // new SlimSelect({
+            //     select: this.columnNamesTarget,
+            //     events: {
+            //         afterChange: async (newVal) => {
+            //             console.log(newVal)
+            //             const columnNames = newVal.map(res => res.text)
+            //             const csvRows = await this.fetchCsvRows(id, columnNames)
+            //             console.log("csv rows: ", csvRows)
+            //             // this.dropdownChanged(newVal)
+            //         }
+            //     }
+            // })
+            //
+            //
+            // new SlimSelect({
+            //     select: this.groupByTarget,
+            //     events: {
+            //         afterChange: async (newVal) => {
+            //             console.log(newVal)
+            //             // const groupBy = newVal.map(res => res.text)
+            //             // const csvRows = await this.fetchCsvRows(id, columnNames)
+            //             // console.log("csv rows: ", csvRows)
+            //         }
+            //     }
+            // })
 
             // this.choices = new Choices(this.singleSelectTarget);
             // console.log("choices: ", this.choices)
