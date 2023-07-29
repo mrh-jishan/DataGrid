@@ -4,15 +4,14 @@
 .row{"data-dashboards-type-value": 'bar', "data-dashboards-data-value": @chart_data.to_json, "data-dashboards-options-value": @chart_options.to_json, "data-dashboards-headers-value": @headers.to_json, "data-dashboards-rows-value": @rows.to_json, "data-controller": "dashboards", "data-index": params[:file_upload_id]}
   .col-md-2.border.border-danger{"data-dashboards-target":  "headers"}
     - @headers.each do |header|
-      .border.border-info.text-truncate.my-1{"data-id" => header.id, "data-bs-toggle": "tooltip", "data-bs-title": header.name}= header.to_s
+      .border.border-info.text-truncate.my-1{"data-id" => header.id, "data-bs-toggle": "tooltip", "data-bs-title": header.name}= header.name
   .col-md-2
     .row.h-50
       .border.border-danger{"data-dashboards-target": "columnNames"}
     .row.h-50
       .border.border-danger{"data-dashboards-target": "groupBy"}
   .col-md-8.border.border-danger
-    %canvas{ "data-dashboards-target":  "canvas"}
-
+    %canvas{"data-dashboards-target":  "canvas"}
 
 
 -# %div{"data-dashboards-type-value": 'bar', "data-dashboards-data-value": @chart_data.to_json, "data-dashboards-options-value": @chart_options.to_json, "data-dashboards-headers-value": @headers.to_json, "data-dashboards-rows-value": @rows.to_json, "data-controller": "dashboards", "data-index": params[:file_upload_id]}

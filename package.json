@@ -23,5 +23,6 @@
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "devDependencies": {}
 }

@@ -21,21 +21,6 @@ export default class extends Controller {
 
     connect() {
         (async () => {
-            // console.log('this.singleSelectItemsValue: ', this.singleSelectTarget.dataset.dashboardsSingleSelectItemsValue)
-
-            // const columnNames = ['Order ID', 'Category', 'Currency'];
-            // const queryParams = new URLSearchParams({column_names: columnNames});
-            // mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
-            //     .then((response) => response.json())
-            //     .then(data => {
-            //         console.log("data: ", data)
-            //     })
-            //
-            // console.log("headers: ", this.headersValue)
-            // console.log("rows: ", this.rowsValue)
-
-            const id = this.element.dataset.index;
-
             let data = {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'AUG'],
                 datasets: [{
@@ -65,8 +50,6 @@ export default class extends Controller {
                 }]
             }
 
-            // this.dataValue,
-
             const ctx = this.canvasTarget.getContext('2d');
             new Chart(ctx, {
                 type: this.typeValue,
@@ -83,65 +66,70 @@ export default class extends Controller {
                         }
                     }
                 }
-                // this.optionsValue,
             });
 
-
-            const sortable1 = new Sortable(this.headersTarget, {
+            new Sortable(this.headersTarget, {
                 animation: 150,
-                group: 'shared',
-                onEnd: (evt) => {
-                    // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
-                    // console.log('Sorted fields:', evt);
-                    // const allItems = Array.from(evt.from.children)
-                    // console.log('1  const allItems = Array.from(evt.from.children): ', allItems)
-                    // console.log('Sorted fieldst:', sortable1.toArray());
+                group: {
+                    name: 'shared',
+                    pull: true,
+                    put: true
                 },
-                // Add any other SortableJS options you may need
+                onEnd: (ev) => onEndChange(ev),
             });
 
-
-            const sortable2 = new Sortable(this.columnNamesTarget, {
+            const sortableColumnName = new Sortable(this.columnNamesTarget, {
                 animation: 150,
-                group: 'shared',
-                onEnd: (evt) => {
-                    // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
-                    // console.log('Sorted fields:', evt);
+                group: {
+                    name: 'shared',
+                    pull: true,
+                    put: true
                 },
-                onAdd: (evt) => {
-                    console.log('Sorted fields:', evt);
-                    const allItems = Array.from(evt.to.children).map(item => {
-                        return {
-                            id: item.dataset.id,
-                            name: item.innerText.trim(),
-                        };
-                    });
-                    console.log('2---------:', allItems)
-                }
-                // Add any other SortableJS options you may need
+                onEnd: (ev) => onEndChange(ev),
             });
 
-            const sortable3 = new Sortable(this.groupByTarget, {
+            const sortableGroupBy = new Sortable(this.groupByTarget, {
                 animation: 150,
-                group: 'shared',
-                onEnd: (evt) => {
-                    // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
-                    // const allItems = Array.from(evt.from.children)
-                    // console.log('3  const allItems = Array.from(evt.from.children): ', allItems)
-                    // console.log('Sorted fields:', evt);
+                group: {
+                    name: 'shared',
+                    pull: true,
+                    put: (to) => {
+                        return to.el.children.length < 1;
+                    }
                 },
-                onAdd: (evt) => {
-                    const allItems = Array.from(evt.to.children).map(item => {
-                        return {
-                            id: item.dataset.id,
-                            name: item.innerText.trim(),
-                        };
-                    });
-                    console.log('3-------------:', allItems)
-                }
-                // Add any other SortableJS options you may need
+                onEnd: (ev) => onEndChange(ev),
             });
 
+
+            const onEndChange = (ev) => {
+                const columnNames = getData(sortableColumnName.el.children)
+                const groupBy = getData(sortableGroupBy.el.children)
+                const queryParams = new URLSearchParams({column_names: columnNames, group_by: groupBy});
+                const id = this.element.dataset.index;
+                mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
+                    .then((response) => response.json())
+                    .then(data => {
+                        console.log("data: ", data)
+                    })
+
+                // console.log("this happen here1", sortable1.toArray())
+                // console.log("this happen here2", getData(sortableColumnName.el.children))
+                // console.log("this happen here3", sortableGroupBy.el.children)
+
+                // const columnNames = ['Order ID', 'Category', 'Currency'];
+                // const queryParams = new URLSearchParams({column_names: columnNames});
+                // mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
+                //     .then((response) => response.json())
+                //     .then(data => {
+                //         console.log("data: ", data)
+                //     })
+                //
+                // console.log("headers: ", this.headersValue)
+                // console.log("rows: ", this.rowsValue)
+            }
+
+            const getData = (children) => Array.from(children)
+                .map(item => item.innerText.trim())
 
             // sortable1.on('end', () => {
             //     const allItems = sortable1.toArray();
@@ -149,13 +137,13 @@ export default class extends Controller {
             //     // Perform any actions with the array of all items here
             // });
             //
-            // sortable2.on('end', () => {
+            // sortableColumnName.on('end', () => {
             //     const allItems = sortable.toArray();
             //     console.log('2All items:', allItems);
             //     // Perform any actions with the array of all items here
             // });
             //
-            // sortable3.on('end', () => {
+            // sortableGroupBy.on('end', () => {
             //     const allItems = sortable.toArray();
             //     console.log('3All items:', allItems);
             //     // Perform any actions with the array of all items here
@@ -218,35 +206,59 @@ export default class extends Controller {
 
     }
 
-
-    dropdownChanged(newVals) {
-        this.removeDropdownContainers();
-
-        // Loop through the selected fields
-        newVals.forEach((newVal) => {
-            const field = newVal.value;
-            const dropdownOptions = ['sum', 'count', 'max', 'min'];
-            const dropdownHtml = `
-                <select>
-                  ${dropdownOptions.map((option) => `<option value="${option}">${option}</option>`).join('')}
-                </select>
-              `;
-
-            // console.log(this.element)
-            // Create a new container and append the dropdown to it
-            const container = document.createElement('div');
-            container.id = `${field}-dropdown-container`;
-            container.innerHTML = dropdownHtml;
-            console.log("this.columnNamesTarget: ", this.columnNamesTarget)
-            // this.element.appendChild(container); // Append the container after the multi-select element
-            // this.columnNamesTarget.insertAdjacentElement('afterend', container);
-            this.columnNamesTarget.parentElement.appendChild(container);
-        });
-    }
-
-    removeDropdownContainers() {
-        // Remove all existing dropdown containers
-        const existingContainers = this.element.querySelectorAll('[id$="-dropdown-container"]');
-        existingContainers.forEach((container) => container.remove());
-    }
 }
+
+
+// onEnd: (ev) => onEndChange(ev),
+// onMove: (ev) => onEndChange(ev),
+// onMove: (evt, originalEvent) => {
+// console.log('evt on move', evt);
+// console.log('original on mve: ', originalEvent);
+// return false
+// }
+// Add any other SortableJS options you may need
+
+
+// console.log('this.singleSelectItemsValue: ', this.singleSelectTarget.dataset.dashboardsSingleSelectItemsValue)
+
+// const columnNames = ['Order ID', 'Category', 'Currency'];
+// const queryParams = new URLSearchParams({column_names: columnNames});
+// mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
+//     .then((response) => response.json())
+//     .then(data => {
+//         console.log("data: ", data)
+//     })
+//
+// console.log("headers: ", this.headersValue)
+// console.log("rows: ", this.rowsValue)
+// const id = this.element.dataset.index;
+
+// onEnd: (ev) => onEndChange(ev),
+// onAdd: (evt) => {
+// console.log('Sorted fields:', evt);
+// const allItems = Array.from(evt.to.children).map(item => {
+//     return {
+//         id: item.dataset.id,
+//         name: item.innerText.trim(),
+//     };
+// });
+// console.log('2---------:', allItems)
+// }
+// Add any other SortableJS options you may need
+//     (evt) => {
+//     // const sortedFields = Array.from(evt.to.children).map((field) => field.querySelector('input').name);
+//     // const allItems = Array.from(evt.from.children)
+//     // console.log('3  const allItems = Array.from(evt.from.children): ', allItems)
+//     // console.log('Sorted fields:', evt);
+// },
+// onEnd: (ev) => onEndChange(ev),
+// onAdd: (evt) => {
+// const allItems = Array.from(evt.to.children).map(item => {
+//     return {
+//         id: item.dataset.id,
+//         name: item.innerText.trim(),
+//     };
+// });
+// console.log('3-------------:', allItems)
+// }
+// Add any other SortableJS options you may need

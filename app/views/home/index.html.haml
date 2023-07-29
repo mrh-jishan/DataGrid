@@ -6,10 +6,6 @@
 = link_to t('.uploaded_files'), file_uploads_path
 
 
-%select{ "data-controller": "choices", "data-choices-items-value": @choices_data.to_json }
-
-%select{ multiple: true, "data-controller": "choices", "data-choices-items-value": @choices_data.to_json }
-
 %div{"data-controller" => "tabulator", "data-index" => "4"}
 
 -# #example-table
