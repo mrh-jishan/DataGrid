@@ -128,8 +128,12 @@ export default class extends Controller {
                 // console.log("rows: ", this.rowsValue)
             }
 
-            const getData = (children) => Array.from(children)
-                .map(item => item.innerText.trim())
+            const getData = (children) => Array.from(children).map(e => {
+                return {
+                    name: e.dataset.name,
+                    type: e.dataset.type
+                }
+            })
 
             // sortable1.on('end', () => {
             //     const allItems = sortable1.toArray();
