@@ -1,7 +1,7 @@
 %h1 Dashboard#index
 %p Find me in app/views/dashboard/index.html.haml
 
-.row{"data-dashboards-type-value": 'bar', "data-dashboards-data-value": @chart_data.to_json, "data-dashboards-options-value": @chart_options.to_json, "data-dashboards-headers-value": @headers.to_json, "data-dashboards-rows-value": @rows.to_json, "data-controller": "dashboards", "data-index": params[:file_upload_id]}
+.row{"data-dashboards-type-value": 'bar', "data-controller": "dashboards", "data-index": params[:file_upload_id]}
   .col-md-3.list-group{"data-dashboards-target":  "headers"}
     - @headers.each do |header|
       .list-group-item.text-truncate{"data-id" => header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => header.name, "data-type" => data_type_pill(header.data_type), "data-name" => header.name}
