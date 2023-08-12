@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_223023) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_30_223341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_223023) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "data_type", default: "string", null: false
     t.index ["file_upload_id"], name: "index_csv_headers_on_file_upload_id"
   end
 

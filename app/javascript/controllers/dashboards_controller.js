@@ -21,6 +21,40 @@ export default class extends Controller {
 
     connect() {
         (async () => {
+            new Sortable(this.headersTarget, {
+                animation: 150,
+                group: {
+                    name: 'shared',
+                    pull: true,
+                    put: true
+                },
+                onEnd: (ev) => onEndChange(ev),
+            });
+
+            const sortableColumnName = new Sortable(this.columnNamesTarget, {
+                animation: 150,
+                group: {
+                    name: 'shared',
+                    pull: true,
+                    put: true
+                },
+                onEnd: (ev) => onEndChange(ev),
+            });
+
+            const sortableGroupBy = new Sortable(this.groupByTarget, {
+                animation: 150,
+                group: {
+                    name: 'shared',
+                    pull: true,
+                    put: true,
+                    // put: (to) => {
+                    //     return to.el.children.length < 1;
+                    // }
+                },
+                onEnd: (ev) => onEndChange(ev),
+            });
+
+
             let data = {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'AUG'],
                 datasets: [{
@@ -68,72 +102,56 @@ export default class extends Controller {
                 }
             });
 
-            new Sortable(this.headersTarget, {
-                animation: 150,
-                group: {
-                    name: 'shared',
-                    pull: true,
-                    put: true
-                },
-                onEnd: (ev) => onEndChange(ev),
-            });
-
-            const sortableColumnName = new Sortable(this.columnNamesTarget, {
-                animation: 150,
-                group: {
-                    name: 'shared',
-                    pull: true,
-                    put: true
-                },
-                onEnd: (ev) => onEndChange(ev),
-            });
-
-            const sortableGroupBy = new Sortable(this.groupByTarget, {
-                animation: 150,
-                group: {
-                    name: 'shared',
-                    pull: true,
-                    put: (to) => {
-                        return to.el.children.length < 1;
-                    }
-                },
-                onEnd: (ev) => onEndChange(ev),
-            });
-
-
             const onEndChange = (ev) => {
-                const columnNames = getData(sortableColumnName.el.children)
-                const groupBy = getData(sortableGroupBy.el.children)
-                const queryParams = new URLSearchParams({column_names: columnNames, group_by: groupBy});
-                const id = this.element.dataset.index;
-                mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
+                const columnNames = Array.from(sortableColumnName.el.children)
+                    .reduce((accumulator, currentValue) => ({
+                        ...accumulator,
+                        [currentValue.dataset.name]: currentValue.dataset.type
+                    }), {})
+
+                const groupBy = Array.from(sortableGroupBy.el.children)
+                    .reduce((accumulator, currentValue) => ({
+                        ...accumulator,
+                        [currentValue.dataset.name]: currentValue.dataset.type
+                    }), {})
+
+                const queryParams = new URLSearchParams({
+                    column_names: encodeURIComponent(JSON.stringify(columnNames)),
+                    group_by: encodeURIComponent(JSON.stringify(groupBy)),
+                });
+                const fileUploadId = this.element.dataset.index;
+                mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
                     .then((response) => response.json())
-                    .then(data => {
-                        console.log("data: ", data)
+                    .then(res => {
+                        console.log("data: ", res)
+
+
+                        //
                     })
-
-                // console.log("this happen here1", sortable1.toArray())
-                // console.log("this happen here2", getData(sortableColumnName.el.children))
-                // console.log("this happen here3", sortableGroupBy.el.children)
-
-                // const columnNames = ['Order ID', 'Category', 'Currency'];
-                // const queryParams = new URLSearchParams({column_names: columnNames});
-                // mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
-                //     .then((response) => response.json())
-                //     .then(data => {
-                //         console.log("data: ", data)
-                //     })
-                //
-                // console.log("headers: ", this.headersValue)
-                // console.log("rows: ", this.rowsValue)
             }
 
-            const getData = (children) => Array.from(children).map(e => {
-                return {
-                    name: e.dataset.name,
-                    type: e.dataset.type
-                }
-            })
+            // const mapData = (accumulator, currentValue) => ({
+            //     ...accumulator,
+            //     [currentValue.dataset.name]: currentValue.dataset.type
+            // })
+
+
+            // console.log("this happen here1", sortable1.toArray())
+            // console.log("this happen here2", getData(sortableColumnName.el.children))
+            // console.log("this happen here3", sortableGroupBy.el.children)
+
+            // const columnNames = ['Order ID', 'Category', 'Currency'];
+            // const queryParams = new URLSearchParams({column_names: columnNames});
+            // mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
+            //     .then((response) => response.json())
+            //     .then(data => {
+            //         console.log("data: ", data)
+            //     })
+            //
+            // console.log("headers: ", this.headersValue)
+            // console.log("rows: ", this.rowsValue)
+            // const getData = (children) => Array.from(children)
+            //     .map(el => `${el.dataset.name}|${el.dataset.type}`)
 
             // sortable1.on('end', () => {
             //     const allItems = sortable1.toArray();
