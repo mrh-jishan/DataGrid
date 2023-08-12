@@ -54,7 +54,6 @@ export default class extends Controller {
                 onEnd: (ev) => onEndChange(ev),
             });
 
-
             let data = {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'AUG'],
                 datasets: [{
@@ -85,7 +84,7 @@ export default class extends Controller {
             }
 
             const ctx = this.canvasTarget.getContext('2d');
-            new Chart(ctx, {
+            const chart = new Chart(ctx, {
                 type: this.typeValue,
                 data: data,
                 options: {
@@ -120,14 +119,84 @@ export default class extends Controller {
                     group_by: encodeURIComponent(JSON.stringify(groupBy)),
                 });
                 const fileUploadId = this.element.dataset.index;
+
+
                 mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
                     .then((response) => response.json())
                     .then(res => {
-                        console.log("data: ", res)
 
+                        const colors = generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)
 
-                        //
+                        Object.keys(groupBy).forEach((gKey) => {
+                            const newData = {
+                                labels: res.map(r => r[toParameterizedUnderscore(gKey)]),
+                                datasets:
+                                    [
+                                        ...Object.keys(columnNames).map((key, index) => {
+                                            const attr = `${toParameterizedUnderscore(key)}_${columnNames[key]}`
+                                            return {
+                                                label: key,
+                                                data: res.map(d => d[attr]),
+                                                backgroundColor: colors[index],
+                                                borderColor: colors[index + 1],
+                                                borderWidth: 1,
+                                            }
+                                        }),
+                                        ...Object.keys(groupBy).map((key, index) => {
+                                            const attr = `${toParameterizedUnderscore(key)}_${groupBy[key]}`
+                                            return {
+                                                label: key,
+                                                data: res.map(d => d[attr]),
+                                                backgroundColor: colors[index],
+                                                borderColor: colors[index + 1],
+                                                borderWidth: 1,
+                                            }
+                                        }),
+
+                                    ]
+                            };
+                            chart.data.datasets = newData.datasets
+                            chart.data.labels = newData.labels;
+                            chart.update()
+                        })
                     })
+            }
+
+
+            const generateDistinctColors = (count) => {
+                const colors = [];
+                for (let i = 0; i < count; i++) {
+                    const hue = (i * 360 / count) % 360; // Generate hues equally spaced around the color wheel
+                    const saturation = 90 + Math.random() * 10; // Random saturation in the range [90, 100]
+                    const lightness = 50 + Math.random() * 10; // Random lightness in the range [50, 60]
+                    const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                    colors.push(color);
+                }
+                return colors;
+            }
+
+
+            const toParameterizedUnderscore = (str) => {
+                return str
+                    .trim() // Remove leading and trailing whitespace
+                    .toLowerCase() // Convert to lowercase
+                    .replace(/[^a-zA-Z0-9]+/g, "_"); // Replace non-alphanumeric characters with underscores
+            }
+
+            function addData(chart, label, newData) {
+                chart.data.labels.push(label);
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(newData);
+                });
+                chart.update();
+            }
+
+            function removeData(chart) {
+                chart.data.labels.pop();
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+                chart.update();
             }
 
             // const mapData = (accumulator, currentValue) => ({
