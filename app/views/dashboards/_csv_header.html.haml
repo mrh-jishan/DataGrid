@@ -1,7 +1,3 @@
--# .list-group-item.text-truncate{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => data_type_pill(csv_header.data_type), "data-name" => csv_header.name, "data-dashboards-target": "item"}
-  -# %span{class: 'badge bg-danger'}
-  -#   = data_type_pill(csv_header.data_type)
-  -# %span=csv_header.name
 .list-group-item{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => data_type_pill(csv_header.data_type), "data-name" => csv_header.name, "data-dashboards-target": "item"}
   .d-grid
     .btn-group
@@ -16,10 +12,10 @@
           = csv_header.name
       %ul.dropdown-menu
         %li
-          %a.dropdown-item{href: "#"} sum
+          = link_to "Sum", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "sum"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          %a.dropdown-item{href: "#"} count
+          = link_to "Count", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "count"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          %a.dropdown-item{href: "#"} max
+          = link_to "Max", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "max"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          %a.dropdown-item{href: "#"} min
+          = link_to "Min", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "min"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"

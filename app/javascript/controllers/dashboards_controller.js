@@ -64,7 +64,7 @@ export default class extends Controller {
                 options: {
                     plugins: {
                         legend: {
-                            onClick: () => false, // Disable click events on legend labels
+                            // onClick: () => false, // Disable click events on legend labels
                         },
                     },
                     scales: {
@@ -94,13 +94,10 @@ export default class extends Controller {
                 });
                 const fileUploadId = this.element.dataset.index;
 
-
                 mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
                     .then((response) => response.json())
                     .then(res => {
-
                         const colors = generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)
-
                         Object.keys(groupBy).forEach((gKey) => {
                             const newData = {
                                 labels: res.map(r => r[toParameterizedUnderscore(gKey)]),
@@ -156,40 +153,6 @@ export default class extends Controller {
                     .toLowerCase() // Convert to lowercase
                     .replace(/[^a-zA-Z0-9]+/g, "_"); // Replace non-alphanumeric characters with underscores
             }
-
-            function addData(chart, label, newData) {
-                chart.data.labels.push(label);
-                chart.data.datasets.forEach((dataset) => {
-                    dataset.data.push(newData);
-                });
-                chart.update();
-            }
-
-            function removeData(chart) {
-                chart.data.labels.pop();
-                chart.data.datasets.forEach((dataset) => {
-                    dataset.data.pop();
-                });
-                chart.update();
-            }
         })()
-
-        // console.log("this.itemTarget: ", this.itemTarget)
-
-        // this.itemTarget.addEventListener('click', (e) => {
-        //     console.log("e---> ", e)
-        // })
-    }
-
-    parameterizeUnderscore(name) {
-        return name.toLowerCase()
-            .replace(/[^\w\s]+|\s+/g, '_');
-    }
-
-    fetchCsvRows(id, columnNames) {
-        const queryParams = new URLSearchParams({column_names: columnNames});
-        return mrujs.fetch(`/file_uploads/${id}/csv_rows.json?${queryParams}`)
-            .then((response) => response.json())
-
     }
 }
