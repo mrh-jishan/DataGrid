@@ -10,7 +10,12 @@ class CsvRow < ApplicationRecord
 
   scope :select_column, ->(column_name, aggregate_function = nil) {
     if aggregate_function
-      select("CAST(#{aggregate_function}(csv_row->>'#{column_name}') AS numeric) AS #{column_name.parameterize.underscore}_#{aggregate_function}")
+      case aggregate_function
+      when "min", "max", "sum", "avg"
+        select("#{aggregate_function}(CAST(csv_row->>'#{column_name}' AS NUMERIC)) AS #{column_name.parameterize.underscore}_#{aggregate_function}")
+      else
+        select("#{aggregate_function}(csv_row->>'#{column_name}') AS #{column_name.parameterize.underscore}_#{aggregate_function}")
+      end
     else
       select("csv_row->>'#{column_name}' AS #{column_name.parameterize.underscore}")
     end

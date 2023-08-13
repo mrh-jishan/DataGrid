@@ -4,7 +4,7 @@
 .row{"data-dashboards-type-value": 'bar', "data-controller": "dashboards", "data-index": params[:file_upload_id]}
   .col-md-3.list-group{"data-dashboards-target":  "headers"}
     - @headers.each do |header|
-      .list-group-item.text-truncate{"data-id" => header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => header.name, "data-type" => data_type_pill(header.data_type), "data-name" => header.name}
+      .list-group-item.text-truncate{"data-id" => header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => header.name, "data-type" => data_type_pill(header.data_type), "data-name" => header.name, "data-dashboards-target": "item"}
         %span{class: 'badge bg-danger'}
           = data_type_pill(header.data_type)
         %span=header.name
@@ -15,36 +15,21 @@
     %canvas{"data-dashboards-target":  "canvas", class: 'border rounded-1'}
 
 
--# %div{"data-dashboards-type-value": 'bar', "data-dashboards-data-value": @chart_data.to_json, "data-dashboards-options-value": @chart_options.to_json, "data-dashboards-headers-value": @headers.to_json, "data-dashboards-rows-value": @rows.to_json, "data-controller": "dashboards", "data-index": params[:file_upload_id]}
--#   %canvas{ "data-dashboards-target":  "canvas"}
-  -# %div
-  -#   = label_tag :column_names
-  -#   = select_tag :column_names, options_from_collection_for_select(@headers, :id, :name), include_blank: false , multiple: true, "data-dashboards-target":  "columnNames"
-  -# %div
-  -#   = label_tag :group_by
-  -#   = select_tag :group_by, options_from_collection_for_select(@headers, :id, :name), include_blank: false , data: { dashboards_target: 'groupBy' }
+.btn-group
+  %button.btn.btn-secondary.btn-sm{type: "button"}
+    Small split button
+  %button.btn.btn-sm.btn-secondary.dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
+    %span.sr-only Toggle Dropdown
+  .dropdown-menu
+    %a.dropdown-item{href: "#"} Action
+    %a.dropdown-item{href: "#"} Another action
+    %a.dropdown-item{href: "#"} Something else here
 
--# = line_chart CsvRow.group_by_day(:created_at).count
--#
--# = line_chart({"2021-01-01" => 2, "2021-01-02" => 3})
--#
--# = line_chart [["2021-01-01", 2], ["2021-01-02", 3]]
--#
--# = bar_chart CsvRow.group_by_day(:created_at).sum(:file_upload_id)
--#
--# = line_chart CsvRow.group_by_day(:created_at).sum(:file_upload_id)
--#
--# = column_chart CsvRow.group_by_day(:created_at).sum(:file_upload_id)
 
--# %canvas{data: {controller: "chart", chart: {"data-value" => @chart_data.to_json, "options-value" => @chart_options.to_json} } }
-
--# %canvas{"data-chart-data-value" => "#{@chart_data.to_json}", "data-chart-options-value" => "#{@chart_options.to_json}", "data-controller" => "chart"}
-
--# %canvas{"data-controller": "dashboards"}
-
--# = simple_form_for :dashboard_index_path do |f|
--#   = f.input :username, as: :select
--#   = f.button :submit, 'Search'
-  -# = f.input :username
-  -# = f.input :password
-  -# = f.button :submit
+.dropdown
+  %button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
+    Dropdown button
+  .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+    %a.dropdown-item{href: "#"} Action
+    %a.dropdown-item{href: "#"} Another action
+    %a.dropdown-item{href: "#"} Something else here
