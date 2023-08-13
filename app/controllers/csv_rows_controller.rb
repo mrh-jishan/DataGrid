@@ -8,6 +8,8 @@ class CsvRowsController < ApplicationController
     @rows = @file_upload.csv_rows.select_columns(column_names).group_by_column_names(group_by)
   end
 
+  protected
+
   def set_file_upload
     @file_upload = FileUpload.find(params[:file_upload_id])
   end

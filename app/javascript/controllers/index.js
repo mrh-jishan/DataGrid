@@ -12,3 +12,6 @@ application.register("editable", EditableController)
 
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
+
+import VisualizationController from "./visualization_controller"
+application.register("visualization", VisualizationController)

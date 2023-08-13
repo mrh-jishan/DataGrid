@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_30_223341) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_160955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aggregations", force: :cascade do |t|
+    t.bigint "visualization_id"
+    t.bigint "csv_header_id"
+    t.string "axis"
+    t.string "func"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["csv_header_id"], name: "index_aggregations_on_csv_header_id"
+    t.index ["visualization_id"], name: "index_aggregations_on_visualization_id"
+  end
 
   create_table "csv_headers", force: :cascade do |t|
     t.bigint "file_upload_id"
@@ -39,6 +50,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_223341) do
     t.bigint "file_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "visualizations", force: :cascade do |t|
+    t.bigint "file_upload_id"
+    t.string "chart_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["file_upload_id"], name: "index_visualizations_on_file_upload_id"
   end
 
 end

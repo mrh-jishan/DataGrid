@@ -26,5 +26,7 @@
 
 = link_to t('.back'), file_uploads_path
 = link_to t('.dashboard'), file_upload_dashboards_path(params[:id])
+= link_to t('.new_visualization'), file_upload_visualizations_path(@file_upload), :method => :post
+= link_to t('.visualizations'), file_upload_visualizations_path(@file_upload)
 
 %div{ data: { controller: "tabulator", index: params[:id] } }

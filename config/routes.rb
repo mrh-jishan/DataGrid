@@ -1,12 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  # get 'csv_rows/index'
-  # get 'dashboards/index'
-  # get 'dashboard/index'
 
-  root "home#index"
   resources :file_uploads, :only => [:index, :new, :create, :show, :update] do
+    resources :visualizations, :only => [:index, :create, :show]
     resources :csv_headers, :only => [:index], defaults: { format: :json } do
       member do
         patch 'update_data_type', to: 'csv_headers#update_data_type', as: 'csv_rows'
@@ -20,5 +17,7 @@ Rails.application.routes.draw do
   end
 
   mount Sidekiq::Web => "/sidekiq"
+
+  root "home#index"
 
 end
