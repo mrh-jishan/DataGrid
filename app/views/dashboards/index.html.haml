@@ -1,35 +1,8 @@
-%h1 Dashboard#index
-%p Find me in app/views/dashboard/index.html.haml
-
 .row{"data-dashboards-type-value": 'bar', "data-controller": "dashboards", "data-index": params[:file_upload_id]}
   .col-md-3.list-group{"data-dashboards-target":  "headers"}
-    - @headers.each do |header|
-      .list-group-item.text-truncate{"data-id" => header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => header.name, "data-type" => data_type_pill(header.data_type), "data-name" => header.name, "data-dashboards-target": "item"}
-        %span{class: 'badge bg-danger'}
-          = data_type_pill(header.data_type)
-        %span=header.name
+    = render partial: "csv_header", collection: @csv_headers
   .col-md-3
     .row.list-group.h-50.border{"data-dashboards-target": "columnNames"}
     .row.list-group.h-50.border{"data-dashboards-target": "groupBy"}
   .col-md-6
     %canvas{"data-dashboards-target":  "canvas", class: 'border rounded-1'}
-
-
-.btn-group
-  %button.btn.btn-secondary.btn-sm{type: "button"}
-    Small split button
-  %button.btn.btn-sm.btn-secondary.dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
-    %span.sr-only Toggle Dropdown
-  .dropdown-menu
-    %a.dropdown-item{href: "#"} Action
-    %a.dropdown-item{href: "#"} Another action
-    %a.dropdown-item{href: "#"} Something else here
-
-
-.dropdown
-  %button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
-    Dropdown button
-  .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
-    %a.dropdown-item{href: "#"} Action
-    %a.dropdown-item{href: "#"} Another action
-    %a.dropdown-item{href: "#"} Something else here

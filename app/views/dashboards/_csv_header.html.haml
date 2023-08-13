@@ -1,0 +1,25 @@
+-# .list-group-item.text-truncate{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => data_type_pill(csv_header.data_type), "data-name" => csv_header.name, "data-dashboards-target": "item"}
+  -# %span{class: 'badge bg-danger'}
+  -#   = data_type_pill(csv_header.data_type)
+  -# %span=csv_header.name
+.list-group-item{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => data_type_pill(csv_header.data_type), "data-name" => csv_header.name, "data-dashboards-target": "item"}
+  .d-grid
+    .btn-group
+      %button.btn.btn-secondary.btn-sm.text-start{type: "button"}
+        = csv_header.name
+        %span.position-absolute.top-0.start-0.translate-middle.badge.rounded-pill.bg-danger
+          = data_type_pill(csv_header.data_type)
+          %span.visually-hidden
+            = data_type_pill(csv_header.data_type)
+      %button.btn.btn-sm.btn-secondary.dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button", style: "flex: 0 0 20%;"}
+        %span.visually-hidden
+          = csv_header.name
+      %ul.dropdown-menu
+        %li
+          %a.dropdown-item{href: "#"} sum
+        %li
+          %a.dropdown-item{href: "#"} count
+        %li
+          %a.dropdown-item{href: "#"} max
+        %li
+          %a.dropdown-item{href: "#"} min

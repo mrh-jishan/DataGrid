@@ -6,7 +6,7 @@ import Sortable from "sortablejs";
 // Connects to data-controller="dashboards"
 export default class extends Controller {
 
-    static targets = ['canvas', 'headers', 'columnNames', 'groupBy', 'item']
+    static targets = ['canvas', 'headers', 'columnNames', 'groupBy']
 
     static values = {
         type: {
@@ -174,11 +174,11 @@ export default class extends Controller {
             }
         })()
 
-        console.log("this.itemTarget: ", this.itemTarget)
+        // console.log("this.itemTarget: ", this.itemTarget)
 
-        this.itemTarget.addEventListener('click', (e) => {
-            console.log("e---> ", e)
-        })
+        // this.itemTarget.addEventListener('click', (e) => {
+        //     console.log("e---> ", e)
+        // })
     }
 
     parameterizeUnderscore(name) {
