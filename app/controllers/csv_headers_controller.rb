@@ -1,11 +1,11 @@
 class CsvHeadersController < ApplicationController
 
-  before_action :set_csv_headers, :only => [:index, :update_data_type]
+  before_action :set_csv_headers, :only => [:index, :update]
 
   def index
   end
 
-  def update_data_type
+  def update
     @csv_header = @csv_headers.find(params[:id])
     respond_to do |format|
       if @csv_header.update(csv_header_params)
@@ -24,7 +24,7 @@ class CsvHeadersController < ApplicationController
   end
 
   def csv_header_params
-    params.require(:csv_header).permit(:data_type)
+    params.require(:csv_header).permit(:aggregate_function)
   end
 
 end

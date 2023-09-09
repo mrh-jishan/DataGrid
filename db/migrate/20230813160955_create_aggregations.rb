@@ -4,7 +4,7 @@ class CreateAggregations < ActiveRecord::Migration[7.0]
       t.references :visualization
       t.references :csv_header
       t.string :axis
-      t.string :func
+      t.string :aggregate_function
       t.timestamps
     end
   end

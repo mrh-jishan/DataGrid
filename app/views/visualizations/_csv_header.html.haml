@@ -1,21 +1,21 @@
-.list-group-item{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => data_type_pill(csv_header.data_type), "data-name" => csv_header.name, "data-dashboards-target": "item"}
+.list-group-item{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => csv_header.aggregate_function, "data-name" => csv_header.name, "data-dashboards-target": "item"}
   .d-grid
     .btn-group
       %button.btn.btn-secondary.btn-sm.text-start{type: "button"}
         = csv_header.name
         %span.position-absolute.top-0.start-0.translate-middle.badge.rounded-pill.bg-danger
-          = data_type_pill(csv_header.data_type)
+          = csv_header.aggregate_function
           %span.visually-hidden
-            = data_type_pill(csv_header.data_type)
+            = csv_header.aggregate_function
       %button.btn.btn-sm.btn-secondary.dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button", style: "flex: 0 0 20%;"}
         %span.visually-hidden
           = csv_header.name
       %ul.dropdown-menu
         %li
-          = link_to "Sum", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "sum"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Sum", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "sum"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          = link_to "Count", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "count"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Count", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "count"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          = link_to "Max", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "max"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Max", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "max"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          = link_to "Min", csv_rows_file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {data_type: "min"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Min", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "min"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"

@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_160955) do
     t.bigint "visualization_id"
     t.bigint "csv_header_id"
     t.string "axis"
-    t.string "func"
+    t.string "aggregate_function"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["csv_header_id"], name: "index_aggregations_on_csv_header_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_160955) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "data_type", default: "string", null: false
+    t.string "aggregate_function", default: "count", null: false
     t.index ["file_upload_id"], name: "index_csv_headers_on_file_upload_id"
   end
 
