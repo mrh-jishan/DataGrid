@@ -9,9 +9,9 @@ class CsvHeadersController < ApplicationController
     @csv_header = @csv_headers.find(params[:id])
     respond_to do |format|
       if @csv_header.update(csv_header_params)
-        format.json { render json: @csv_header, status: :ok }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(helpers.dom_id(@csv_header), partial: 'visualizations/csv_header', locals: { csv_header: @csv_header }) }
       else
-        format.json { render json: { success: false, errors: @csv_header.errors.full_messages }, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(helpers.dom_id(@csv_header), partial: "visualizations/csv_header", locals: { csv_header: @csv_header }) }
       end
     end
   end

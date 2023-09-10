@@ -35,3 +35,6 @@ en:
     index:
       file_upload: File Upload
       uploaded_files: Uploaded Files
+  file_uploads:
+    show:
+      visualization: Visualization %{id}

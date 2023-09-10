@@ -1,4 +1,4 @@
-.list-group-item{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "data-type" => csv_header.aggregate_function, "data-name" => csv_header.name, "data-dashboards-target": "item"}
+.list-group-item{"id" => dom_id(csv_header),"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "aggregate-function" => csv_header.aggregate_function, "data-name" => csv_header.name, "data-dashboards-target": "item"}
   .d-grid
     .btn-group
       %button.btn.btn-secondary.btn-sm.text-start{type: "button"}

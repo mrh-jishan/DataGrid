@@ -29,4 +29,9 @@
 = link_to t('.new_visualization'), file_upload_visualizations_path(@file_upload), :method => :post
 = link_to t('.visualizations'), file_upload_visualizations_path(@file_upload)
 
+%ul
+  - @file_upload.visualizations.each do |visualization|
+    %li
+      = link_to t('.visualization', id: visualization.id ), file_upload_visualization_path(@file_upload, visualization)
+
 %div{ data: { controller: "tabulator", index: params[:id] } }

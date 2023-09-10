@@ -1,4 +1,4 @@
-import {Application} from "@hotwired/stimulus"
+import { Application } from "@hotwired/stimulus"
 import mrujs from "mrujs";
 import {MrujsTurbo} from "mrujs/plugins"
 
@@ -8,9 +8,8 @@ mrujs.start({
         MrujsTurbo()
     ]
 });
-
 // Configure Stimulus development experience
-application.debug = false
-window.Stimulus = application
+application.debug = true
+window.Stimulus   = application
 
-export {application}
+export { application }
