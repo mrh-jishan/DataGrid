@@ -1,21 +1,22 @@
-.list-group-item{"id" => dom_id(csv_header), "data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "aggregate-function" => csv_header.aggregate_function, "data-name" => csv_header.name, "data-dashboards-target": "item"}
-  .d-grid
-    .btn-group
-      %button.btn.btn-secondary.btn-sm.text-start{type: "button"}
-        = csv_header.name
-        %span.position-absolute.top-0.start-0.translate-middle.badge.rounded-pill.bg-danger
-          = csv_header.aggregate_function
-          %span.visually-hidden
-            = csv_header.aggregate_function
-      %button.btn.btn-sm.btn-secondary.dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button", style: "flex: 0 0 20%;"}
-        %span.visually-hidden
+= turbo_frame_tag dom_id(csv_header) do
+  .list-group-item{"data-id" => csv_header.id, "data-bs-toggle" => "tooltip", "data-bs-title" => csv_header.name, "aggregate-function" => csv_header.aggregate_function, "data-name" => csv_header.name, "data-dashboards-target": "item"}
+    .d-grid
+      .btn-group
+        %button.btn.btn-secondary.btn-sm.text-start{type: "button"}
           = csv_header.name
-      %ul.dropdown-menu
-        %li
-          = link_to "Sum", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "sum"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
-        %li
-          = link_to "Count", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "count"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
-        %li
-          = link_to "Max", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "max"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
-        %li
-          = link_to "Min", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "min"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          %span.position-absolute.top-0.start-0.translate-middle.badge.rounded-pill.bg-danger
+            = csv_header.aggregate_function
+            %span.visually-hidden
+              = csv_header.aggregate_function
+        %button.btn.btn-sm.btn-secondary.dropdown-toggle.dropdown-toggle-split{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button", style: "flex: 0 0 20%;"}
+          %span.visually-hidden
+            = csv_header.name
+        %ul.dropdown-menu
+          %li
+            = button_to "Sum", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "sum"}}), :method => :patch, class: "dropdown-item"
+          %li
+            = button_to "Count", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "count"}}), :method => :patch, class: "dropdown-item"
+          %li
+            = button_to "Max", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "max"}}), :method => :patch, class: "dropdown-item"
+          %li
+            = button_to "Min", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "min"}}), :method => :patch, class: "dropdown-item"
