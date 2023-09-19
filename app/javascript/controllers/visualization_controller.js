@@ -76,16 +76,17 @@ export default class extends Controller {
             });
 
             const onEndChange = (ev) => {
+
                 const columnNames = Array.from(sortableColumnName.el.children)
                     .reduce((accumulator, currentValue) => ({
                         ...accumulator,
-                        [currentValue.dataset.name]: currentValue.dataset.type
+                        [currentValue.dataset.name]: currentValue.dataset.aggregateFunction
                     }), {})
 
                 const groupBy = Array.from(sortableGroupBy.el.children)
                     .reduce((accumulator, currentValue) => ({
                         ...accumulator,
-                        [currentValue.dataset.name]: currentValue.dataset.type
+                        [currentValue.dataset.name]: currentValue.dataset.aggregateFunction
                     }), {})
 
                 const queryParams = new URLSearchParams({
@@ -97,8 +98,10 @@ export default class extends Controller {
                 mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
                     .then((response) => response.json())
                     .then(res => {
+
                         const colors = generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)
                         Object.keys(groupBy).forEach((gKey) => {
+
                             const newData = {
                                 labels: res.map(r => r[toParameterizedUnderscore(gKey)]),
                                 datasets:
