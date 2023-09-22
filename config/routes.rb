@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
   resources :file_uploads, :only => [:index, :new, :create, :show, :update] do
-    resources :visualizations, :only => [:index, :create, :show]
+    resources :visualizations, :only => [:index, :create, :show, :update]
     resources :csv_headers, :only => [:index, :update, :show]
     resources :csv_rows, :only => [:index]
     resources :dashboards, :only => [:index]

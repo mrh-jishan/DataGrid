@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AggregationTest < ActiveSupport::TestCase
+class AggregatorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

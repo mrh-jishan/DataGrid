@@ -10,19 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_160955) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_011021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "aggregations", force: :cascade do |t|
+  create_table "aggregators", force: :cascade do |t|
     t.bigint "visualization_id"
     t.bigint "csv_header_id"
     t.string "axis"
-    t.string "aggregate_function"
+    t.string "aggregator_function"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["csv_header_id"], name: "index_aggregations_on_csv_header_id"
-    t.index ["visualization_id"], name: "index_aggregations_on_visualization_id"
+    t.index ["csv_header_id"], name: "index_aggregators_on_csv_header_id"
+    t.index ["visualization_id", "csv_header_id", "aggregator_function", "axis"], name: "idx_viz_header_function_axis", unique: true
+    t.index ["visualization_id"], name: "index_aggregators_on_visualization_id"
   end
 
   create_table "csv_headers", force: :cascade do |t|

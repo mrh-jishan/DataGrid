@@ -94,23 +94,24 @@ export default class extends Controller {
                     group_by: encodeURIComponent(JSON.stringify(groupBy)),
                 });
                 const fileUploadId = this.element.dataset.index;
+                const visualizationId = this.element.dataset.visualization;
 
                 mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
                     .then((response) => response.json())
-                    .then(res => {
+                    .then(data => {
 
                         const colors = generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)
                         Object.keys(groupBy).forEach((gKey) => {
 
                             const newData = {
-                                labels: res.map(r => r[toParameterizedUnderscore(gKey)]),
+                                labels: data.map(r => r[toParameterizedUnderscore(gKey)]),
                                 datasets:
                                     [
                                         ...Object.keys(columnNames).map((key, index) => {
                                             const attr = `${toParameterizedUnderscore(key)}_${columnNames[key]}`
                                             return {
                                                 label: key,
-                                                data: res.map(d => d[attr]),
+                                                data: data.map(d => d[attr]),
                                                 backgroundColor: colors[index],
                                                 borderColor: colors[index + 1],
                                                 borderWidth: 1,
@@ -120,19 +121,36 @@ export default class extends Controller {
                                             const attr = `${toParameterizedUnderscore(key)}_${groupBy[key]}`
                                             return {
                                                 label: key,
-                                                data: res.map(d => d[attr]),
+                                                data: data.map(d => d[attr]),
                                                 backgroundColor: colors[index],
                                                 borderColor: colors[index + 1],
                                                 borderWidth: 1,
                                             }
                                         }),
-
                                     ]
                             };
                             chart.data.datasets = newData.datasets
                             chart.data.labels = newData.labels;
                             chart.update()
                         })
+                    })
+
+
+                mrujs.fetch(`/file_uploads/${fileUploadId}/visualizations/${visualizationId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        visualizations: {
+                            columnNames,
+                            groupBy
+                        }
+                    })
+                })
+                    .then((response) => response.json())
+                    .then(res => {
+                        console.log("res------>", res)
                     })
             }
 
