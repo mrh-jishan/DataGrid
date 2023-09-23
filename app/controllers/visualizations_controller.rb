@@ -15,9 +15,7 @@ class VisualizationsController < ApplicationController
 
   def update
     @visualization = @file_upload.visualizations.find(params[:id])
-
     @visualization.patch_aggregators(visualizations_params[:columnNames], visualizations_params[:groupBy])
-
 
     respond_to do |format|
       format.json { render json: { success: true } }

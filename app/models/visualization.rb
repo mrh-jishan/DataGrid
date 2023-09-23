@@ -4,21 +4,27 @@ class Visualization < ApplicationRecord
   has_many :aggregators
 
   def patch_aggregators(column_names, group_by)
-    puts "column_names------------------#{column_names}"
-    puts "group_by------------------#{group_by}"
-    puts "self_id------------------#{self.id}"
-    puts "aggregators------------------#{self.aggregators}"
-
-    x_axis =  patch_aggregator(column_names)
-    y_axis = patch_aggregator(group_by)
-    # self.aggregators.upsert_all({}, :unique_by => [:visualization_id, :csv_header_id, :aggregator_function, :axis])
+    upsert_data = aggregate_headers(column_names, group_by, self.id)
+    self.aggregators.upsert_all(upsert_data, :unique_by => [:visualization_id, :csv_header_id, :aggregator_function, :axis])
   end
 
   protected
 
-  def patch_aggregator(column_names)
-    column_names.reduce([]) do |column_name, aggregate_function|
+  def aggregate_headers(column_names, group_by, visualization_id)
+    x_axis_headers = map_headers(column_names, visualization_id, 'xAxis')
+    y_axis_headers = map_headers(group_by, visualization_id, 'yAxis')
+    x_axis_headers + y_axis_headers
+  end
 
+  def map_headers(header_mapping, visualization_id, axis)
+    CsvHeader.where(name: header_mapping.keys)
+             .map do |csv_header|
+      {
+        visualization_id: visualization_id,
+        csv_header_id: csv_header.id,
+        aggregator_function: header_mapping[csv_header.name],
+        axis: axis
+      }
     end
   end
 
