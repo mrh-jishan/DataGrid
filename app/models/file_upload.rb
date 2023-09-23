@@ -5,6 +5,7 @@ class FileUpload < ApplicationRecord
   has_many :csv_headers
   has_many :csv_rows
   has_many :visualizations
+  has_many :aggregators, :through => :visualizations
 
   before_save :extract_metadata
 

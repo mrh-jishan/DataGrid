@@ -23,9 +23,12 @@ class VisualizationsController < ApplicationController
   end
 
   def show
-    @csv_headers = @file_upload.csv_headers
-    @rows = @file_upload.csv_rows
     @visualization = @file_upload.visualizations.find(params[:id])
+    @x_axis_headers = @file_upload.csv_headers.x_axi_headers.where(aggregators: { visualization: @visualization })
+    @y_axis_headers = @file_upload.csv_headers.y_axi_headers.where(aggregators: { visualization: @visualization })
+    @csv_headers = @file_upload.csv_headers.where.not(id: @x_axis_headers.ids).where.not(id: @y_axis_headers.pluck(:id))
+    @rows = @file_upload.csv_rows
+
   end
 
   protected
