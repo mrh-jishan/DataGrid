@@ -5,7 +5,9 @@ class Visualization < ApplicationRecord
 
   def patch_aggregators(column_names, group_by)
     upsert_data = aggregate_headers(column_names, group_by, self.id)
-    self.aggregators.upsert_all(upsert_data, :unique_by => [:visualization_id, :csv_header_id, :aggregator_function, :axis])
+    unless upsert_data.blank?
+      self.aggregators.upsert_all(upsert_data, :unique_by => [:visualization_id, :csv_header_id, :aggregator_function, :axis])
+    end
   end
 
   protected
