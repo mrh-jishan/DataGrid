@@ -39,6 +39,7 @@ export default class extends Controller {
                 put: true
             },
             onEnd: (ev) => onEndChange(false),
+            onRemove: (evt) => onRemoveChange(evt)
         });
 
         const sortableGroupBy = new Sortable(this.groupByTarget, {
@@ -52,6 +53,7 @@ export default class extends Controller {
                 // }
             },
             onEnd: (ev) => onEndChange(false),
+            onRemove: (evt) => onRemoveChange(evt)
         });
 
         const ctx = this.canvasTarget.getContext('2d');
@@ -74,6 +76,22 @@ export default class extends Controller {
                 }
             }
         });
+
+        const onRemoveChange = (evt) => {
+            const visualizationId = this.element.dataset.visualization;
+            const fileUploadId = this.element.dataset.index;
+            const headerId = evt.item.dataset.id;
+            mrujs.fetch(`/file_uploads/${fileUploadId}/visualizations/${visualizationId}/aggregators/${headerId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then((response) => response.json())
+                .then(res => {
+                    console.log("destroy------>", res)
+                })
+        }
 
         const onEndChange = (onInit) => {
 

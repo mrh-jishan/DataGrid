@@ -1,6 +1,7 @@
 class VisualizationsController < ApplicationController
 
   before_action :set_file_upload, :only => [:create, :show, :update]
+  before_action :set_visualization, :only => [:update, :show]
 
   def create
     @visualization = @file_upload.visualizations.new(chart_type: "bar")
@@ -14,7 +15,6 @@ class VisualizationsController < ApplicationController
   end
 
   def update
-    @visualization = @file_upload.visualizations.find(params[:id])
     @visualization.patch_aggregators(visualizations_params[:columnNames], visualizations_params[:groupBy])
 
     respond_to do |format|
@@ -23,7 +23,6 @@ class VisualizationsController < ApplicationController
   end
 
   def show
-    @visualization = @file_upload.visualizations.find(params[:id])
     @x_axis_headers = @file_upload.csv_headers.x_axi_headers.where(aggregators: { visualization: @visualization })
     @y_axis_headers = @file_upload.csv_headers.y_axi_headers.where(aggregators: { visualization: @visualization })
     @csv_headers = @file_upload.csv_headers.where.not(id: @x_axis_headers.ids).where.not(id: @y_axis_headers.pluck(:id))
@@ -32,6 +31,10 @@ class VisualizationsController < ApplicationController
   end
 
   protected
+
+  def set_visualization
+    @visualization = @file_upload.visualizations.find(params[:id])
+  end
 
   def set_file_upload
     @file_upload = FileUpload.find(params[:file_upload_id])

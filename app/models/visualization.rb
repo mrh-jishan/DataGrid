@@ -1,6 +1,7 @@
 class Visualization < ApplicationRecord
 
   belongs_to :file_upload
+  has_many :csv_headers, :through => :file_upload
   has_many :aggregators
 
   def patch_aggregators(column_names, group_by)
