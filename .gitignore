@@ -37,3 +37,4 @@
 .idea
 yarn-error.log
 public/uploads/*
+.env
