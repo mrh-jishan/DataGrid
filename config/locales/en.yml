@@ -38,3 +38,6 @@ en:
   file_uploads:
     show:
       visualization: Visualization %{id}
+  layouts:
+    navbar:
+      title: DataGrid

@@ -9,7 +9,8 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
   %body
-    %main.container-fluid
+    %main.container-fluid.p-0
       = render "layouts/navbar"
       = render "layouts/flash"
-      = yield
+      .container
+        = yield

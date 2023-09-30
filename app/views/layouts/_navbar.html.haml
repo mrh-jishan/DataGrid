@@ -1,0 +1,42 @@
+%nav.navbar.navbar-expand-md.bg-body-tertiary
+  .container
+    = link_to t('.title'), root_path, class: 'navbar-brand'
+    %button.navbar-toggler{"aria-controls" => "mainMenu", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#mainMenu", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #mainMenu.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          %a.nav-link{:href => "#"} Link
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+            Dropdown
+          %ul.dropdown-menu
+            %li
+              %a.dropdown-item{:href => "#"} Action
+            %li
+              %a.dropdown-item{:href => "#"} Another action
+            %li
+              %hr.dropdown-divider/
+            %li
+              %a.dropdown-item{:href => "#"} Something else here
+        %li.nav-item
+          %a.nav-link.disabled{"aria-disabled" => "true"} Disabled
+      %ul.navbar-nav.mb-2.mb-lg-0.justify-content-end
+        - if user_signed_in?
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+              Dropdown
+            %ul.dropdown-menu
+              %li
+                %a.dropdown-item{:href => "#"} Action
+              %li
+                %a.dropdown-item{:href => "#"} Another action
+              %li
+                %hr.dropdown-divider/
+              %li
+                %a.dropdown-item{:href => "#"} Something else here
+        - else
+          %li.nav-item
+            = link_to t('.login'), new_user_session_path, class: 'nav-link active'
+          %li.nav-item
+            = link_to t('.register'), new_user_registration_path, class: 'nav-link active'

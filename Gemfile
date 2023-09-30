@@ -62,6 +62,12 @@ group :development do
 
   # Env setup
   gem "dotenv-rails", "~> 2.8"
+
+  # Convert to haml
+  gem "html2haml", "~> 2.3"
+
+  # open mail
+  gem "letter_opener", "~> 1.8"
 end
 
 group :test do
@@ -81,8 +87,6 @@ gem "haml-rails", "~> 2.1"
 
 gem "simple_form", "~> 5.2"
 
-gem "letter_opener", "~> 1.8"
-
 gem "bullet", "~> 7.0"
 
 gem "cssbundling-rails", "~> 1.1"
@@ -100,3 +104,4 @@ gem "groupdate", "~> 6.3"
 gem "chartkick", "~> 5.0"
 
 gem "devise", "~> 4.9"
+
