@@ -41,3 +41,6 @@ en:
   layouts:
     navbar:
       title: DataGrid
+      register: Register
+      login: Login
+      logout: Logout

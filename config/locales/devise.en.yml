@@ -7,6 +7,8 @@ en:
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
       resend_confirmation_instructions: "Resend confirmation instructions"
+      new:
+        resend_confirmation_instructions: "Resend confirmation instructions"
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."
@@ -70,6 +72,7 @@ en:
         unhappy: "Update"
         cancel_my_account: "Cancel my account"
         back: "Back"
+        are_you_sure: "Are you sure?"
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
@@ -80,6 +83,8 @@ en:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      new:
+        resend_unlock_instructions: Resend unlock instructions
     shared:
       links:
         back: "Back"
