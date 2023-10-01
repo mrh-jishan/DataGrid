@@ -2,3 +2,12 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import "slim-select/dist/slimselect";
 @import "tabulator-tables/dist/css/tabulator_bootstrap5.min";
+
+.sidebar {
+  display: flex;
+  flex-wrap: nowrap;
+  height: calc(100vh - 5vh);
+  max-height: calc(100vh - 5vh);
+  overflow-x: auto;
+  overflow-y: hidden;
+}

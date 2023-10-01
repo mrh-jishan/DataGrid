@@ -33,11 +33,14 @@ en:
   hello: "Hello world"
   home:
     index:
-      file_upload: File Upload
+      file_upload: New Dataset
       uploaded_files: Uploaded Files
   file_uploads:
     show:
       visualization: Visualization %{id}
+    new:
+      upload: Upload
+      accepted_file_types: "Accepted file types: CSV"
   layouts:
     navbar:
       title: DataGrid

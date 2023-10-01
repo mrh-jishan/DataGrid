@@ -3,6 +3,8 @@ import * as bootstrap from "bootstrap"
 import "chartkick/chart.js"
 import "./controllers"
 
+// import {Modal} from "bootstrap"
+
 
 // import '@popperjs/core'
 // import 'bootstrap'

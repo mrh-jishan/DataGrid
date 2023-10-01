@@ -10,6 +10,9 @@ application.register("dashboards", DashboardsController)
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
 

@@ -1,11 +1,23 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+= link_to t('.file_upload'), new_file_upload_path, class: "btn btn-primary", data: { turbo_frame: "modal" }
+.modal.fade{"data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
+  .modal-dialog.modal-dialog-centered
+    = turbo_frame_tag "modal"
 
+-# %button.btn.btn-primary{"data-bs-target" => "#fileUploadModal", "data-bs-toggle" => "modal", type: "button"}
+-#   = t('.file_upload')
+-# #fileUploadModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "fileUploadModalLabel", tabindex: "-1"}
+-#   .modal-dialog.modal-dialog-centered
+-#     .modal-content
+-#       = simple_form_for @file_upload, remote: true, html: { multipart: true } do |f|
+-#         .modal-header
+-#           %h1.modal-title.fs-5 Upload Dataset
+-#           %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+-#         .modal-body
+-#           = f.input :file, as: :file, label: false
+-#           %small.form-text
+-#             = t('.accepted_file_types')
+-#         .modal-footer
+-#           %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
+-#           = f.button :submit, t('.upload'), class: 'btn btn-primary'
+%hr
 
-= link_to t('.file_upload'), new_file_upload_path
-= link_to t('.uploaded_files'), file_uploads_path
-
-
-%div{"data-controller" => "tabulator", "data-index" => "4"}
-
--# #example-table

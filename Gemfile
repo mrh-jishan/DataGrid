@@ -104,4 +104,3 @@ gem "groupdate", "~> 6.3"
 gem "chartkick", "~> 5.0"
 
 gem "devise", "~> 4.9"
-
