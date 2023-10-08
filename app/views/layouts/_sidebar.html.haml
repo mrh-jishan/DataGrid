@@ -20,19 +20,4 @@
         %svg.bi.me-2{height: "16", width: "16"}
           %use{"xlink:href" => "#people-circle"}
         Customers
-  %hr/
-  .dropdown
-    %a#dropdownUser2.d-flex.align-items-center.link-dark.text-decoration-none.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#"}
-      %img.rounded-circle.me-2{alt: "", height: "32", src: "https://github.com/mdo.png", width: "32"}/
-      %strong mdo
-    %ul.dropdown-menu.text-small.shadow{"aria-labelledby" => "dropdownUser2"}
-      %li
-        %a.dropdown-item{href: "#"} New project...
-      %li
-        %a.dropdown-item{href: "#"} Settings
-      %li
-        %a.dropdown-item{href: "#"} Profile
-      %li
-        %hr.dropdown-divider/
-      %li
-        %a.dropdown-item{href: "#"} Sign out
+  = render "layouts/footer"

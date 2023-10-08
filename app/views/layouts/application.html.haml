@@ -15,7 +15,7 @@
       .sidebar
         - if user_signed_in?
           = render "layouts/sidebar"
-          .container-fluid
+          .container-fluid.overflow-scroll
             = render_breadcrumbs
             = render "layouts/flash"
             #error-container
