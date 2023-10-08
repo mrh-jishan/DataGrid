@@ -8,7 +8,7 @@ class DashboardsController < ApplicationController
   end
 
   def set_file_upload
-    @file_upload = FileUpload.find(params[:file_upload_id])
+    @file_upload = current_user.file_uploads.find(params[:file_upload_id])
   end
 
 end

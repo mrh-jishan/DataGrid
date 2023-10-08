@@ -4,15 +4,15 @@ class FileUploadsController < ApplicationController
   before_action :set_file_upload, :only => [:show, :update, :destroy]
 
   def index
-    @file_uploads = FileUpload.all
+    @file_uploads = current_user.file_uploads.order(created_at: :desc)
   end
 
   def new
-    @file_upload = FileUpload.new
+    @file_upload = current_user.file_uploads.new
   end
 
   def create
-    @file_upload = FileUpload.new(file_upload_params)
+    @file_upload = current_user.file_uploads.new(file_upload_params)
 
     respond_to do |format|
       if @file_upload.save
@@ -58,7 +58,7 @@ class FileUploadsController < ApplicationController
   protected
 
   def set_file_upload
-    @file_upload = FileUpload.find(params[:id])
+    @file_upload = current_user.file_uploads.find(params[:id])
   end
 
   def file_upload_params

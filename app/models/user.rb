@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
 
+  has_many :file_uploads
+  has_many :visualizations, :through => :file_uploads
+
   def to_s
     Mail::Address.new(email).local.titleize
   end

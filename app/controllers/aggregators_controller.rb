@@ -11,7 +11,7 @@ class AggregatorsController < ApplicationController
   protected
 
   def set_aggregator
-    @file_upload = FileUpload.find(params[:file_upload_id])
+    @file_upload = current_user.file_uploads.find(params[:file_upload_id])
     @visualization = @file_upload.visualizations.find(params[:visualization_id])
     @aggregator = @visualization.aggregators.find_by(csv_header_id: params[:id])
   end
