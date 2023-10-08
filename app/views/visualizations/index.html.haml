@@ -1,7 +1,8 @@
 = link_to t('.new_dashboard'), new_file_upload_visualization_path(@file_upload), class: "btn btn-primary", data: { turbo_frame: "modal" }
 .modal.fade{"data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered
-    = turbo_frame_tag "modal"
+    .modal-content
+      = turbo_frame_tag "modal"
 
 %hr
 
@@ -9,14 +10,14 @@
   %thead
     %tr
       %th{scope: "col"} #
-      %th{scope: "col"} DataSet
+      %th{scope: "col"} Label
       %th{scope: "col"} CreatedAt
       %th{scope: "col"} Action
   %tbody
     - @visualizations.each do |visualization|
       %tr
         %th{scope: "row"}= visualization.id
-        %td
+        %td= visualization.label
         %td=visualization.created_at
         %td
           =link_to t('.show'), file_upload_visualization_path(@file_upload, visualization), class: 'btn btn-outline-primary'

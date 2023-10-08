@@ -1,7 +1,8 @@
 = link_to t('.file_upload'), new_file_upload_path, class: "btn btn-primary", data: { turbo_frame: "modal" }
 .modal.fade{"data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered
-    = turbo_frame_tag "modal"
+    .modal-content
+      = turbo_frame_tag "modal"
 
 %hr
 
