@@ -151,7 +151,7 @@ export default class extends Controller {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        visualizations: {
+                        visualization: {
                             columnNames,
                             groupBy
                         }

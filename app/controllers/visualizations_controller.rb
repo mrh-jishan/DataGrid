@@ -16,7 +16,8 @@ class VisualizationsController < ApplicationController
 
     respond_to do |format|
       if @file_upload.save
-        format.turbo_stream
+        # format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.redirect(file_upload_visualization_path(@file_upload, @visualization)) }
         format.html { redirect_to file_upload_visualization_path(@file_upload, @visualization) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/unprocessable_entity', locals: { exception: @visualization }) }
@@ -38,7 +39,6 @@ class VisualizationsController < ApplicationController
     @y_axis_headers = @file_upload.csv_headers.y_axi_headers.where(aggregators: { visualization: @visualization })
     @csv_headers = @file_upload.csv_headers.where.not(id: @x_axis_headers.ids).where.not(id: @y_axis_headers.pluck(:id))
     @rows = @file_upload.csv_rows
-
   end
 
   protected

@@ -3,6 +3,28 @@ import * as bootstrap from "bootstrap"
 import "chartkick/chart.js"
 import "./controllers"
 
+
+import {Turbo} from "@hotwired/turbo-rails";
+
+Turbo.StreamActions.redirect = function () {
+    Turbo.visit(this.target);
+};
+
+// or using event listener
+
+document.addEventListener("turbo:before-stream-render", (event) => {
+    const fallbackToDefaultActions = event.detail.render;
+    event.detail.render = function (streamElement) {
+        if (streamElement.action === "redirect") {
+            Turbo.visit(streamElement.target);
+        } else {
+            fallbackToDefaultActions(streamElement);
+        }
+    };
+});
+
+// import { Turbo } from "@hotwired/turbo-rails";
+
 // import {Modal} from "bootstrap"
 
 
@@ -13,3 +35,19 @@ import "./controllers"
 // const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
 // import * as bootstrap from "bootstrap"
 
+// Turbo.StreamActions.redirect = function () {
+//     Turbo.visit(this.target);
+// };
+//
+// // or using event listener
+//
+// document.addEventListener("turbo:before-stream-render", (event) => {
+//     const fallbackToDefaultActions = event.detail.render;
+//     event.detail.render = function (streamElement) {
+//         if (streamElement.action === "redirect") {
+//             Turbo.visit(streamElement.target);
+//         } else {
+//             fallbackToDefaultActions(streamElement);
+//         }
+//     };
+// });
