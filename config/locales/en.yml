@@ -47,3 +47,6 @@ en:
       register: Register
       login: Login
       logout: Logout
+  visualizations:
+    new:
+      create: Create

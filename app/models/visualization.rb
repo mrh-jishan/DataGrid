@@ -4,6 +4,8 @@ class Visualization < ApplicationRecord
   has_many :csv_headers, :through => :file_upload
   has_many :aggregators
 
+  validates :label, :presence => true
+
   def patch_aggregators(column_names, group_by)
     upsert_data = aggregate_headers(column_names, group_by, self.id)
     unless upsert_data.blank?

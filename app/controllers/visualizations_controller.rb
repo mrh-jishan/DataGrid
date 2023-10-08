@@ -1,25 +1,32 @@
 class VisualizationsController < ApplicationController
 
-  before_action :set_file_upload, :only => [:index, :create, :show, :update]
+  before_action :set_file_upload, :only => [:index, :new, :create, :show, :update]
   before_action :set_visualization, :only => [:update, :show]
 
   def index
+    @visualizations = @file_upload.visualizations
+  end
 
+  def new
+    @visualization = @file_upload.visualizations.new
   end
 
   def create
-    @visualization = @file_upload.visualizations.new(chart_type: "bar")
+    @visualization = @file_upload.visualizations.new(visualization_params.merge(chart_type: "bar"))
+
     respond_to do |format|
       if @file_upload.save
+        format.turbo_stream
         format.html { redirect_to file_upload_visualization_path(@file_upload, @visualization) }
       else
-        format.html { redirect_to @file_upload }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/unprocessable_entity', locals: { exception: @visualization }) }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    @visualization.patch_aggregators(visualizations_params[:columnNames], visualizations_params[:groupBy])
+    @visualization.patch_aggregators(visualization_params[:columnNames], visualization_params[:groupBy])
 
     respond_to do |format|
       format.json { render json: { success: true } }
@@ -44,8 +51,12 @@ class VisualizationsController < ApplicationController
     @file_upload = FileUpload.find(params[:file_upload_id])
   end
 
-  def visualizations_params
-    params.require(:visualizations).permit(:columnNames => {}, :groupBy => {})
+  # def visualizations_params
+  #   params.require(:visualizations).permit(:columnNames => {}, :groupBy => {})
+  # end
+
+  def visualization_params
+    params.require(:visualization).permit(:label, :columnNames => {}, :groupBy => {})
   end
 
 end
