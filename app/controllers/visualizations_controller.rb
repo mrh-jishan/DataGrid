@@ -1,7 +1,7 @@
 class VisualizationsController < ApplicationController
 
-  before_action :set_file_upload, :only => [:index, :new, :create, :show, :update]
-  before_action :set_visualization, :only => [:update, :show]
+  before_action :set_file_upload
+  before_action :set_visualization, :only => [:update, :show, :destroy]
 
   def index
     @visualizations = @file_upload.visualizations
@@ -41,6 +41,14 @@ class VisualizationsController < ApplicationController
     @rows = @file_upload.csv_rows
   end
 
+  def destroy
+    @visualization.destroy
+    respond_to do |format|
+      format.html { redirect_to file_upload_visualizations_path(@file_upload), notice: 'User was successfully destroyed.' }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@visualization) }
+    end
+  end
+
   protected
 
   def set_visualization
@@ -50,10 +58,6 @@ class VisualizationsController < ApplicationController
   def set_file_upload
     @file_upload = FileUpload.find(params[:file_upload_id])
   end
-
-  # def visualizations_params
-  #   params.require(:visualizations).permit(:columnNames => {}, :groupBy => {})
-  # end
 
   def visualization_params
     params.require(:visualization).permit(:label, :columnNames => {}, :groupBy => {})

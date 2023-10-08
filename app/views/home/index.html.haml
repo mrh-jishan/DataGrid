@@ -1,4 +1,4 @@
-= link_to t('.file_upload'), new_file_upload_path, class: "btn btn-primary", data: { turbo_frame: "modal" }
+= link_to t('.file_upload'), new_file_upload_path, class: "btn btn-sm btn-primary", data: { turbo_frame: "modal" }
 .modal.fade{"data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered
     .modal-content
@@ -15,11 +15,11 @@
       %th{scope: "col"} Action
   %tbody
     - @file_uploads.each do |file_upload|
-      %tr
+      %tr{id: dom_id(file_upload)}
         %th{scope: "row"}= file_upload.id
         %td= file_upload.name
         %td=file_upload.created_at
         %td
-          -# =link_to t('.visualizations'), "#", class: 'btn btn-outline-secondary'
-          =link_to t('.show'), file_upload_visualizations_path(file_upload), class: 'btn btn-outline-primary'
+          =link_to t('.destroy'), file_upload_path(file_upload), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+          =link_to t('.show'), file_upload_visualizations_path(file_upload), class: 'btn btn-sm btn-outline-primary'
 

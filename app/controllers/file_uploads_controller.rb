@@ -1,6 +1,8 @@
 class FileUploadsController < ApplicationController
   include Pagy::Backend
 
+  before_action :set_file_upload, :only => [:show, :update, :destroy]
+
   def index
     @file_uploads = FileUpload.all
   end
@@ -25,7 +27,6 @@ class FileUploadsController < ApplicationController
   end
 
   def show
-    @file_upload = FileUpload.find(params[:id])
     @csv_headers = @file_upload.csv_headers
     @pagy, @csv_rows = pagy(@file_upload.csv_rows)
   end
@@ -35,7 +36,6 @@ class FileUploadsController < ApplicationController
   end
 
   def update
-    @file_upload = FileUpload.find(params[:id])
     @csv_row = @file_upload.csv_rows.find(params[:csv_row_id])
     respond_to do |format|
       if @csv_row.update(file_upload_params)
@@ -48,7 +48,18 @@ class FileUploadsController < ApplicationController
     end
   end
 
+  def destroy
+    @file_upload.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@file_upload) }
+    end
+  end
+
   protected
+
+  def set_file_upload
+    @file_upload = FileUpload.find(params[:id])
+  end
 
   def file_upload_params
     params.require(:file_upload).permit(:file, :City)

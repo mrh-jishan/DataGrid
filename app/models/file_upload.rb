@@ -2,10 +2,10 @@ class FileUpload < ApplicationRecord
 
   mount_uploader :file, CsvFileUploader
 
-  has_many :csv_headers
-  has_many :csv_rows
-  has_many :visualizations
-  has_many :aggregators, :through => :visualizations
+  has_many :csv_headers, :dependent => :destroy
+  has_many :csv_rows, :dependent => :destroy
+  has_many :visualizations, :dependent => :destroy
+  has_many :aggregators, :through => :visualizations, :dependent => :destroy
 
   before_save :extract_metadata
 

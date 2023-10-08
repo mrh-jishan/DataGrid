@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :file_uploads, :only => [:index, :new, :create, :show, :update] do
-    resources :visualizations, :only => [:index, :new, :create, :show, :update] do
+  resources :file_uploads, :only => [:index, :new, :create, :show, :update, :destroy] do
+    resources :visualizations, :only => [:index, :new, :create, :show, :update, :destroy] do
       resources :aggregators, :only => [:destroy]
     end
     resources :csv_headers, :only => [:index, :update, :show]
