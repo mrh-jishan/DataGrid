@@ -21,6 +21,7 @@ class FileUploadsController < ApplicationController
       else
         puts "---------else"
         # render :new, status: :unprocessable_entity
+        format.turbo_stream
         format.html { render :new, status: :unprocessable_entity }
       end
     end

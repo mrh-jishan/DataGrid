@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+
+  # get 'errors/internal_server_error'
+  # get 'errors/not_found'
+  # get 'errors/bad_request'
+
   devise_for :users
 
   resources :file_uploads, :only => [:index, :new, :create, :show, :update] do
@@ -18,5 +23,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   root "home#index"
+
+  # match '/500', to: 'errors#internal_server_error', via: :all
+  # match '/404', to: 'errors#not_found', via: :all
+  # match '/400', to: 'errors#bad_request', via: :all
 
 end
