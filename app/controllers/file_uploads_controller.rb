@@ -15,12 +15,9 @@ class FileUploadsController < ApplicationController
     respond_to do |format|
       if @file_upload.save
         CsvUploadJob.perform_async(@file_upload.id)
-        puts "if----------------"
         format.turbo_stream
         format.html { redirect_to file_upload_path(@file_upload), notice: "File was successfully created." }
       else
-        puts "---------else"
-        # render :new, status: :unprocessable_entity
         format.turbo_stream
         format.html { render :new, status: :unprocessable_entity }
       end

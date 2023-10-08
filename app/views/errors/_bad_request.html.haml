@@ -1,3 +1,4 @@
-.alert.alert-danger
+.alert.alert-danger.alert-dismissible.fade.show
   %h1 Bad Request
-  %p There was a problem with your request.
+  %p= exception
+  %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", type: "button"}

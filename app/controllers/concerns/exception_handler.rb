@@ -14,9 +14,9 @@ module ExceptionHandler
   def render_error(exception)
     logger.error(exception.message)
     respond_to do |format|
-      format.html { render partial: 'errors/internal_server_error', status: :internal_server_error }
+      format.html { render partial: 'errors/internal_server_error', status: :internal_server_error, locals: { exception: exception } }
       format.json { render json: { error: 'Internal Server Error' }, status: :internal_server_error }
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/_internal_server_error') }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/_internal_server_error', locals: { exception: exception }) }
     end
   end
 
@@ -34,7 +34,7 @@ module ExceptionHandler
       # format.html { render 'errors/bad_request', status: :bad_request }
       format.html { render partial: 'errors/bad_request', locals: { exception: exception }, status: :bad_request }
       format.json { render json: { error: exception.message }, status: :bad_request }
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/bad_request') }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/bad_request', locals: { exception: exception }) }
     end
   end
 

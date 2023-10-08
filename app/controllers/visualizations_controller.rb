@@ -1,7 +1,11 @@
 class VisualizationsController < ApplicationController
 
-  before_action :set_file_upload, :only => [:create, :show, :update]
+  before_action :set_file_upload, :only => [:index, :create, :show, :update]
   before_action :set_visualization, :only => [:update, :show]
+
+  def index
+
+  end
 
   def create
     @visualization = @file_upload.visualizations.new(chart_type: "bar")
