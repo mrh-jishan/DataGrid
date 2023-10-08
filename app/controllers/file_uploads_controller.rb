@@ -17,7 +17,7 @@ class FileUploadsController < ApplicationController
     respond_to do |format|
       if @file_upload.save
         CsvUploadJob.perform_async(@file_upload.id)
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend('file_uploads', partial: 'file_uploads/file_upload', locals: { file_upload: @file_upload }) }
         format.html { redirect_to file_upload_path(@file_upload), notice: "File was successfully created." }
       else
         format.turbo_stream

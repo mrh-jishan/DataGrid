@@ -11,13 +11,15 @@
     %tr
       %th{scope: "col"} #
       %th{scope: "col"} DataSet
+      %th{scope: "col"} No. of dashboards
       %th{scope: "col"} CreatedAt
       %th{scope: "col"} Action
-  %tbody
+  %tbody{id: "file_uploads"}
     - @file_uploads.each do |file_upload|
       %tr{id: dom_id(file_upload)}
         %th{scope: "row"}= file_upload.id
         %td= file_upload.name
+        %td= file_upload.visualizations.count
         %td=file_upload.created_at
         %td
           =link_to t('.destroy'), file_upload_path(file_upload), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
