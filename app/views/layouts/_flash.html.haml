@@ -1,4 +1,4 @@
-- if notice
-  %p.notice= notice
-- if alert
-  %p.alert= alert
+- flash.each do |key, value|
+  = content_tag(:div, class: flash_class(key), role: key ) do
+    = value
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", type: "button"}

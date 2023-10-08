@@ -13,8 +13,14 @@
     %main.container-fluid.p-0
       = render "layouts/navbar"
       .sidebar
-        = render "layouts/sidebar"
-        .container
-          = render "layouts/breadcrumb"
-          = render "layouts/flash"
-          = yield
+        - if user_signed_in?
+          = render "layouts/sidebar"
+          .container-fluid
+            = render_breadcrumbs
+            = render "layouts/flash"
+            = yield
+        - else
+          .container
+            = render_breadcrumbs
+            = render "layouts/flash"
+            = yield
