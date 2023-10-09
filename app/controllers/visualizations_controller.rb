@@ -16,7 +16,6 @@ class VisualizationsController < ApplicationController
 
     respond_to do |format|
       if @file_upload.save
-        # format.turbo_stream
         format.turbo_stream { render turbo_stream: turbo_stream.redirect(file_upload_visualization_path(@file_upload, @visualization)) }
         format.html { redirect_to file_upload_visualization_path(@file_upload, @visualization) }
       else

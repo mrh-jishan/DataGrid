@@ -5,9 +5,9 @@
     .col-md-2.list-group{"data-visualization-target":  "headers"}
       = render partial: "csv_header", collection: @csv_headers
     .col-md-2
-      .row.list-group.h-50.border{"data-visualization-target": "columnNames"}
+      .row.list-group.h-25.border{"data-visualization-target": "columnNames"}
         = render partial: "csv_header", collection: @x_axis_headers
-      .row.list-group.h-50.border{"data-visualization-target": "groupBy"}
+      .row.list-group.h-25.border{"data-visualization-target": "groupBy"}
         = render partial: "csv_header", collection: @y_axis_headers
     .col-md-8
       %canvas{"data-visualization-target":  "canvas", class: 'border rounded-1'}
