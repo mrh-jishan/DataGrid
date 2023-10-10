@@ -14,16 +14,16 @@ Rails.application.routes.draw do
     end
     resources :csv_headers, :only => [:index, :update, :show]
     resources :csv_rows, :only => [:index]
-    resources :dashboards, :only => [:index]
     member do
       patch 'csv_rows/:csv_row_id', to: 'file_uploads#update', as: 'csv_rows'
     end
   end
 
+  resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
+
+  root "file_uploads#index"
+
   mount Sidekiq::Web => "/sidekiq"
-
-  root "home#index"
-
   # match '/500', to: 'errors#internal_server_error', via: :all
   # match '/404', to: 'errors#not_found', via: :all
   # match '/400', to: 'errors#bad_request', via: :all

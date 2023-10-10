@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :file_uploads
   has_many :visualizations, :through => :file_uploads
+  has_many :dashboards
 
   def to_s
     Mail::Address.new(email).local.titleize

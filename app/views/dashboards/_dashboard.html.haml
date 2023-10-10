@@ -1,0 +1,6 @@
+%tr{id: dom_id(dashboard)}
+  %td{scope: "row"}= dashboard.label
+  %td=dashboard.created_at
+  %td
+    =link_to t('.destroy'), dashboard_path(dashboard), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    =link_to t('.show'), dashboard_path(dashboard), class: 'btn btn-sm btn-outline-primary'

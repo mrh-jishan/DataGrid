@@ -3,6 +3,7 @@ class Visualization < ApplicationRecord
   belongs_to :file_upload
   has_many :csv_headers, :through => :file_upload
   has_many :aggregators, :dependent => :destroy
+  has_and_belongs_to_many :dashboards
 
   validates :label, :presence => true
 

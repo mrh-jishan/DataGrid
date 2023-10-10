@@ -50,3 +50,6 @@ en:
   visualizations:
     new:
       create: Create
+  dashboards:
+    new:
+      create: Create

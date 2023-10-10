@@ -1,8 +1,28 @@
-.row{"data-dashboards-type-value": 'bar', "data-controller": "dashboards", "data-index": params[:file_upload_id]}
-  .col-md-3.list-group{"data-dashboards-target":  "headers"}
-    = render partial: "csv_header", collection: @csv_headers
-  .col-md-3
-    .row.list-group.h-50.border{"data-dashboards-target": "columnNames"}
-    .row.list-group.h-50.border{"data-dashboards-target": "groupBy"}
-  .col-md-6
-    %canvas{"data-dashboards-target":  "canvas", class: 'border rounded-1'}
+= link_to t('.new_dashboard'), new_dashboard_path, class: "btn btn-sm btn-primary", data: { turbo_frame: "modal" }
+.modal.fade{"data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      = turbo_frame_tag "modal"
+
+%hr
+
+%table.table
+  %thead
+    %tr
+      %th{scope: "col"} DataSet
+      %th{scope: "col"} No. of dashboards
+      %th{scope: "col"} CreatedAt
+      %th{scope: "col"} Action
+  %tbody{id: "file_uploads"}
+    = render partial: "dashboards/dashboard", collection: @dashboards
+
+-# %h1
+-#   this is dashboards
+-# .row{"data-dashboards-type-value": 'bar', "data-controller": "dashboards", "data-index": params[:file_upload_id]}
+-#   .col-md-3.list-group{"data-dashboards-target":  "headers"}
+-#     = render partial: "csv_header", collection: @csv_headers
+-#   .col-md-3
+-#     .row.list-group.h-50.border{"data-dashboards-target": "columnNames"}
+-#     .row.list-group.h-50.border{"data-dashboards-target": "groupBy"}
+-#   .col-md-6
+-#     %canvas{"data-dashboards-target":  "canvas", class: 'border rounded-1'}
