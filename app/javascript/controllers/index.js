@@ -13,6 +13,9 @@ application.register("editable", EditableController)
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
+import SlimselectController from "./slimselect_controller"
+application.register("slimselect", SlimselectController)
+
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
 
