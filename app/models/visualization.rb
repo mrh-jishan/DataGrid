@@ -14,6 +14,14 @@ class Visualization < ApplicationRecord
     end
   end
 
+  def x_axis_object
+    aggregators.includes([:csv_header]).x_axis.each_with_object({}) { |agg, hash| hash[agg.csv_header.name] = agg.aggregator_function }
+  end
+
+  def y_axis_object
+    aggregators.includes([:csv_header]).y_axis.each_with_object({}) { |agg, hash| hash[agg.csv_header&.name] = agg&.aggregator_function }
+  end
+
   protected
 
   def aggregate_headers(column_names, group_by, visualization_id)
@@ -34,7 +42,7 @@ class Visualization < ApplicationRecord
     end
   end
 
-  public def to_s
+  def to_s
     label
   end
 

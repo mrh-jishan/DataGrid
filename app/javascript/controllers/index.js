@@ -4,6 +4,12 @@
 
 import { application } from "./application"
 
+import ChartController from "./chart_controller"
+application.register("chart", ChartController)
+
+import DashboardController from "./dashboard_controller"
+application.register("dashboard", DashboardController)
+
 import DashboardsController from "./dashboards_controller"
 application.register("dashboards", DashboardsController)
 
@@ -13,8 +19,8 @@ application.register("editable", EditableController)
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
-import SlimselectController from "./slimselect_controller"
-application.register("slimselect", SlimselectController)
+import SlimSelectController from "./slim_select_controller"
+application.register("slim-select", SlimSelectController)
 
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
