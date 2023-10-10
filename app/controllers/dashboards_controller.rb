@@ -4,6 +4,7 @@ class DashboardsController < ApplicationController
 
   def index
     @dashboards = current_user.dashboards
+    @visualizations = current_user.visualizations
   end
 
   def new
@@ -43,7 +44,7 @@ class DashboardsController < ApplicationController
   end
 
   def dashboard_params
-    params.require(:dashboard).permit(:label)
+    params.require(:dashboard).permit(:label, visualization_ids: [])
   end
 
 end

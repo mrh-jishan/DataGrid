@@ -34,4 +34,8 @@ class Visualization < ApplicationRecord
     end
   end
 
+  public def to_s
+    label
+  end
+
 end
