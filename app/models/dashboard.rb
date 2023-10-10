@@ -1,7 +1,6 @@
 class Dashboard < ApplicationRecord
 
   has_and_belongs_to_many :visualizations
-  # has_many :aggregators, :through => :visualizations
 
   validates :label, :presence => true
   validates :visualizations, :presence => true

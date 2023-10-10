@@ -19,7 +19,7 @@ class Visualization < ApplicationRecord
   end
 
   def y_axis_object
-    aggregators.includes([:csv_header]).y_axis.each_with_object({}) { |agg, hash| hash[agg.csv_header&.name] = agg&.aggregator_function }
+    aggregators.includes([:csv_header]).y_axis.each_with_object({}) { |agg, hash| hash[agg.csv_header.name] = agg.aggregator_function }
   end
 
   protected
