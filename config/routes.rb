@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
+  resources :platforms
+  resources :connections
 
   root "file_uploads#index"
 
