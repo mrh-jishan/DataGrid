@@ -9,10 +9,9 @@
 %table.table
   %thead
     %tr
-      %th{scope: "col"} DataSet
-      %th{scope: "col"} No. of dashboards
-      %th{scope: "col"} CreatedAt
-      %th{scope: "col"} Action
+      %th Label
+      %th CreatedAt
+      %th Action
   %tbody{id: "file_uploads"}
     = render partial: "dashboards/dashboard", collection: @dashboards
 
