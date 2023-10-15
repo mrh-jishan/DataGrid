@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
-  resources :data_platforms, :only => [:index, :new, :create, :destroy]
+  resources :data_platforms, :only => [:index, :new, :create, :destroy, :edit, :update]
   resources :connections
 
   # authenticate :user, ->(user) { user.user? } do

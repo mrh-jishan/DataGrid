@@ -1,6 +1,6 @@
 class DataPlatformsController < ApplicationController
 
-  before_action :set_data_platform, :only => [:destroy]
+  before_action :set_data_platform, :only => [:destroy, :edit, :update]
 
   def index
     @data_platforms = current_user.data_platforms.includes([:platform])
@@ -13,7 +13,6 @@ class DataPlatformsController < ApplicationController
 
   def create
     @platforms_user = current_user.data_platforms.new(platforms_users_params)
-
     respond_to do |format|
       if @platforms_user.save
         format.html { redirect_to data_platforms_path, notice: 'Platforms was added successfully.' }
@@ -31,10 +30,25 @@ class DataPlatformsController < ApplicationController
     end
   end
 
+  def edit
+    excluded_ids = current_user.platforms.ids - [@data_platform.platform_id]
+    @platforms = Platform.where.not(:id => excluded_ids)
+  end
+
+  def update
+    respond_to do |format|
+      if @data_platform.update(platforms_users_params)
+        format.html { redirect_to data_platforms_path, notice: 'Platforms was updated successfully.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
   protected
 
   def platforms_users_params
-    params.require(:data_platform).permit(:_destroy, :platform_id, :config)
+    params.require(:data_platform).permit(:platform_id, :config)
   end
 
   def set_data_platform
