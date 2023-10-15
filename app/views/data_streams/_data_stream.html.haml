@@ -1,0 +1,7 @@
+%tr{id: dom_id(data_stream)}
+  %td{scope: "row"}= data_stream.id
+  %td= data_stream.label
+  %td= data_stream.created_at
+  %td
+    =link_to t('.destroy'), data_platform_path(data_stream), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    -# =link_to t('.edit'), edit_data_platform_path(data_platform), class: 'btn btn-sm btn-outline-primary'

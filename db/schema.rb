@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_15_183648) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_15_212231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_183648) do
     t.datetime "updated_at", null: false
     t.index ["platform_id"], name: "index_data_platforms_on_platform_id"
     t.index ["user_id"], name: "index_data_platforms_on_user_id"
+  end
+
+  create_table "data_streams", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_data_streams_on_user_id"
   end
 
   create_table "file_uploads", force: :cascade do |t|

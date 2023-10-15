@@ -1,0 +1,12 @@
+= link_to t('.add_data_stream'),  new_data_stream_path, class: "btn btn-primary"
+
+%hr
+
+%table.table
+  %thead
+    %tr
+      %th Platform
+      %th CreatedAt
+      %th Action
+  %tbody{id: "platforms"}
+    = render partial: "data_streams/data_stream", collection: @data_streams

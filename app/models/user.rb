@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :data_platforms
   has_many :platforms, :through => :data_platforms
 
+  has_many :data_streams
+
   def admin?
     roles.where(name: 'admin').exists?
   end
