@@ -1,6 +1,6 @@
 class Platform < ApplicationRecord
 
-  has_and_belongs_to_many :data_platforms
+  has_many :data_platforms, :dependent => :destroy
 
   def to_s
     label

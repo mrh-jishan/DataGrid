@@ -1,0 +1,12 @@
+= link_to t('.add_platform'),  new_admin_platform_path, class: "btn btn-primary"
+
+%hr
+
+%table.table
+  %thead
+    %tr
+      %th Platform
+      %th CreatedAt
+      %th Action
+  %tbody{id: "platforms"}
+    = render partial: "admin/platforms/platform", collection: @platforms

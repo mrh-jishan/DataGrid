@@ -23,11 +23,23 @@ Rails.application.routes.draw do
   resources :data_platforms, :only => [:index, :new, :create, :destroy]
   resources :connections
 
+  # authenticate :user, ->(user) { user.user? } do
+  #   resources :user_resources # Replace with your user-specific routes
+  # end
+
+  authenticate :user, ->(user) { user.admin? } do
+    namespace :admin do
+      resources :platforms
+      mount Sidekiq::Web => "/sidekiq"
+    end
+  end
+
   root "file_uploads#index"
 
-  mount Sidekiq::Web => "/sidekiq"
   # match '/500', to: 'errors#internal_server_error', via: :all
   # match '/404', to: 'errors#not_found', via: :all
   # match '/400', to: 'errors#bad_request', via: :all
+
+  match '*path', to: 'errors#not_found', via: :all
 
 end

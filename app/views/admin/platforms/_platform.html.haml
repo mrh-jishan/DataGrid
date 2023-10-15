@@ -1,0 +1,6 @@
+%tr{id: dom_id(platform)}
+  %td{scope: "row"}= platform.label
+  %td= platform.created_at
+  %td
+    =link_to t('.destroy'), admin_platform_path(platform), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    =link_to t('.edit'), edit_admin_platform_path(platform), class: 'btn btn-sm btn-outline-primary'
