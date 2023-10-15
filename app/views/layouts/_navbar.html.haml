@@ -7,7 +7,7 @@
       %ul.navbar-nav.me-auto
         %li.nav-item.dropdown
           %a.nav-link.link-dark.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
-            = t('.manage_platforms')
+            = t('.data_platforms')
           %ul.dropdown-menu
             %li
               = link_to t('.platforms'), admin_platforms_path, class: "dropdown-item"
@@ -15,10 +15,18 @@
               %hr.dropdown-divider/
             %li
               = link_to t('.platforms_config'), data_platforms_path, class: "dropdown-item"
-        -# %li.nav-item
-        -#   = link_to t('.data_platforms'), data_platforms_path, class: "nav-link link-dark"
+        %li.nav-item.dropdown
+          %a.nav-link.link-dark.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+            = t('.data_mapping') # mapping data to flat
+          %ul.dropdown-menu
+            %li
+              = link_to t('.platforms'), admin_platforms_path, class: "dropdown-item"
+            %li
+              %hr.dropdown-divider/
+            %li
+              = link_to t('.mapping_config'), data_platforms_path, class: "dropdown-item"
         %li.nav-item
-          = link_to t('.connections'), connections_path, class: "nav-link link-dark"
+          = link_to t('.audit'), connections_path, class: "nav-link link-dark"
       %ul.navbar-nav.justify-content-end.me-5
         - if user_signed_in?
           %li.nav-item.dropdown
@@ -26,7 +34,7 @@
               = current_user
             %ul.dropdown-menu
               %li
-                %a.dropdown-item{:href => "#"} Profile
+                = link_to t('.profiles'), profiles_path, class: 'dropdown-item'
               %li
                 %hr.dropdown-divider/
               %li
