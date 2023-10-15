@@ -2,6 +2,12 @@
 
 %hr
 
-
-- @data_platforms.each do |data_platform|
-  = data_platform
+%table.table
+  %thead
+    %tr
+      %th Platform
+      %th Config
+      %th CreatedAt
+      %th Action
+  %tbody{id: "data_platforms"}
+    = render partial: "data_platforms/data_platform", collection: @data_platforms

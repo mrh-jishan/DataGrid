@@ -1,0 +1,7 @@
+%tr{id: dom_id(data_platform)}
+  %td{scope: "row"}= data_platform.platform
+  %td= data_platform.config
+  %td= data_platform.created_at
+  %td
+    =link_to t('.destroy'), data_platform_path(data_platform), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    -# =link_to t('.show'), file_upload_visualizations_path(file_upload), class: 'btn btn-sm btn-outline-primary'
