@@ -27,3 +27,6 @@ application.register("tabulator", TabulatorController)
 
 import VisualizationController from "./visualization_controller"
 application.register("visualization", VisualizationController)
+
+import NestedForm from 'stimulus-rails-nested-form'
+application.register('nested-form', NestedForm)

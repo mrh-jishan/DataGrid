@@ -16,7 +16,7 @@ module ExceptionHandler
     respond_to do |format|
       format.html { render partial: 'errors/internal_server_error', status: :internal_server_error, locals: { exception: exception } }
       format.json { render json: { error: 'Internal Server Error' }, status: :internal_server_error }
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/_internal_server_error', locals: { exception: exception }) }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/internal_server_error', locals: { exception: exception }) }
     end
   end
 

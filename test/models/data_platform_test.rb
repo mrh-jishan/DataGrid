@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PlatformsControllerTest < ActionDispatch::IntegrationTest
+class DataPlatformTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

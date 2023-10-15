@@ -1,0 +1,25 @@
+%h1
+  new platform
+
+= simple_form_for([@data_platform], input_html: {"data-turbo": false}) do |f|
+  = f.input :platform_id, collection: @platforms, label_method: :label, value_method: :id, include_blank: false,  input_html: { "data-controller": "slim-select", }
+  = f.input :config
+
+  -# data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' },
+  -# %template{"data-nested-form-target": "template"}
+  -#   = f.fields_for :data_platform_configs, current_user.data_platforms.new, child_index: 'NEW_RECORD' do |platform_fields|
+  -#     = render "platform_form", f: platform_fields
+  -#
+  -# = f.simple_fields_for :data_platform_configs do |platform_fields|
+  -#   = render "platform_form", f: platform_fields
+  -#
+  -# -# <!-- Inserted elements will be injected before that target. -->
+  -# %div{"data-nested-form-target": "target"}
+  -#
+  -# %button{type: "button", "data-action": "nested-form#add"}
+  -#   Add todo
+
+  -# =f.fields_for :platforms do |ff|
+  -#   =f.association :platform, collection: @platforms, label_method: :label, value_method: :id, include_blank: false,  input_html: { "data-controller": "slim-select", }
+
+  =f.submit class: "btn btn-primary"

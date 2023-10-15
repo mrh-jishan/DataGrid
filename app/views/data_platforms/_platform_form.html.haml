@@ -1,0 +1,8 @@
+%div{ class: "nested-form-wrapper", "data-new-record": f.object.new_record?}
+  = f.association :platforms, label_method: :label, value_method: :id, include_blank: false,  input_html: { "data-controller": "slim-select", }
+  -# = f.input :config
+  %button{type: "button", "data-action": "nested-form#remove"}
+    Remove todo
+  = f.hidden_field :_destroy
+
+-# = "---------------#{f.object}"
