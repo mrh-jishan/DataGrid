@@ -1,5 +1,6 @@
-.m-3
+.row.m-3
   - @dashboard.visualizations.each do |visualization|
-    = visualization.label
-    - if visualization.y_axis_object.present?
-      %canvas.my-2{"data-controller": "dashboard", "data-index": visualization.file_upload_id, "data-dashboard-type-value": 'bar', "data-dashboard-group-by-value": visualization.y_axis_object.to_json, "data-dashboard-column-names-value": visualization.x_axis_object.to_json,  class: 'border rounded-1'}
+    .col-md-6
+      = visualization.label
+      - if visualization.y_axis_object.present?
+        %canvas.my-2{"data-controller": "dashboard", "data-index": visualization.file_upload_id, "data-dashboard-type-value": 'bar', "data-dashboard-group-by-value": visualization.y_axis_object.to_json, "data-dashboard-column-names-value": visualization.x_axis_object.to_json,  class: 'border rounded-1'}

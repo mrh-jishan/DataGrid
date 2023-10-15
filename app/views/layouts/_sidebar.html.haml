@@ -1,11 +1,11 @@
-.d-flex.flex-column.flex-shrink-0.bg-light.border-end{style: "width: 280px;"}
+.d-flex.flex-column.flex-shrink-0.bg-light.border-end{style: "width: 150px;"}
   %ul.navbar-nav.flex-column.mb-auto.list-group.list-group-flush.border-bottom
     %li.list-group-item.list-group-item-action
-      = link_to(root_path, class: "nav-link link-dark") do
+      = link_to(root_path, class: "nav-link link-dark p-0") do
         %i.bi-database
         DataSets
     %li.list-group-item.list-group-item-action
-      = link_to(dashboards_path, class: "nav-link link-dark") do
+      = link_to(dashboards_path, class: "nav-link link-dark p-0") do
         %i.bi-bar-chart
         Dashboards
 

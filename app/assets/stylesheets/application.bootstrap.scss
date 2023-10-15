@@ -6,8 +6,8 @@
 .sidebar {
   display: flex;
   flex-wrap: nowrap;
-  height: calc(100vh - 5vh);
-  max-height: calc(100vh - 5vh);
+  height: calc(100vh - 55px);
+  max-height: calc(100vh - 55px);
   overflow-x: auto;
   overflow-y: hidden;
 }

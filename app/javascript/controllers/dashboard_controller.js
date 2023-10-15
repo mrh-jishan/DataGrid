@@ -21,7 +21,10 @@ export default class extends Controller {
             default: {}
         },
         data: Object,
-        options: Object,
+        options: {
+            type: Object,
+            default: {}
+        },
     }
 
     connect() {
@@ -43,7 +46,8 @@ export default class extends Controller {
                     y: {
                         beginAtZero: true
                     }
-                }
+                },
+                ...this.optionsValue
             }
         });
 
