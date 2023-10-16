@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
   resources :data_streams, :only => [:index, :new, :create, :show, :destroy]
-  resources :profiles, :only => [:index]
+  resources :profiles, :only => [:index, :edit, :update]
   resources :data_platforms, :only => [:index, :new, :create, :destroy, :edit, :update]
   resources :connections
 
