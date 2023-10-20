@@ -1,2 +1,3 @@
-%h1
-  new data stream
+= simple_form_for([@data_stream], html: {"data-turbo": false}) do |f|
+  = f.input :label
+  = f.submit class: 'btn btn-primary'

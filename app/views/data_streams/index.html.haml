@@ -5,8 +5,9 @@
 %table.table
   %thead
     %tr
-      %th Platform
+      %th #
+      %th Label
       %th CreatedAt
       %th Action
-  %tbody{id: "platforms"}
+  %tbody{id: "data_streams"}
     = render partial: "data_streams/data_stream", collection: @data_streams

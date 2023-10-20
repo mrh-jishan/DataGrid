@@ -68,6 +68,8 @@ group :development do
 
   # open mail
   gem "letter_opener", "~> 1.8"
+
+  # live reload
 end
 
 group :test do
@@ -108,3 +110,5 @@ gem "devise", "~> 4.9"
 gem "pundit", "~> 2.3"
 
 gem "aws-sdk-s3", "~> 1.136"
+
+gem "hotwire-livereload", "~> 1.3", :group => :development

@@ -1,3 +1,3 @@
-= simple_form_for([:admin,@platform], input_html: {"data-turbo": false}) do |f|
+= simple_form_for([:admin,@platform], html: {"data-turbo": false}) do |f|
   = f.input :label
   = f.submit class: "btn btn-primary"

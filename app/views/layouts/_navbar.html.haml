@@ -20,11 +20,11 @@
             = t('.data_mapping') # mapping data to flat
           %ul.dropdown-menu
             %li
-              = link_to t('.platforms'), admin_platforms_path, class: "dropdown-item"
+              = link_to t('.mapping'), mappings_path, class: "dropdown-item"
             %li
               %hr.dropdown-divider/
             %li
-              = link_to t('.mapping_config'), data_platforms_path, class: "dropdown-item"
+              = link_to t('.mapping_config'), data_mappings_path, class: "dropdown-item"
         %li.nav-item
           = link_to t('.audit'), connections_path, class: "nav-link link-dark"
       %ul.navbar-nav.justify-content-end.me-5

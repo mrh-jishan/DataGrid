@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :profiles, :only => [:index, :edit, :update]
   resources :data_platforms, :only => [:index, :new, :create, :destroy, :edit, :update]
   resources :connections
+  resources :mappings
+  resources :data_mappings
 
   # authenticate :user, ->(user) { user.user? } do
   #   resources :user_resources # Replace with your user-specific routes

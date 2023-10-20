@@ -1,7 +1,7 @@
 %h1
   new platform
 
-= simple_form_for([@data_platform], input_html: {"data-turbo": false}) do |f|
+= simple_form_for([@data_platform], html: {"data-turbo": false}) do |f|
   = f.input :platform_id, collection: @platforms, label_method: :label, value_method: :id, include_blank: false,  input_html: { "data-controller": "slim-select", }
   = f.input :config
   =f.submit class: "btn btn-primary"
