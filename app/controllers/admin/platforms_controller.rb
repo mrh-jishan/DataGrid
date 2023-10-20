@@ -38,7 +38,7 @@ class Admin::PlatformsController < ApplicationController
       if @platform.update(platforms_params)
         format.html { redirect_to admin_platforms_path, notice: 'Platforms was updated successfully.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

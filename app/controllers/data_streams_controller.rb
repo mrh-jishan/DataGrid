@@ -1,5 +1,5 @@
 class DataStreamsController < ApplicationController
-  before_action :set_data_stream, :only => [:destroy]
+  before_action :set_data_stream, :only => [:destroy, :edit, :update]
 
   def index
     @data_streams = current_user.data_streams
@@ -16,6 +16,20 @@ class DataStreamsController < ApplicationController
         format.html { redirect_to data_stream_params, notice: 'Data stream was added successfully.' }
       else
         format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit
+
+  end
+
+  def update
+    respond_to do |format|
+      if @data_stream.update(data_stream_params)
+        format.html { redirect_to data_streams_path, notice: 'Data stream was updated successfully.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

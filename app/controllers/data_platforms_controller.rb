@@ -40,7 +40,7 @@ class DataPlatformsController < ApplicationController
       if @data_platform.update(platforms_users_params)
         format.html { redirect_to data_platforms_path, notice: 'Platforms was updated successfully.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
