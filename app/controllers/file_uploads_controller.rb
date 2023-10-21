@@ -62,7 +62,7 @@ class FileUploadsController < ApplicationController
   end
 
   def file_upload_params
-    params.require(:file_upload).permit(:file, :City)
+    params.require(:file_upload).permit(:file)
   end
 
 end

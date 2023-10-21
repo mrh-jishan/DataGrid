@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_15_212231) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_21_014709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,9 +71,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_212231) do
     t.index ["user_id"], name: "index_data_platforms_on_user_id"
   end
 
+  create_table "data_stream_files", force: :cascade do |t|
+    t.bigint "data_stream_id"
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_stream_id"], name: "index_data_stream_files_on_data_stream_id"
+  end
+
   create_table "data_streams", force: :cascade do |t|
     t.bigint "user_id"
     t.string "label"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_data_streams_on_user_id"
