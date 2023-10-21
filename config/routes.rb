@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
   resources :data_streams, :only => [:index, :new, :create, :edit, :destroy, :update, :show]
-  resources :profiles, :only => [:index, :edit, :update]
+  resources :profiles, :only => [:index, :edit, :update] do
+    post 'generate_token', on: :collection
+  end
   resources :data_platforms, :only => [:index, :new, :create, :destroy, :edit, :update]
   resources :connections
   resources :mappings
@@ -38,8 +40,8 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    resources :data_stream_files, only: [:create]
+  namespace :api, defaults: { format: :json } do
+    resources :data_stream_files
   end
 
   root "file_uploads#index"

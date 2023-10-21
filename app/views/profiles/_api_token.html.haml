@@ -1,0 +1,4 @@
+.input-group{"data-controller": "clipboard", "data-clipboard-success-content-value": "Copied!"}
+  %input{"data-clipboard-target": "source", class: "form-control", value: token, "data-bs-toggle": "tooltip", "data-bs-title": token, readonly: true}
+  %button{type: "button", class: "btn btn-outline-primary", "data-action": "clipboard#copy", "data-clipboard-target": "button", "data-bs-toggle": "tooltip", "data-bs-title": "Copy"}
+    %span.bi-clipboard

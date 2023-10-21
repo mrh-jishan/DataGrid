@@ -22,6 +22,14 @@ class User < ApplicationRecord
     roles.where(name: 'moderator').exists?
   end
 
+  def api_token?
+    self.api_token.present?
+  end
+
+  def generate_api_token
+    self.api_token = Digest::SHA1.hexdigest([Time.now, rand(111..999)].join)
+  end
+
   def to_s
     Mail::Address.new(email).local.titleize
   end
