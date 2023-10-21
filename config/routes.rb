@@ -38,6 +38,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :data_stream_files, only: [:create]
+  end
+
   root "file_uploads#index"
 
   # match '/500', to: 'errors#internal_server_error', via: :all

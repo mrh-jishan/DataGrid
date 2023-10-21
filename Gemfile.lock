@@ -131,6 +131,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_uid (0.1.1)
+      devise (>= 3.0.0)
+      railties (>= 3.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -345,6 +348,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.1)
   debug
   devise (~> 4.9)
+  devise_uid (~> 0.1.1)
   dotenv-rails (~> 2.8)
   groupdate (~> 6.3)
   haml-rails (~> 2.1)
