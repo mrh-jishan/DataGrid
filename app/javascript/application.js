@@ -30,9 +30,10 @@ document.addEventListener("turbo:before-stream-render", (event) => {
 
 // import '@popperjs/core'
 // import 'bootstrap'
-// import {Tooltip} from "bootstrap"
-// const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-// const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
+import {Tooltip} from "bootstrap"
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
+
 // import * as bootstrap from "bootstrap"
 
 // Turbo.StreamActions.redirect = function () {

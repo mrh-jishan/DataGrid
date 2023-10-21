@@ -1,14 +1,13 @@
-%ul#myTab.nav.nav-tabs{role: "tablist"}
-  %li.nav-item{role: "presentation"}
-    %button#home-tab.nav-link.active{"aria-controls" => "home-tab-pane", "aria-selected" => "true", "data-bs-target" => "#home-tab-pane", "data-bs-toggle" => "tab", role: "tab", type: "button"} curl
-  %li.nav-item{role: "presentation"}
-    %button#profile-tab.nav-link{"aria-controls" => "profile-tab-pane", "aria-selected" => "false", "data-bs-target" => "#profile-tab-pane", "data-bs-toggle" => "tab", role: "tab", type: "button"} Ruby
-  %li.nav-item{role: "presentation"}
-    %button#contact-tab.nav-link{"aria-controls" => "contact-tab-pane", "aria-selected" => "false", "data-bs-target" => "#contact-tab-pane", "data-bs-toggle" => "tab", role: "tab", type: "button"} NodeJS
-#myTabContent.tab-content
-  #home-tab-pane.tab-pane.fade.show.active{"aria-labelledby" => "home-tab", role: "tabpanel", tabindex: "0"}
-    home
-  #profile-tab-pane.tab-pane.fade{"aria-labelledby" => "profile-tab", role: "tabpanel", tabindex: "0"}
-    profile
-  #contact-tab-pane.tab-pane.fade{"aria-labelledby" => "contact-tab", role: "tabpanel", tabindex: "0"}
-    contact
+.d-flex
+  %h4
+    = @data_stream
+  .ms-auto
+    .d-flex
+      .me-2
+        = render "token_sgid", data_stream: @data_stream
+      = render "connection_modal", data_stream: @data_stream
+
+%hr
+
+- @data_stream_files.each do |data_stream_file|
+  = data_stream_file

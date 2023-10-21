@@ -1,0 +1,55 @@
+%ul.nav.nav-tabs{role: "tablist"}
+  %li.nav-item{role: "presentation"}
+    %button#curl-tab.nav-link.active{"aria-controls" => "curl-tab-pane", "aria-selected" => "true", "data-bs-target" => "#curl-tab-pane", "data-bs-toggle" => "tab", role: "tab", type: "button"} cURL
+  %li.nav-item{role: "presentation"}
+    %button#ruby-tab.nav-link{"aria-controls" => "ruby-tab-pane", "aria-selected" => "false", "data-bs-target" => "#ruby-tab-pane", "data-bs-toggle" => "tab", role: "tab", type: "button"} Ruby
+  %li.nav-item{role: "presentation"}
+    %button#nodejs-tab.nav-link{"aria-controls" => "nodejs-tab-pane", "aria-selected" => "false", "data-bs-target" => "#nodejs-tab-pane", "data-bs-toggle" => "tab", role: "tab", type: "button"} NodeJS
+.tab-content
+  #curl-tab-pane.tab-pane.fade.show.active{"aria-labelledby" => "curl-tab", role: "tabpanel", tabindex: "0"}
+    %pre.p-3
+      :plain
+        curl -s --user 'api:YOUR_API_KEY' \\
+        https://api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages \\
+        -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \\
+        -F to=YOU@YOUR_DOMAIN_NAME \\
+        -F to=bar@example.com \\
+        -F subject='Hello' \\
+        -F text='Testing some Mailgun awesomeness!'
+  #ruby-tab-pane.tab-pane.fade{"aria-labelledby" => "ruby-tab", role: "tabpanel", tabindex: "0"}
+    %pre.p-3
+      :plain
+        def send_simple_message
+          RestClient.post "https://api:YOUR_API_KEY"\
+          "@api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages",
+          :from => "Excited User <mailgun@YOUR_DOMAIN_NAME>",
+          :to => "bar@example.com, YOU@YOUR_DOMAIN_NAME",
+          :subject => "Hello",
+          :text => "Testing some Mailgun awesomness!"
+        end
+  #nodejs-tab-pane.tab-pane.fade{"aria-labelledby" => "nodejs-tab", role: "tabpanel", tabindex: "0"}
+    %pre.p-3
+      :plain
+        const API_KEY = 'YOUR_API_KEY';
+        const DOMAIN = 'YOUR_DOMAIN_NAME';
+
+          import formData from 'form-data';
+          import Mailgun from 'mailgun.js';
+
+        const mailgun = new Mailgun(formData);
+        const client = mailgun.client({username: 'api', key: API_KEY});
+
+        const messageData = {
+          from: 'Excited User <me@samples.mailgun.org>',
+          to: 'foo@example.com, bar@example.com',
+          subject: 'Hello',
+          text: 'Testing some Mailgun awesomeness!'
+        };
+
+        client.messages.create(DOMAIN, messageData)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+          });

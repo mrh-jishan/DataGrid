@@ -3,7 +3,6 @@ class CreateDataStreams < ActiveRecord::Migration[7.0]
     create_table :data_streams do |t|
       t.references :user
       t.string :label
-      t.string :token
       t.timestamps
     end
   end

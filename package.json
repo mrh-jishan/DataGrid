@@ -15,6 +15,7 @@
     "sass": "^1.65.1",
     "slim-select": "^2.5.1",
     "sortablejs": "^1.15.0",
+    "stimulus-clipboard": "^4.0.1",
     "stimulus-rails-nested-form": "^4.1.0",
     "tabulator-tables": "^5.5.0"
   },

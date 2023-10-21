@@ -53,3 +53,6 @@ en:
   dashboards:
     new:
       create: Create
+  data_streams:
+    connection_modal:
+      connection_info: Connection Info

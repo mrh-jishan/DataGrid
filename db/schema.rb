@@ -82,7 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_014709) do
   create_table "data_streams", force: :cascade do |t|
     t.bigint "user_id"
     t.string "label"
-    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_data_streams_on_user_id"

@@ -30,3 +30,6 @@ application.register("visualization", VisualizationController)
 
 import NestedForm from 'stimulus-rails-nested-form'
 application.register('nested-form', NestedForm)
+
+import Clipboard from 'stimulus-clipboard'
+application.register('clipboard', Clipboard)
