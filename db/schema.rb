@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_22_201826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
     t.datetime "updated_at", null: false
     t.string "aggregate_function", default: "count", null: false
     t.index ["file_upload_id"], name: "index_csv_headers_on_file_upload_id"
+    t.index ["name", "file_upload_id"], name: "index_csv_headers_on_name_and_file_upload_id", unique: true
   end
 
   create_table "csv_rows", force: :cascade do |t|
@@ -95,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.integer "import_source", default: 1
     t.index ["user_id"], name: "index_file_uploads_on_user_id"
   end
 

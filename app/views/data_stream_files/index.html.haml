@@ -13,9 +13,10 @@
   %thead
     %tr
       %th #
-      %th File
-      %th CreatedAt
-      %th Action
+      %th= t('.file')
+      %th= t('.status')
+      %th= t('.created_at')
+      %th= t('.action')
   %tbody{id: "data_stream_files"}
     = render partial: "data_stream_file", collection: @data_stream_files
 

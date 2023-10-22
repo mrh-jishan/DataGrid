@@ -1,5 +1,5 @@
 class DataStreamsController < ApplicationController
-  before_action :set_data_stream, :only => [:destroy, :edit, :update, :show]
+  before_action :set_data_stream, :only => [:destroy, :edit, :update]
 
   def index
     @data_streams = current_user.data_streams

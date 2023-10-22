@@ -9,11 +9,12 @@
   %thead
     %tr
       %th DataSet
+      %th Import Source
       %th No. of dashboards
       %th CreatedAt
       %th Action
   %tbody{id: "file_uploads"}
-    = render partial: "file_uploads/file_upload", collection: @file_uploads
+    = render partial: "file_upload", collection: @file_uploads
 
 -# = link_to t('.file_upload'), new_file_upload_path
 -#

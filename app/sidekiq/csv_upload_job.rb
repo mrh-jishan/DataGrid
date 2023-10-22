@@ -5,16 +5,15 @@ class CsvUploadJob
 
   def perform(csv_file_id)
     file_upload = FileUpload.find(csv_file_id)
-    CSV.foreach(file_upload.file.path, headers: true) do |row|
-      csv_row_data = row.to_h
-      csv_row_data.keys.each do |header_name|
-        CsvHeader.where(name: header_name, file_upload: file_upload).first_or_initialize.tap do |csv_header|
-          csv_header.aggregate_function = infer_aggregate_function(csv_row_data[header_name])
-          csv_header.save!
-        end
-      end
-      CsvRow.upsert({ csv_row: csv_row_data, file_upload_id: file_upload.id }, :unique_by => [:csv_row, :file_upload_id])
-    end
+
+    data = CSV.read(file_upload.file.path, headers: true)
+
+    first_row = data.first
+    csv_header_data = data.headers.map { |header| { name: header, file_upload_id: file_upload.id, aggregate_function: infer_aggregate_function(first_row[header]) } }
+    CsvHeader.upsert_all(csv_header_data, :unique_by => [:name, :file_upload_id])
+
+    csv_row_data = data.map { |row| { csv_row: row.to_h, file_upload_id: file_upload.id } }
+    CsvRow.upsert_all(csv_row_data, :unique_by => [:csv_row, :file_upload_id])
   end
 
   def infer_aggregate_function(value)
