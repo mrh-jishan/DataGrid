@@ -6,16 +6,15 @@
   .row
     .card.col-lg-4
       .card-body.text-center
-        %img.rounded-circle.img-fluid{alt: "avatar", src: "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp", style: "width: 150px;"}/
-        %h5.my-3 John Smith
-        %p.text-muted.mb-1 Full Stack Developer
-        %p.text-muted.mb-4 Bay Area, San Francisco, CA
+        = image_tag "avatar.webp", :alt => "avatar", class: "rounded-circle img-fluid", style: "width: 150px;"
+        %h5.my-3= @user.to_s
+        %p.text-muted.mb-1= @user.email
+        %p.text-muted.mb-4= @user.to_roles.join(",")
         .d-flex.justify-content-center.mb-2
           - if @user.api_token?
             = render "api_token", token: @user.api_token
           - else
             = link_to t('.create_api_token'), generate_token_profiles_path, class: 'btn btn-primary', data: { 'turbo-method' => :post }
-
 
     .col-lg-8
       .card.mb-4
@@ -24,31 +23,19 @@
             .col-sm-3
               %p.mb-0 Full Name
             .col-sm-9
-              %p.text-muted.mb-0 Johnatan Smith
+              %p.text-muted.mb-0= @user.to_s
           %hr/
           .row
             .col-sm-3
               %p.mb-0 Email
             .col-sm-9
-              %p.text-muted.mb-0 example@example.com
+              %p.text-muted.mb-0= @user.email
           %hr/
           .row
             .col-sm-3
-              %p.mb-0 Phone
+              %p.mb-0 Role
             .col-sm-9
-              %p.text-muted.mb-0 (097) 234-5678
-          %hr/
-          .row
-            .col-sm-3
-              %p.mb-0 Mobile
-            .col-sm-9
-              %p.text-muted.mb-0 (098) 765-4321
-          %hr/
-          .row
-            .col-sm-3
-              %p.mb-0 Address
-            .col-sm-9
-              %p.text-muted.mb-0 Bay Area, San Francisco, CA
+              %p.text-muted.mb-0= @user.to_roles.join(",")
       .row
         .col-md-6
           .card.mb-4.mb-md-0

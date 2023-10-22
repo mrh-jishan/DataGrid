@@ -30,6 +30,10 @@ class User < ApplicationRecord
     self.api_token = Digest::SHA1.hexdigest([Time.now, rand(111..999)].join)
   end
 
+  def to_roles
+    roles.pluck(:name)
+  end
+
   def to_s
     Mail::Address.new(email).local.titleize
   end

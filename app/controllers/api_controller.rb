@@ -1,14 +1,16 @@
 class ApiController < ActionController::API
 
-  before_action :validate_global_id
+  before_action :validate_auth_token
+
+  def current_user
+    @current_user ||= User.find_by(api_token: request.headers['Authorization'])
+  end
 
   private
 
-  def validate_global_id
-    global_id = request.headers['X-Global-ID']
-    @gid = GlobalID::Locator.locate_signed(global_id)
-    unless @gid.present?
-      render json: { error: 'Invalid GlobalID' }, status: :unauthorized
+  def validate_auth_token
+    unless current_user&.valid?
+      render json: { error: 'Invalid token' }, status: :unauthorized
     end
   end
 
