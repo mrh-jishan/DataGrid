@@ -20,10 +20,6 @@ class DataStreamsController < ApplicationController
     end
   end
 
-  def show
-    @data_stream_files = @data_stream.data_stream_files
-  end
-
   def edit
 
   end

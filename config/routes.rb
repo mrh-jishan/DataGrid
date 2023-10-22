@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
-  resources :data_streams, :only => [:index, :new, :create, :edit, :destroy, :update, :show]
+  resources :data_streams, :only => [:index, :new, :create, :edit, :destroy, :update] do
+    resources :data_stream_files
+  end
   resources :profiles, :only => [:index, :edit, :update] do
     post 'generate_token', on: :collection
   end
