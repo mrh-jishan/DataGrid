@@ -1,0 +1,9 @@
+%tr{id: dom_id(data_stream_file)}
+  %td{scope: "row"}= data_stream_file.id
+  %td= data_stream_file.file
+  -# %td= render "token_sgid", data_stream: data_stream
+  %td= data_stream_file.created_at
+  %td
+    -# =link_to t('.destroy'), data_stream_path(data_stream), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    -# =link_to t('.edit'), edit_data_stream_path(data_stream), class: 'btn btn-sm btn-outline-secondary'
+    -# =link_to t('.show'), data_stream_path(data_stream), class: 'btn btn-sm btn-outline-primary'

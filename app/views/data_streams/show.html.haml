@@ -9,5 +9,13 @@
 
 %hr
 
-- @data_stream_files.each do |data_stream_file|
-  = data_stream_file
+%table.table
+  %thead
+    %tr
+      %th #
+      %th File
+      %th CreatedAt
+      %th Action
+  %tbody{id: "data_stream_files"}
+    = render partial: "data_stream_file", collection: @data_stream_files
+

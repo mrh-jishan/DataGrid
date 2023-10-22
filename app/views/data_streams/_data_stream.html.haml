@@ -1,8 +1,7 @@
 %tr{id: dom_id(data_stream)}
   %td{scope: "row"}= data_stream.id
   %td= data_stream.label
-  %td
-    = render "token_sgid", data_stream: data_stream
+  %td= render "token_sgid", data_stream: data_stream
   %td= data_stream.created_at
   %td
     =link_to t('.destroy'), data_stream_path(data_stream), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
