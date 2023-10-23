@@ -1,5 +1,6 @@
 %tr{id: dom_id(file_upload)}
   %td{scope: "row"}= file_upload.name
+  %td= file_upload.unique_by
   %td= file_upload.import_source.humanize
   %td= file_upload.visualizations.count
   %td= file_upload.created_at

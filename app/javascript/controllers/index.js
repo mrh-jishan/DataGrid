@@ -16,6 +16,9 @@ application.register("dashboards", DashboardsController)
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
 
+import FileUploadController from "./file_upload_controller"
+application.register("file-upload", FileUploadController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
@@ -27,9 +30,3 @@ application.register("tabulator", TabulatorController)
 
 import VisualizationController from "./visualization_controller"
 application.register("visualization", VisualizationController)
-
-import NestedForm from 'stimulus-rails-nested-form'
-application.register('nested-form', NestedForm)
-
-import Clipboard from 'stimulus-clipboard'
-application.register('clipboard', Clipboard)

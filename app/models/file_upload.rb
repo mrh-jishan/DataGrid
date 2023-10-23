@@ -15,16 +15,20 @@ class FileUpload < ApplicationRecord
 
   before_save :extract_metadata
 
+  validates :unique_by, :file, :presence => true, exclusion: { in: [nil, ""] }
+
+  def to_s
+    name
+  end
+
+  private
+
   def extract_metadata
     if self.file.present?
       self.name = File.basename(self.file.path)
       self.file_type = self.file.content_type
       self.file_size = self.file.size
     end
-  end
-
-  def to_s
-    name
   end
 
 end

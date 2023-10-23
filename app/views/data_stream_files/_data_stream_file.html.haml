@@ -5,5 +5,4 @@
   %td= data_stream_file.created_at
   %td
     =link_to t('.destroy'), data_stream_data_stream_file_path(@data_stream,data_stream_file), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
-    =link_to t('.import_again'), import_again_data_stream_data_stream_file_path(@data_stream,data_stream_file), data: { 'turbo-method' => :patch, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-primary'
-    -# =link_to t('.show'), data_stream_path(data_stream), class: 'btn btn-sm btn-outline-primary'
+    =link_to t('.import_again'), import_again_data_stream_data_stream_file_path(@data_stream,data_stream_file), :method => :patch, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-primary'

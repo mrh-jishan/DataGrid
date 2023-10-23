@@ -14,8 +14,6 @@ class DataStreamFilesController < ApplicationController
   end
 
   def import_again
-    puts @data_stream_file
-
     @file_upload = current_user.file_uploads.new(file: @data_stream_file.file, import_source: :data_stream)
     if @file_upload.save
       CsvUploadJob.perform_async(@file_upload.id)
