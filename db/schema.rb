@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_23_002309) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_26_040518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_002309) do
     t.jsonb "csv_row", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unique_by", default: [], array: true
     t.index ["csv_row", "file_upload_id"], name: "index_csv_rows_on_csv_row_and_file_upload_id", unique: true
     t.index ["file_upload_id"], name: "index_csv_rows_on_file_upload_id"
   end

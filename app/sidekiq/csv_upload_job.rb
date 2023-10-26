@@ -12,7 +12,10 @@ class CsvUploadJob
     csv_header_data = data.headers.map { |header| { name: header, file_upload_id: file_upload.id, aggregate_function: infer_aggregate_function(first_row[header]) } }
     CsvHeader.upsert_all(csv_header_data, :unique_by => [:name, :file_upload_id])
 
-    csv_row_data = data.map { |row| { csv_row: row.to_h, file_upload_id: file_upload.id } }
+    csv_row_data = data.map { |row| { csv_row: row.to_h,
+                                      file_upload_id: file_upload.id,
+                                      unique_by: uniq_column_value(file_upload.unique_by, row) } }
+
     CsvRow.upsert_all(csv_row_data, :unique_by => [:csv_row, :file_upload_id])
   end
 
@@ -27,6 +30,10 @@ class CsvUploadJob
     else
       :count # Default to string data type if the type cannot be determined
     end
+  end
+
+  def uniq_column_value(columns, row)
+    columns.compact.reject(&:empty?).map { |column| row[column] }
   end
 
 end

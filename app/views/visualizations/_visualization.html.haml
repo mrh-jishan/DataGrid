@@ -1,10 +1,11 @@
 %tr{"id" => dom_id(visualization)}
-  %th{scope: "row"}
-    .form-check.form-switch
-      = check_box_tag visualization.id,visualization.id, false ,class: "form-check-input", role: "switch"
+  %th{scope: "row"}= visualization.id
   %td= visualization.label
   %td= visualization.created_at
   %td
     =link_to t('.destroy'), file_upload_visualization_path(@file_upload, visualization), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
     =link_to t('.show'), file_upload_visualization_path(@file_upload, visualization), class: 'btn btn-sm btn-outline-primary'
 
+
+-# .form-check.form-switch
+-#   = check_box_tag visualization.id,visualization.id, false ,class: "form-check-input", role: "switch"

@@ -6,15 +6,21 @@
 
 %hr
 
-%table.table
-  %thead
-    %tr
-      %th #
-      %th Label
-      %th CreatedAt
-      %th Action
-  %tbody
-    = render partial: "visualization", collection: @visualizations
+.card
+  .row
+    .col-md-8
+      %div{class: "mt-3", data: { controller: "tabulator", index: params[:file_upload_id] } }
+    .col-md-4
+      %table.table
+        %thead
+          %tr
+            %th #
+            %th Label
+            %th CreatedAt
+            %th Action
+        %tbody
+          = render partial: "visualization", collection: @visualizations
+
 
 
     -# - @visualizations.each do |visualization|

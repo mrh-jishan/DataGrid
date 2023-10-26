@@ -10,6 +10,9 @@ export default class extends Controller {
         (async () => {
             const id = this.element.dataset.index;
             new Tabulator(this.element, {
+                columnDefaults:{
+                    tooltip:true,
+                },
                 layout: "fitData",
                 pagination: true, //enable pagination
                 paginationMode: "remote",
