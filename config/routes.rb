@@ -8,26 +8,26 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :file_uploads, :only => [:index, :new, :create, :show, :update, :destroy] do
+  resources :file_uploads do
+    resources :csv_rows, :only => [:index, :update]
     resources :visualizations, :only => [:index, :new, :create, :show, :update, :destroy] do
       resources :aggregators, :only => [:destroy]
     end
     resources :csv_headers, :only => [:index, :update, :show]
-    resources :csv_rows, :only => [:index]
-    member do
-      patch 'csv_rows/:csv_row_id', to: 'file_uploads#update', as: 'csv_rows'
-    end
   end
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
+
   resources :data_streams, :only => [:index, :new, :create, :edit, :destroy, :update] do
     resources :data_stream_files do
       patch 'import_again', on: :member
     end
   end
+
   resources :profiles, :only => [:index, :edit, :update] do
     post 'generate_token', on: :collection
   end
+
   resources :data_platforms, :only => [:index, :new, :create, :destroy, :edit, :update]
   resources :connections
   resources :mappings
@@ -54,6 +54,6 @@ Rails.application.routes.draw do
   # match '/404', to: 'errors#not_found', via: :all
   # match '/400', to: 'errors#bad_request', via: :all
 
-  match '*path', to: 'errors#not_found', via: :all
+  # match '*path', to: 'errors#not_found', via: :all
 
 end

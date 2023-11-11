@@ -35,19 +35,6 @@ class FileUploadsController < ApplicationController
 
   end
 
-  def update
-    @csv_row = @file_upload.csv_rows.find(params[:csv_row_id])
-    respond_to do |format|
-      if @csv_row.update(file_upload_params)
-        # format.html { redirect_to @file_upload, notice: 'Item was successfully updated.' }
-        format.json { render json: { success: true } }
-      else
-        # format.html { render :edit }
-        format.json { render json: { success: false, errors: @file_upload.errors.full_messages }, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def destroy
     @file_upload.destroy
     respond_to do |format|

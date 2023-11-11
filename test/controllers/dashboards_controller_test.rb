@@ -5,11 +5,10 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     sign_in users(:one)
-    @file_upload = file_uploads(:one)
   end
 
   test "should get index" do
-    get file_upload_dashboards_url(@file_upload)
+    get dashboards_url
     assert_response :success
   end
 end

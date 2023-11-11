@@ -9,7 +9,7 @@ class CsvRowsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get file_upload_csv_rows_url(@file_upload, params: { column_names: '[]', group_by: '[]' })
+    get file_upload_csv_rows_url(@file_upload, format: :json, params: { column_names: '[]', group_by: '[]' })
     assert_response :success
   end
 end

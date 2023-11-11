@@ -5,9 +5,11 @@ one:
   file: MyString1
   file_type: MyString1
   file_size: 1mb
+  user: one
 
 two:
   name: MyString2
   file: MyString2
   file_type: MyString2
   file_size: 2mb
+  user: one
