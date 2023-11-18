@@ -1,4 +1,10 @@
-%h4 Create Visualizations
+.d-flex.align-items-center
+  %h4 Create Visualizations
+  .ms-auto
+    = render "common/data_table", title:  @file_upload, file_upload_id: params[:file_upload_id]
+
+%hr
+
 .m-4
   .row{"data-visualization-type-value": 'bar', "data-controller": "visualization", "data-index": params[:file_upload_id], "data-visualization": params[:id]}
     .col-md-2.list-group{"data-visualization-target":  "headers"}
@@ -12,4 +18,4 @@
       %canvas{"data-visualization-target":  "canvas", class: 'border rounded-1'}
 
 
-%div{ data: { controller: "tabulator", index: params[:file_upload_id] } }
+-# %div{ data: { controller: "tabulator", index: params[:file_upload_id] } }

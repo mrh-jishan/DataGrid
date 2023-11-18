@@ -16,6 +16,7 @@ export default class extends Controller {
                 layout: "fitData",
                 pagination: true, //enable pagination
                 paginationMode: "remote",
+                height:"calc(100vh - 115px)",
                 ajaxURL: `/file_uploads/${id}.json`, //ajax URL
                 columns: await this.fetchColumns(id)
             });

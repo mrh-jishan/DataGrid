@@ -1,8 +1,8 @@
-.d-flex
+.d-flex.align-items-center
   %h4
     = @data_stream
   .ms-auto
-    .d-flex
+    .d-flex.align-items-center
       .me-2
         = render "common/token_sgid", data_stream: @data_stream
       = render "common/connection_modal", data_stream: @data_stream

@@ -1,6 +1,7 @@
 .ms-auto
-  %button{class: "btn btn-primary", type: "button", title: t('.connection_info'), "data-bs-toggle": "modal", "data-bs-target": "#connectionInfo"}
-    %i.bi-info-circle
+  %span{"data-bs-toggle": "modal", "data-bs-target": "#connectionInfo"}
+    %button{class: "btn btn-primary", type: "button", "data-bs-toggle": "tooltip", "data-bs-title":  t('.connection_info') }
+      %i.bi-info-circle
   #connectionInfo.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "connectionInfoLabel", tabindex: "-1"}
     .modal-dialog.modal-dialog-centered
       .modal-content

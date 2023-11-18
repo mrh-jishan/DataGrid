@@ -54,11 +54,14 @@ en:
     new:
       create: Create
   data_streams:
-    connection_modal:
-      connection_info: Connection Info
     form:
       unique_column_name: Unique column seperated by comma
   data_stream_files:
     data_stream_file:
       reimport: Re-import
       destroy: Destroy
+  common:
+    connection_modal:
+      connection_info: Connection Info
+    data_table:
+      data_table: DataTable
