@@ -111,6 +111,4 @@ gem "pundit", "~> 2.3"
 
 gem "aws-sdk-s3", "~> 1.136"
 
-gem "hotwire-livereload", "~> 1.3", :group => :development
-
 gem "devise_uid", "~> 0.1.1"
