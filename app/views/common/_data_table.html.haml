@@ -1,10 +1,10 @@
 %span{"aria-controls" => "offcanvasScrolling", "data-bs-target" => "#offcanvasScrolling", "data-bs-toggle" => "offcanvas"}
   %button.btn.btn-primary{ "data-bs-toggle": "tooltip", "data-bs-title":  t('.data_table') }
     %i.bi-info-circle
-  #offcanvasScrolling.offcanvas.offcanvas-end.w-75{"aria-labelledby" => "offcanvasScrollingLabel", "data-bs-backdrop" => "false", "data-bs-scroll" => "true", tabindex: "-1"}
-    .offcanvas-header
-      %h5#offcanvasScrollingLabel.offcanvas-title
-        = title
-      %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", type: "button"}
-    .offcanvas-body
-      %div{class: "mt-3", data: { controller: "tabulator", index: file_upload_id } }
+#offcanvasScrolling.offcanvas.offcanvas-end.w-75{"data-bs-backdrop" => "true", "data-bs-scroll" => "true", tabindex: "-1"}
+  .offcanvas-header
+    %h5.offcanvas-title
+      = title
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", type: "button"}
+  .offcanvas-body
+    %div{class: "mt-3", data: { controller: "tabulator", index: file_upload_id } }
