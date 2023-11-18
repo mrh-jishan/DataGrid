@@ -13,7 +13,7 @@ class DataStreamsController < ApplicationController
     @data_stream = current_user.data_streams.new(data_stream_params)
     respond_to do |format|
       if @data_stream.save
-        format.html { redirect_to data_stream_path(@data_stream), notice: 'Data stream was added successfully.' }
+        format.html { redirect_to data_stream_data_stream_files_path(@data_stream), notice: 'Data stream was added successfully.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -25,6 +25,9 @@ class DataStreamsController < ApplicationController
   end
 
   def update
+
+    puts "data_stream_params--------------#{data_stream_params}"
+
     respond_to do |format|
       if @data_stream.update(data_stream_params)
         format.html { redirect_to data_streams_path, notice: 'Data stream was updated successfully.' }
@@ -45,7 +48,9 @@ class DataStreamsController < ApplicationController
   private
 
   def data_stream_params
-    params.require(:data_stream).permit :label
+    params.require(:data_stream).permit(:label, :unique_by).tap do |t|
+      t[:unique_by] = params[:data_stream][:unique_by].split(",")
+    end
   end
 
   def set_data_stream

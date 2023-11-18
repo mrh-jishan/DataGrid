@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_26_040518) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,10 +39,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_040518) do
   create_table "csv_rows", force: :cascade do |t|
     t.bigint "file_upload_id"
     t.jsonb "csv_row", default: {}, null: false
+    t.string "unique_by", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "unique_by", default: [], array: true
-    t.index ["csv_row", "file_upload_id"], name: "index_csv_rows_on_csv_row_and_file_upload_id", unique: true
+    t.index ["file_upload_id", "csv_row", "unique_by"], name: "index_csv_rows_on_file_upload_id_and_csv_row_and_unique_by", unique: true
     t.index ["file_upload_id"], name: "index_csv_rows_on_file_upload_id"
   end
 
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_040518) do
   create_table "data_streams", force: :cascade do |t|
     t.bigint "user_id"
     t.string "label"
+    t.string "unique_by", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_data_streams_on_user_id"
@@ -94,11 +95,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_040518) do
     t.string "file"
     t.string "file_type"
     t.bigint "file_size"
+    t.string "unique_by", default: [], array: true
+    t.integer "import_source", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.integer "import_source", default: 1
-    t.string "unique_by", default: [], array: true
     t.index ["user_id"], name: "index_file_uploads_on_user_id"
   end
 

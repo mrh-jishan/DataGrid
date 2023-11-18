@@ -5,5 +5,8 @@ class CreateCsvHeaders < ActiveRecord::Migration[7.0]
       t.string :name
       t.timestamps
     end
+
+    add_index :csv_headers, [:name, :file_upload_id], :unique => true
+
   end
 end

@@ -1,6 +1,8 @@
 %tr{id: dom_id(data_stream)}
   %td{scope: "row"}= data_stream.id
   %td= data_stream.label
+  %td= render "common/badges", badges: data_stream.unique_by
+  -# %td= data_stream.unique_by.compact.reject(&:empty?)
   %td= render "common/token_sgid", data_stream: data_stream
   %td= data_stream.created_at
   %td

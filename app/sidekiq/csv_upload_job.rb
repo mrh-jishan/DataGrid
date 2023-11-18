@@ -16,7 +16,7 @@ class CsvUploadJob
                                       file_upload_id: file_upload.id,
                                       unique_by: uniq_column_value(file_upload.unique_by, row) } }
 
-    CsvRow.upsert_all(csv_row_data, :unique_by => [:csv_row, :file_upload_id])
+    CsvRow.upsert_all(csv_row_data, :unique_by => [:file_upload_id, :csv_row, :unique_by])
   end
 
   def infer_aggregate_function(value)

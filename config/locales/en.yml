@@ -56,3 +56,9 @@ en:
   data_streams:
     connection_modal:
       connection_info: Connection Info
+    form:
+      unique_column_name: Unique column seperated by comma
+  data_stream_files:
+    data_stream_file:
+      reimport: Re-import
+      destroy: Destroy

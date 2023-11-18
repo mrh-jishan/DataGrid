@@ -9,7 +9,7 @@ class FileUpload < ApplicationRecord
 
   belongs_to :user
   has_many :csv_headers, :dependent => :destroy
-  has_many :csv_rows, :dependent => :destroy
+  has_many :csv_rows, :dependent => :delete_all # no dependent table
   has_many :visualizations, :dependent => :destroy
   has_many :aggregators, :through => :visualizations, :dependent => :destroy
 

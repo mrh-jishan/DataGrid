@@ -7,6 +7,9 @@ import { application } from "./application"
 import ChartController from "./chart_controller"
 application.register("chart", ChartController)
 
+import ClipboardController from "./clipboard_controller"
+application.register("clipboard", ClipboardController)
+
 import DashboardController from "./dashboard_controller"
 application.register("dashboard", DashboardController)
 
@@ -27,6 +30,9 @@ application.register("slim-select", SlimSelectController)
 
 import TabulatorController from "./tabulator_controller"
 application.register("tabulator", TabulatorController)
+
+import TagifyController from "./tagify_controller"
+application.register("tagify", TagifyController)
 
 import VisualizationController from "./visualization_controller"
 application.register("visualization", VisualizationController)
