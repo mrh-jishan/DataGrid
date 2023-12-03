@@ -33,14 +33,20 @@ en:
   hello: "Hello world"
   home:
     index:
-      file_upload: New Dataset
+      dataset: New Dataset
       uploaded_files: Uploaded Files
-  file_uploads:
+  datasets:
     show:
       visualization: Visualization %{id}
     new:
       upload: Upload
       accepted_file_types: "Accepted file types: CSV"
+      upload_dataset: Upload Dataset
+    dataset:
+      destroy: Destroy
+      show: Show
+    index:
+      new_dataset: New Dataset
   layouts:
     navbar:
       title: DataGrid
@@ -50,6 +56,8 @@ en:
   visualizations:
     new:
       create: Create
+    index:
+      new_visualization: New Visualization
   dashboards:
     new:
       create: Create

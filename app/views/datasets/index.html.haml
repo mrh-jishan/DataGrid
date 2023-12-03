@@ -1,0 +1,21 @@
+= link_to t('.new_dataset'), new_dataset_path, class: "btn btn-sm btn-primary", data: { turbo_frame: "modal" }
+
+.modal.fade{"aria-hidden" => "true", role: "dialog", "data-bs-focus": "false", "data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal"}
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      = turbo_frame_tag "modal"
+
+%hr
+
+%table.table
+  %thead
+    %tr
+      %th DataSet
+      %th Unique by
+      %th Import Source
+      %th No. of dashboards
+      %th CreatedAt
+      %th Action
+  %tbody{id: "datasets"}
+    = render partial: "dataset", collection: @datasets
+

@@ -1,4 +1,4 @@
-class FileUpload < ApplicationRecord
+class Dataset < ApplicationRecord
 
   mount_uploader :file, CsvFileUploader
 
@@ -15,7 +15,8 @@ class FileUpload < ApplicationRecord
 
   before_save :extract_metadata
 
-  validates :unique_by, :file, :presence => true, exclusion: { in: [nil, ""] }
+  validates :unique_by, :file, :presence => true, exclusion: { in: [nil, ""], message: "can't be blank" }
+  validates_presence_of :dataset_name
 
   def to_s
     name

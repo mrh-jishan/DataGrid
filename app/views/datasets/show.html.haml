@@ -1,15 +1,15 @@
 %h4
   File name:
-  = @file_upload.name
+  = @dataset.name
 %h4
   File type:
-  = @file_upload.file_type
+  = @dataset.file_type
 %h4
   File size:
-  = @file_upload.file_size
+  = @dataset.file_size
 %h4
   Row count:
-  = @file_upload.csv_rows.count
+  = @dataset.csv_rows.count
 
 -# %table.table.table-bordered.table-hover.table-striped.table-responsive
 -#   %thead
@@ -18,20 +18,20 @@
 -#         %th.text-center.align-middle= header.name
 -#   %tbody
 -#     - @csv_rows.each do |row|
--#       %tr{"data-id" => "#{row.id}", "data-item-id" => "#{row.file_upload_id}"}
+-#       %tr{"data-id" => "#{row.id}", "data-item-id" => "#{row.dataset_id}"}
 -#         - @csv_headers.each do |header|
 -#           %td.align-middle{"data-action" => "click->editable#edit", "data-column-name" => header.name, "data-controller" => "editable", "data-turbo-frame" => "item-frame"}
 -#             = row.csv_row[header.name]
 -# .d-flex.justify-content-end!= pagy_bootstrap_nav(@pagy)
 
-= link_to t('.back'), file_uploads_path
-= link_to t('.dashboard'), file_upload_dashboards_path(params[:id])
-= link_to t('.new_visualization'), file_upload_visualizations_path(@file_upload), :method => :post
-= link_to t('.visualizations'), file_upload_visualizations_path(@file_upload)
+= link_to t('.back'), datasets_path
+= link_to t('.dashboard'), dataset_dashboards_path(params[:id])
+= link_to t('.new_visualization'), dataset_visualizations_path(@dataset), :method => :post
+= link_to t('.visualizations'), dataset_visualizations_path(@dataset)
 
 %ul
-  - @file_upload.visualizations.each do |visualization|
+  - @dataset.visualizations.each do |visualization|
     %li
-      = link_to t('.visualization', id: visualization.id ), file_upload_visualization_path(@file_upload, visualization)
+      = link_to t('.visualization', id: visualization.id ), dataset_visualization_path(@dataset, visualization)
 
 %div{ data: { controller: "tabulator", index: params[:id] } }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_19_033338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,23 +27,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
   end
 
   create_table "csv_headers", force: :cascade do |t|
-    t.bigint "file_upload_id"
+    t.bigint "dataset_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "aggregate_function", default: "count", null: false
-    t.index ["file_upload_id"], name: "index_csv_headers_on_file_upload_id"
-    t.index ["name", "file_upload_id"], name: "index_csv_headers_on_name_and_file_upload_id", unique: true
+    t.index ["dataset_id"], name: "index_csv_headers_on_dataset_id"
+    t.index ["name", "dataset_id"], name: "index_csv_headers_on_name_and_dataset_id", unique: true
   end
 
   create_table "csv_rows", force: :cascade do |t|
-    t.bigint "file_upload_id"
+    t.bigint "dataset_id"
     t.jsonb "csv_row", default: {}, null: false
     t.string "unique_by", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["file_upload_id", "csv_row", "unique_by"], name: "index_csv_rows_on_file_upload_id_and_csv_row_and_unique_by", unique: true
-    t.index ["file_upload_id"], name: "index_csv_rows_on_file_upload_id"
+    t.index ["dataset_id", "csv_row", "unique_by"], name: "index_csv_rows_on_dataset_id_and_csv_row_and_unique_by", unique: true
+    t.index ["dataset_id"], name: "index_csv_rows_on_dataset_id"
   end
 
   create_table "dashboards", force: :cascade do |t|
@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
     t.index ["user_id"], name: "index_data_streams_on_user_id"
   end
 
-  create_table "file_uploads", force: :cascade do |t|
+  create_table "datasets", force: :cascade do |t|
     t.string "name"
     t.string "file"
     t.string "file_type"
@@ -100,7 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_file_uploads_on_user_id"
+    t.string "dataset_name"
+    t.index ["user_id"], name: "index_datasets_on_user_id"
   end
 
   create_table "platforms", force: :cascade do |t|
@@ -155,12 +156,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
   end
 
   create_table "visualizations", force: :cascade do |t|
-    t.bigint "file_upload_id"
+    t.bigint "dataset_id"
     t.string "chart_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "label"
-    t.index ["file_upload_id"], name: "index_visualizations_on_file_upload_id"
+    t.index ["dataset_id"], name: "index_visualizations_on_dataset_id"
   end
 
   add_foreign_key "user_roles", "roles"

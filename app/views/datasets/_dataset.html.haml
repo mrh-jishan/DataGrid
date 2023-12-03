@@ -1,0 +1,9 @@
+%tr{id: dom_id(dataset)}
+  %td{scope: "row"}= dataset.name
+  %td= render "common/badges", badges: dataset.unique_by
+  %td= dataset.import_source.humanize
+  %td= dataset.visualizations.count
+  %td= dataset.created_at
+  %td
+    =link_to t('.destroy'), dataset_path(dataset), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    =link_to t('.show'), dataset_visualizations_path(dataset), class: 'btn btn-sm btn-outline-primary'

@@ -1,14 +1,14 @@
 = turbo_frame_tag "modal" do
-  = simple_form_for @file_upload, html: { multipart: true } do |f|
+  = simple_form_for @dataset, html: { multipart: true } do |f|
     .modal-header
       %h1.modal-title.fs-5=t('.upload_dataset')
       %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+
     .modal-body{"data-controller": "file-upload"}
-      - if @file_upload.errors.any?
-        .alert.alert-danger
-          = @file_upload.errors.full_messages.to_sentence
+      = f.input :dataset_name, collection: @datasets, include_blank: false, input_html: {data: { controller: "slim-select" }}
       = f.input :file, as: :file, input_html: { "data-file-upload-target": "inputFile" }
       = f.input :unique_by, collection: [], include_blank: false,  hint: t('.accepted_file_types'),  input_html: { multiple: true, "data-file-upload-target": "uniqueBy"}
+
     .modal-footer
       %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
       = f.button :submit, t('.upload'), class: 'btn btn-primary'

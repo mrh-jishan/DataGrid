@@ -24,11 +24,11 @@ export default class extends Controller {
     }
 
     updateData(itemId, id, columnName, newValue) {
-        const url = `/file_uploads/${itemId}/csv_rows/${id}`;
+        const url = `/datasets/${itemId}/csv_rows/${id}`;
         const csrfToken = document.querySelector("meta[name='csrf-token']").content;
         const params = {
             _method: 'patch',
-            file_upload: {
+            dataset: {
                 [columnName]: newValue
             }
         };

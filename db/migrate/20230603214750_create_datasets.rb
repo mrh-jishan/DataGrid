@@ -1,6 +1,6 @@
-class CreateFileUploads < ActiveRecord::Migration[7.0]
+class CreateDatasets < ActiveRecord::Migration[7.0]
   def change
-    create_table :file_uploads do |t|
+    create_table :datasets do |t|
       t.string :name
       t.string :file
       t.string :file_type

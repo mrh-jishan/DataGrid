@@ -1,5 +1,6 @@
 import "@hotwired/turbo-rails"
-import * as bootstrap from "bootstrap"
+// import '@popperjs/core'
+// import * as bootstrap from "bootstrap"
 import "chartkick/chart.js"
 import "./controllers"
 
@@ -9,8 +10,6 @@ import {Turbo} from "@hotwired/turbo-rails";
 Turbo.StreamActions.redirect = function () {
     Turbo.visit(this.target);
 };
-
-// or using event listener
 
 document.addEventListener("turbo:before-stream-render", (event) => {
     const fallbackToDefaultActions = event.detail.render;
@@ -23,16 +22,18 @@ document.addEventListener("turbo:before-stream-render", (event) => {
     };
 });
 
+import {Tooltip} from "bootstrap"
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
+
+
 // import { Turbo } from "@hotwired/turbo-rails";
 
 // import {Modal} from "bootstrap"
 
 
-// import '@popperjs/core'
 // import 'bootstrap'
-import {Tooltip} from "bootstrap"
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
 
 // import * as bootstrap from "bootstrap"
 

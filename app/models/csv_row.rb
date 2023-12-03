@@ -1,6 +1,6 @@
 class CsvRow < ApplicationRecord
-  belongs_to :file_upload
-  has_many :csv_headers, :through => :file_upload
+  belongs_to :dataset
+  has_many :csv_headers, :through => :dataset
 
   scope :select_columns, -> (column_names) { column_names.map { |column_name, aggregate_function| select_column(column_name, aggregate_function) }.reduce(:merge) }
 

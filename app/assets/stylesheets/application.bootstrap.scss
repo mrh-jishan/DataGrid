@@ -1,9 +1,9 @@
 //$font-size-base: .7rem;
 
 @import 'bootstrap/scss/bootstrap';
+@import "slim-select/dist/slimselect";
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import "@yaireo/tagify/src/tagify";
-@import "slim-select/dist/slimselect";
 @import "tabulator-tables/dist/css/tabulator_bootstrap5.min";
 
 .sidebar {

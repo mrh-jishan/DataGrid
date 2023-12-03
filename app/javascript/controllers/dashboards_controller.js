@@ -92,9 +92,9 @@ export default class extends Controller {
                     column_names: encodeURIComponent(JSON.stringify(columnNames)),
                     group_by: encodeURIComponent(JSON.stringify(groupBy)),
                 });
-                const fileUploadId = this.element.dataset.index;
+                const datasetId = this.element.dataset.index;
 
-                mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
+                mrujs.fetch(`/datasets/${datasetId}/csv_rows.json?${queryParams}`)
                     .then((response) => response.json())
                     .then(res => {
                         const colors = generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)

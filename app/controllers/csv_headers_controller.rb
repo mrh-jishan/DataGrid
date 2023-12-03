@@ -19,8 +19,8 @@ class CsvHeadersController < ApplicationController
   protected
 
   def set_csv_headers
-    @file_upload = current_user.file_uploads.find(params[:file_upload_id])
-    @csv_headers = @file_upload.csv_headers
+    @dataset = current_user.datasets.find(params[:dataset_id])
+    @csv_headers = @dataset.csv_headers
   end
 
   def csv_header_params

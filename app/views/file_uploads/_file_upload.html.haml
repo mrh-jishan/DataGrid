@@ -1,9 +1,0 @@
-%tr{id: dom_id(file_upload)}
-  %td{scope: "row"}= file_upload.name
-  %td= file_upload.unique_by.compact.reject(&:empty?)
-  %td= file_upload.import_source.humanize
-  %td= file_upload.visualizations.count
-  %td= file_upload.created_at
-  %td
-    =link_to t('.destroy'), file_upload_path(file_upload), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
-    =link_to t('.show'), file_upload_visualizations_path(file_upload), class: 'btn btn-sm btn-outline-primary'

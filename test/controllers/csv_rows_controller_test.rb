@@ -5,11 +5,11 @@ class CsvRowsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     sign_in users(:one)
-    @file_upload = file_uploads(:one)
+    @dataset = datasets(:one)
   end
 
   test "should get index" do
-    get file_upload_csv_rows_url(@file_upload, format: :json, params: { column_names: '[]', group_by: '[]' })
+    get dataset_csv_rows_url(@dataset, format: :json, params: { column_names: '[]', group_by: '[]' })
     assert_response :success
   end
 end

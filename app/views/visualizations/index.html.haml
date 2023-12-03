@@ -1,21 +1,21 @@
 .d-flex.align-items-center
-  = link_to t('.new_visualization'), new_file_upload_visualization_path(@file_upload), class: "btn btn-sm btn-primary", data: { turbo_frame: "modal" }
-  .modal.fade{"data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
+  = link_to t('.new_visualization'), new_dataset_visualization_path(@dataset), class: "btn btn-sm btn-primary", data: { turbo_frame: "modal" }
+  .modal.fade{"aria-hidden" => "true", role: "dialog", "data-bs-focus": "false", "data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal", tabindex: "-1"}
     .modal-dialog.modal-dialog-centered
       .modal-content
         = turbo_frame_tag "modal"
 
   .ms-auto
-    = render "common/data_table", title:  @file_upload, file_upload_id: params[:file_upload_id]
+    = render "common/data_table", title:  @dataset, dataset_id: params[:dataset_id]
     -# %span{"aria-controls" => "offcanvasScrolling", "data-bs-target" => "#offcanvasScrolling", "data-bs-toggle" => "offcanvas"}
     -#   %button.btn.btn-primary{ "data-bs-toggle": "tooltip", "data-bs-title":  t('.data_table') }
     -#     %i.bi-info-circle
     -# #offcanvasScrolling.offcanvas.offcanvas-end.w-75{"aria-labelledby" => "offcanvasScrollingLabel", "data-bs-backdrop" => "false", "data-bs-scroll" => "true", tabindex: "-1"}
     -#   .offcanvas-header
-    -#     %h5#offcanvasScrollingLabel.offcanvas-title= @file_upload
+    -#     %h5#offcanvasScrollingLabel.offcanvas-title= @dataset
     -#     %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "offcanvas", type: "button"}
     -#   .offcanvas-body
-    -#     %div{class: "mt-3", data: { controller: "tabulator", index: params[:file_upload_id] } }
+    -#     %div{class: "mt-3", data: { controller: "tabulator", index: params[:dataset_id] } }
 
 %hr
 
@@ -32,7 +32,7 @@
 -# .card
 -#   .row
 -#     .col-md-8
--#       %div{class: "mt-3", data: { controller: "tabulator", index: params[:file_upload_id] } }
+-#       %div{class: "mt-3", data: { controller: "tabulator", index: params[:dataset_id] } }
 -#     .col-md-4
 -#       %table.table
 -#         %thead
@@ -52,7 +52,7 @@
     -#     %td= visualization.label
     -#     %td=visualization.created_at
     -#     %td
-    -#       =link_to t('.destroy'), file_upload_visualization_path(@file_upload, visualization), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
-    -#       =link_to t('.show'), file_upload_visualization_path(@file_upload, visualization), class: 'btn btn-sm btn-outline-primary'
+    -#       =link_to t('.destroy'), dataset_visualization_path(@dataset, visualization), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'
+    -#       =link_to t('.show'), dataset_visualization_path(@dataset, visualization), class: 'btn btn-sm btn-outline-primary'
 
--# %div{class: "mt-3", data: { controller: "tabulator", index: params[:file_upload_id] } }
+-# %div{class: "mt-3", data: { controller: "tabulator", index: params[:dataset_id] } }

@@ -20,12 +20,12 @@ json.data do
     json.set! :'Unique By', csv_row[:unique_by]
     json.merge! csv_row[:csv_row]
     # json.id csv_row['id']
-    # json.file_upload_id csv_row['file_upload_id']
+    # json.dataset_id csv_row['dataset_id']
     # json.created_at csv_row['created_at']
     # json.updated_at csv_row['updated_at']
   end
 end
 
 # json.headers @csv_headers
-# json.file_upload @file_upload
+# json.dataset @dataset
 json.pagy @pagy

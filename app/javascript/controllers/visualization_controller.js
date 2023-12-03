@@ -79,9 +79,9 @@ export default class extends Controller {
 
         const onRemoveChange = (evt) => {
             const visualizationId = this.element.dataset.visualization;
-            const fileUploadId = this.element.dataset.index;
+            const datasetId = this.element.dataset.index;
             const headerId = evt.item.dataset.id;
-            mrujs.fetch(`/file_uploads/${fileUploadId}/visualizations/${visualizationId}/aggregators/${headerId}`, {
+            mrujs.fetch(`/datasets/${datasetId}/visualizations/${visualizationId}/aggregators/${headerId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -104,9 +104,9 @@ export default class extends Controller {
             });
 
             const visualizationId = this.element.dataset.visualization;
-            const fileUploadId = this.element.dataset.index;
+            const datasetId = this.element.dataset.index;
 
-            mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
+            mrujs.fetch(`/datasets/${datasetId}/csv_rows.json?${queryParams}`)
                 .then((response) => response.json())
                 .then(data => {
                     const colors = this.generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)
@@ -145,7 +145,7 @@ export default class extends Controller {
 
             if (onInit === false) {
                 // save the visualizations
-                mrujs.fetch(`/file_uploads/${fileUploadId}/visualizations/${visualizationId}`, {
+                mrujs.fetch(`/datasets/${datasetId}/visualizations/${visualizationId}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",

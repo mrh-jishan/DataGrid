@@ -4,19 +4,19 @@ class CsvUploadJob
   include Sidekiq::Job
 
   def perform(csv_file_id)
-    file_upload = FileUpload.find(csv_file_id)
+    dataset = Dataset.find(csv_file_id)
 
-    data = CSV.read(file_upload.file.path, headers: true)
+    data = CSV.read(dataset.file.path, headers: true)
 
     first_row = data.first
-    csv_header_data = data.headers.map { |header| { name: header, file_upload_id: file_upload.id, aggregate_function: infer_aggregate_function(first_row[header]) } }
-    CsvHeader.upsert_all(csv_header_data, :unique_by => [:name, :file_upload_id])
+    csv_header_data = data.headers.map { |header| { name: header, dataset_id: dataset.id, aggregate_function: infer_aggregate_function(first_row[header]) } }
+    CsvHeader.upsert_all(csv_header_data, :unique_by => [:name, :dataset_id])
 
     csv_row_data = data.map { |row| { csv_row: row.to_h,
-                                      file_upload_id: file_upload.id,
-                                      unique_by: uniq_column_value(file_upload.unique_by, row) } }
+                                      dataset_id: dataset.id,
+                                      unique_by: uniq_column_value(dataset.unique_by, row) } }
 
-    CsvRow.upsert_all(csv_row_data, :unique_by => [:file_upload_id, :csv_row, :unique_by])
+    CsvRow.upsert_all(csv_row_data, :unique_by => [:dataset_id, :csv_row, :unique_by])
   end
 
   def infer_aggregate_function(value)

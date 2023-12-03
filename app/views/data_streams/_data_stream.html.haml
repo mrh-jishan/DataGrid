@@ -3,7 +3,7 @@
   %td= data_stream.label
   %td= render "common/badges", badges: data_stream.unique_by
   -# %td= data_stream.unique_by.compact.reject(&:empty?)
-  %td= render "common/token_sgid", data_stream: data_stream
+  -# %td= render "common/token_sgid", data_stream: data_stream
   %td= data_stream.created_at
   %td
     =link_to t('.destroy'), data_stream_path(data_stream), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'

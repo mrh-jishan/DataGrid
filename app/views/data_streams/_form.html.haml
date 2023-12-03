@@ -1,4 +1,7 @@
 = simple_form_for([@data_stream], html: {"data-turbo": false}) do |f|
   = f.input :label
+  -# = label_tag 'name', nil, class: "form-label"
+  -# = file_field_tag :file, class: "form-control"
   = f.input :unique_by, hint: t('.unique_column_name'), input_html: {"data-controller": 'tagify',  value: @data_stream.tagify }
+  -# %span{class: "input-group-text", id: "basic-addon2"} @example.com
   = f.submit class: 'btn btn-primary'

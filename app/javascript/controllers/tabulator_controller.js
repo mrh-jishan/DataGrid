@@ -17,14 +17,14 @@ export default class extends Controller {
                 pagination: true, //enable pagination
                 paginationMode: "remote",
                 height:"calc(100vh - 115px)",
-                ajaxURL: `/file_uploads/${id}.json`, //ajax URL
+                ajaxURL: `/datasets/${id}.json`, //ajax URL
                 columns: await this.fetchColumns(id)
             });
         })()
     }
 
     fetchColumns = (id) => {
-        return mrujs.fetch(`/file_uploads/${id}/csv_headers.json`)
+        return mrujs.fetch(`/datasets/${id}/csv_headers.json`)
             .then((response) => response.json())
     }
 }

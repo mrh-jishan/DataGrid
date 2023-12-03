@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :file_uploads do
+  resources :datasets do
     resources :csv_rows, :only => [:index, :update]
     resources :visualizations, :only => [:index, :new, :create, :show, :update, :destroy] do
       resources :aggregators, :only => [:destroy]
@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resources :data_stream_files
   end
 
-  root "file_uploads#index"
+  root "datasets#index"
 
   # match '/500', to: 'errors#internal_server_error', via: :all
   # match '/404', to: 'errors#not_found', via: :all

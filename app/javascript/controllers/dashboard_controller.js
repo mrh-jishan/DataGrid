@@ -51,7 +51,7 @@ export default class extends Controller {
             }
         });
 
-        const fileUploadId = this.element.dataset.index;
+        const datasetId = this.element.dataset.index;
         const columnNames = this.columnNamesValue;
         const groupBy = this.groupByValue;
 
@@ -60,7 +60,7 @@ export default class extends Controller {
             group_by: encodeURIComponent(JSON.stringify(groupBy)),
         });
 
-        mrujs.fetch(`/file_uploads/${fileUploadId}/csv_rows.json?${queryParams}`)
+        mrujs.fetch(`/datasets/${datasetId}/csv_rows.json?${queryParams}`)
             .then((response) => response.json())
             .then(data => {
                 const colors = this.generateDistinctColors([...Object.keys(groupBy), ...Object.keys(columnNames)].length * 4)

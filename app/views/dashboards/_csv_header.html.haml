@@ -12,10 +12,10 @@
           = csv_header.name
       %ul.dropdown-menu
         %li
-          = link_to "Sum", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "sum"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Sum", dataset_csv_header_path(params[:dataset_id], csv_header.id, {csv_header: {aggregate_function: "sum"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          = link_to "Count", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "count"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Count", dataset_csv_header_path(params[:dataset_id], csv_header.id, {csv_header: {aggregate_function: "count"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          = link_to "Max", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "max"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Max", dataset_csv_header_path(params[:dataset_id], csv_header.id, {csv_header: {aggregate_function: "max"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
         %li
-          = link_to "Min", file_upload_csv_header_path(params[:file_upload_id], csv_header.id, {csv_header: {aggregate_function: "min"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
+          = link_to "Min", dataset_csv_header_path(params[:dataset_id], csv_header.id, {csv_header: {aggregate_function: "min"}}), :method => :patch, data: { remote: true }, class: "dropdown-item"
