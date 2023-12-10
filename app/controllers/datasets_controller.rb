@@ -19,7 +19,7 @@ class DatasetsController < ApplicationController
       if @dataset.save
         CsvUploadJob.perform_async(@dataset.id)
         format.turbo_stream { render turbo_stream: turbo_stream.prepend('datasets', partial: 'datasets/dataset', locals: { dataset: @dataset }) }
-        format.html { redirect_to dataset_path(@dataset), notice: "File was successfully created." }
+        format.html { redirect_to dataset_path(@dataset), notice: "Dataset was successfully created." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/unprocessable_entity', locals: { exception: @dataset }) }
         format.html { render :new, status: :unprocessable_entity }

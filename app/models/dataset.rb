@@ -16,7 +16,7 @@ class Dataset < ApplicationRecord
   before_save :extract_metadata
 
   validates :unique_by, :file, :presence => true, exclusion: { in: [nil, ""], message: "can't be blank" }
-  validates :name, :presence => true, :uniqueness => { :case_sensitive => true }
+  validates :name, :presence => true, :uniqueness => { :case_sensitive => true, scope: :user }
 
   def to_s
     name
