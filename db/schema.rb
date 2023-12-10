@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_19_033338) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,10 +83,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_033338) do
 
   create_table "data_streams", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "dataset_id"
     t.string "label"
     t.string "unique_by", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dataset_id"], name: "index_data_streams_on_dataset_id"
     t.index ["user_id"], name: "index_data_streams_on_user_id"
   end
 
@@ -100,7 +102,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_033338) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.string "dataset_name"
     t.index ["user_id"], name: "index_datasets_on_user_id"
   end
 

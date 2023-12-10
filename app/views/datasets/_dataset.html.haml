@@ -2,6 +2,7 @@
   %td{scope: "row"}= dataset.name
   %td= render "common/badges", badges: dataset.unique_by
   %td= dataset.import_source.humanize
+  %td= dataset.csv_rows.count
   %td= dataset.visualizations.count
   %td= dataset.created_at
   %td

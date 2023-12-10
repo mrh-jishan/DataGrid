@@ -6,6 +6,7 @@ class DataStreamsController < ApplicationController
   end
 
   def new
+    @datasets = current_user.datasets
     @data_stream = current_user.data_streams.new
   end
 

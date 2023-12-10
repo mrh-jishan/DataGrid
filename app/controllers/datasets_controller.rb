@@ -15,7 +15,6 @@ class DatasetsController < ApplicationController
 
   def create
     @dataset = current_user.datasets.new(dataset_params)
-
     respond_to do |format|
       if @dataset.save
         CsvUploadJob.perform_async(@dataset.id)
@@ -51,7 +50,7 @@ class DatasetsController < ApplicationController
   end
 
   def dataset_params
-    params.require(:dataset).permit(:file, unique_by: [])
+    params.require(:dataset).permit(:name, :file, unique_by: [])
   end
 
 end

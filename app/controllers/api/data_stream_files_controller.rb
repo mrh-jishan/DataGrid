@@ -12,9 +12,9 @@ class Api::DataStreamFilesController < ApiController
     return handle_errors(data_stream_file) unless data_stream_file.save
 
     dataset = current_user.datasets.new(file: data_stream_file.file,
-                                                import_source: :data_stream,
-                                                unique_by: data_stream.unique_by,
-                                                dataset_name: data_stream_file_params[:dataset_name])
+                                        import_source: :data_stream,
+                                        unique_by: data_stream.unique_by,
+                                        name: data_stream_file_params[:dataset_name])
     return handle_errors(dataset) unless dataset.save
 
     CsvUploadJob.perform_async(dataset.id)

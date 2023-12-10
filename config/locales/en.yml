@@ -64,10 +64,18 @@ en:
   data_streams:
     form:
       unique_column_name: Unique column seperated by comma
+    index:
+      add_data_stream: Add data stream
+      from_existing_dataset: From existing dataset
+      new_data_stream: New data stream
   data_stream_files:
     data_stream_file:
       reimport: Re-import
       destroy: Destroy
+    index:
+      file: File
+      created_at: Created At
+      action: Action
   common:
     connection_modal:
       connection_info: Connection Info

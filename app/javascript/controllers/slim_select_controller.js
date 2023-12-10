@@ -13,7 +13,16 @@ export default class extends Controller {
     connect() {
         this.slimselect = new SlimSelect({
             select: this.element,
-            settings: this.settingsValue
+            settings: this.settingsValue,
+            events: {
+                addable: (value) => {
+                    return {
+                        text: value,
+                        value: value
+                    }
+                }
+            }
+
         });
     }
 

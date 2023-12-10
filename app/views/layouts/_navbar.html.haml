@@ -36,7 +36,7 @@
               %li
                 = link_to t('.profiles'), profiles_path, class: 'dropdown-item'
               %li
-                %hr.dropdown-divider/
+                %hr.dropdown-divider
               %li
                 = link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item', data: { 'turbo-method' => :delete }
         - else
