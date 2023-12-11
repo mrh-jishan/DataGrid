@@ -1,13 +1,9 @@
-.dropdown
-  %button.btn.btn-primary.btn-sm.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
-    = t('.add_data_stream')
-  %ul.dropdown-menu
-    %li
-      = link_to t('.from_existing_dataset'),  new_data_stream_path(use_dataset: true), class: "dropdown-item"
-    %li
-      %hr.dropdown-divider
-    %li
-      = link_to t('.new_data_stream'),  new_data_stream_path, class: "dropdown-item"
+= link_to t('.setup_data_stream'), new_data_stream_path, class: "btn btn-sm btn-primary", data: { turbo_frame: "modal" }
+
+.modal.fade{"aria-hidden" => "true", role: "dialog", "data-bs-focus": "false", "data-action" => "turbo:frame-load->modal#open turbo:submit-end->modal#close", "data-controller" => "modal"}
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      = turbo_frame_tag "modal"
 
 %hr
 

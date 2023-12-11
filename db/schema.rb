@@ -84,8 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_183212) do
   create_table "data_streams", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "dataset_id"
-    t.string "label"
-    t.string "unique_by", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dataset_id"], name: "index_data_streams_on_dataset_id"

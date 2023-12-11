@@ -14,21 +14,20 @@ class DataStreamsController < ApplicationController
     @data_stream = current_user.data_streams.new(data_stream_params)
     respond_to do |format|
       if @data_stream.save
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend('data_streams', partial: 'data_streams/data_stream', locals: { data_stream: @data_stream }) }
         format.html { redirect_to data_stream_data_stream_files_path(@data_stream), notice: 'Data stream was added successfully.' }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('error-container', partial: 'errors/unprocessable_entity', locals: { exception: @data_stream }) }
         format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   def edit
-
+    @datasets = current_user.datasets
   end
 
   def update
-
-    puts "data_stream_params--------------#{data_stream_params}"
-
     respond_to do |format|
       if @data_stream.update(data_stream_params)
         format.html { redirect_to data_streams_path, notice: 'Data stream was updated successfully.' }
@@ -49,9 +48,7 @@ class DataStreamsController < ApplicationController
   private
 
   def data_stream_params
-    params.require(:data_stream).permit(:label, :unique_by).tap do |t|
-      t[:unique_by] = params[:data_stream][:unique_by].split(",")
-    end
+    params.require(:data_stream).permit(:dataset_id)
   end
 
   def set_data_stream

@@ -5,7 +5,7 @@
       %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
 
     .modal-body{"data-controller": "file-upload"}
-      = f.input :name, collection: @datasets, value_method: :name, input_html: {data: { controller: "slim-select" }}
+      = f.input :name
       = f.input :file, as: :file, input_html: { "data-file-upload-target": "inputFile" }
       = f.input :unique_by, collection: [], include_blank: false,  hint: t('.accepted_file_types'),  input_html: { multiple: true, "data-file-upload-target": "uniqueBy"}
 

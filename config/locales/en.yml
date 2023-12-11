@@ -61,13 +61,18 @@ en:
   dashboards:
     new:
       create: Create
+      create_dashboard: Create dashboard
   data_streams:
     form:
       unique_column_name: Unique column seperated by comma
     index:
-      add_data_stream: Add data stream
-      from_existing_dataset: From existing dataset
-      new_data_stream: New data stream
+      setup_data_stream: Setup data stream
+    new:
+      setup_data_stream: Setup data stream
+    data_stream:
+      destroy: Destroy
+      edit: Edit
+      show: Show
   data_stream_files:
     data_stream_file:
       reimport: Re-import
