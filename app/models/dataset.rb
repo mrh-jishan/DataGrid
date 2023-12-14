@@ -2,16 +2,12 @@ class Dataset < ApplicationRecord
 
   mount_uploader :file, CsvFileUploader
 
-  enum import_source: {
-    manual_upload: 1,
-    data_stream: 2,
-  }
-
   belongs_to :user
   has_many :csv_headers, :dependent => :destroy
   has_many :csv_rows, :dependent => :delete_all # no dependent table
   has_many :visualizations, :dependent => :destroy
   has_many :aggregators, :through => :visualizations, :dependent => :destroy
+  has_many :data_streams, :dependent => :destroy
 
   before_save :extract_metadata
 

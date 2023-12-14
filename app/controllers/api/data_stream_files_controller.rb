@@ -11,19 +11,10 @@ class Api::DataStreamFilesController < ApiController
     data_stream_file = data_stream.data_stream_files.build(file: data_stream_file_params[:file])
     return handle_errors(data_stream_file) unless data_stream_file.save
 
-    dataset = current_user.datasets.find_or_initialize_by(name: data_stream.dataset.name)
+    data_stream.dataset.update(file: data_stream_file.file)
 
-    return handle_errors(dataset) unless dataset.update(file: data_stream_file.file)
-
-    # dataset = current_user.datasets.new(file: data_stream_file.file,
-    #                                     import_source: :data_stream,
-    #                                     unique_by: data_stream.dataset.unique_by,
-    #                                     name: data_stream.dataset.name)
-    return handle_errors(dataset) unless dataset.save
-
-    CsvUploadJob.perform_async(dataset.id)
+    CsvUploadJob.perform_async(data_stream.dataset_id)
     render json: data_stream_file, status: :created
-
   end
 
   private

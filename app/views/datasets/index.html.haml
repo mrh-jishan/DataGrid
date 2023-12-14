@@ -10,13 +10,12 @@
 %table.table
   %thead
     %tr
-      %th DataSet
-      %th Unique by
-      %th Import Source
-      %th No. of rows
-      %th No. of dashboards
-      %th CreatedAt
-      %th Action
+      %th= t('.dataset')
+      %th= t('.unique_by')
+      %th= t('.no_of_rows')
+      %th= t('.no_of_dashboards')
+      %th= t('.created_at')
+      %th= t('.action')
   %tbody{id: "datasets"}
     = render partial: "dataset", collection: @datasets
 

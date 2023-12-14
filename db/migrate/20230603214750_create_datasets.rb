@@ -6,7 +6,6 @@ class CreateDatasets < ActiveRecord::Migration[7.0]
       t.string :file_type
       t.bigint :file_size
       t.string :unique_by, array: true, default: []
-      t.integer :import_source, default: 1
       t.timestamps
     end
 

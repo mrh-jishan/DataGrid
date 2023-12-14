@@ -47,6 +47,12 @@ en:
       show: Show
     index:
       new_dataset: New Dataset
+      dataset: Dataset
+      unique_by: Unique By
+      no_of_rows: No. of rows
+      no_of_dashboards: No. of databases
+      created_at: CreatedAt
+      action: Action
   layouts:
     navbar:
       title: DataGrid

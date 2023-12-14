@@ -14,14 +14,14 @@ export default class extends Controller {
         this.slimselect = new SlimSelect({
             select: this.element,
             settings: this.settingsValue,
-            events: {
-                addable: (value) => {
-                    return {
-                        text: value,
-                        value: value
-                    }
-                }
-            }
+            // events: {
+            //     addable: (value) => {
+            //         return {
+            //             text: value,
+            //             value: value
+            //         }
+            //     }
+            // }
 
         });
     }
