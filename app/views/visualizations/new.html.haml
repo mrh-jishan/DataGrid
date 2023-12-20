@@ -5,6 +5,7 @@
       %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
     .modal-body
       = f.input :label
+      = f.input :chart_type,  collection: Visualization::CHART_TYPES.map { |key, value| [value, key] }, include_blank: false, input_html: { data: { controller: "slim-select" } }
     .modal-footer
       %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
       = f.button :submit, t('.create'), class: 'btn btn-primary'

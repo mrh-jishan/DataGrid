@@ -12,7 +12,7 @@ class VisualizationsController < ApplicationController
   end
 
   def create
-    @visualization = @dataset.visualizations.new(visualization_params.merge(chart_type: "bar"))
+    @visualization = @dataset.visualizations.new(visualization_params)
 
     respond_to do |format|
       if @visualization.save
@@ -59,7 +59,7 @@ class VisualizationsController < ApplicationController
   end
 
   def visualization_params
-    params.require(:visualization).permit(:label, :columnNames => {}, :groupBy => {})
+    params.require(:visualization).permit(:label, :chart_type, :columnNames => {}, :groupBy => {})
   end
 
 end

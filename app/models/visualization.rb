@@ -5,7 +5,9 @@ class Visualization < ApplicationRecord
   has_many :aggregators, :dependent => :destroy
   has_and_belongs_to_many :dashboards
 
-  validates :label, :presence => true
+  validates :label, :chart_type, :presence => true
+
+  CHART_TYPES = { bar: 'Bar Chart', line: 'Line Chart', pie: 'Pie Chart', radar: 'Radar Chart' }
 
   def patch_aggregators(column_names, group_by)
     upsert_data = aggregate_headers(column_names, group_by, self.id)
