@@ -9,47 +9,52 @@
   #curl-tab-pane.tab-pane.fade.show.active{"aria-labelledby" => "curl-tab", role: "tabpanel", tabindex: "0"}
     %pre.p-3
       :plain
-        curl -s --user 'api:YOUR_API_KEY' \\
-        https://api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages \\
-        -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \\
-        -F to=YOU@YOUR_DOMAIN_NAME \\
-        -F to=bar@example.com \\
-        -F subject='Hello' \\
-        -F text='Testing some Mailgun awesomeness!'
+        curl --location 'localhost:3000/api/data_stream_files' \
+        --header 'Authorization: YOUR_API_KEY' \
+        --form 'data_stream_file[file]=@"YOUR_DATA_STREAM_FILE"' \
+        --form 'data_stream_file[gid]="YOUR_DATA_STREAM_GID"'
   #ruby-tab-pane.tab-pane.fade{"aria-labelledby" => "ruby-tab", role: "tabpanel", tabindex: "0"}
     %pre.p-3
       :plain
-        def send_simple_message
-          RestClient.post "https://api:YOUR_API_KEY"\
-          "@api.mailgun.net/v3/YOUR_DOMAIN_NAME/messages",
-          :from => "Excited User <mailgun@YOUR_DOMAIN_NAME>",
-          :to => "bar@example.com, YOU@YOUR_DOMAIN_NAME",
-          :subject => "Hello",
-          :text => "Testing some Mailgun awesomness!"
-        end
+        require "uri"
+        require "net/http"
+
+        url = URI("localhost:3000/api/data_stream_files")
+
+        http = Net::HTTP.new(url.host, url.port);
+        request = Net::HTTP::Post.new(url)
+        request["Authorization"] = "YOUR_API_KEY"
+        form_data = [['data_stream_file[file]', File.open('YOUR_DATA_STREAM_FILE')],['data_stream_file[gid]', 'YOUR_DATA_STREAM_GID']]
+        request.set_form form_data, 'multipart/form-data'
+        response = http.request(request)
+        puts response.read_body
+
   #nodejs-tab-pane.tab-pane.fade{"aria-labelledby" => "nodejs-tab", role: "tabpanel", tabindex: "0"}
     %pre.p-3
       :plain
-        const API_KEY = 'YOUR_API_KEY';
-        const DOMAIN = 'YOUR_DOMAIN_NAME';
+        const axios = require('axios');
+        const FormData = require('form-data');
+        const fs = require('fs');
+        let data = new FormData();
+        data.append('data_stream_file[file]', fs.createReadStream('YOUR_DATA_STREAM_FILE'));
+        data.append('data_stream_file[gid]', 'YOUR_DATA_STREAM_GID');
 
-          import formData from 'form-data';
-          import Mailgun from 'mailgun.js';
-
-        const mailgun = new Mailgun(formData);
-        const client = mailgun.client({username: 'api', key: API_KEY});
-
-        const messageData = {
-          from: 'Excited User <me@samples.mailgun.org>',
-          to: 'foo@example.com, bar@example.com',
-          subject: 'Hello',
-          text: 'Testing some Mailgun awesomeness!'
+        let config = {
+          method: 'post',
+          maxBodyLength: Infinity,
+          url: 'localhost:3000/api/data_stream_files',
+          headers: {
+            'Authorization': 'YOUR_API_KEY',
+            ...data.getHeaders()
+          },
+          data : data
         };
 
-        client.messages.create(DOMAIN, messageData)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        axios.request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
