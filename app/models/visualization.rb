@@ -7,7 +7,7 @@ class Visualization < ApplicationRecord
 
   validates :label, :chart_type, :presence => true
 
-  CHART_TYPES = { bar: 'Bar Chart', line: 'Line Chart', pie: 'Pie Chart', radar: 'Radar Chart' }
+  CHART_TYPES = { bar: 'Bar Chart', line: 'Line Chart', pie: 'Pie Chart', doughnut: 'Doughnut Chart' , radar: 'Radar Chart' }
 
   def patch_aggregators(column_names, group_by)
     upsert_data = aggregate_headers(column_names, group_by, self.id)

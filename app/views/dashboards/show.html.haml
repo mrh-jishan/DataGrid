@@ -3,4 +3,4 @@
     .col-md-6
       = visualization.label
       - if visualization.y_axis_object.present?
-        %canvas.my-2{"data-controller": "dashboard", "data-index": visualization.dataset_id, "data-dashboard-type-value": 'bar', "data-dashboard-group-by-value": visualization.y_axis_object.to_json, "data-dashboard-column-names-value": visualization.x_axis_object.to_json,  class: 'border rounded-1'}
+        %canvas.my-2{"data-controller": "dashboard", "data-index": visualization.dataset_id, "data-dashboard-type-value": visualization.chart_type, "data-dashboard-group-by-value": visualization.y_axis_object.to_json, "data-dashboard-column-names-value": visualization.x_axis_object.to_json,  class: 'border rounded-1'}
