@@ -45,7 +45,8 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
-          bundle install --jobs 4 --retry 3    
+          bundle install --jobs 4 --retry 3
+          yarn install
 
       # Add or replace database setup steps here
       - name: Set up database schema
