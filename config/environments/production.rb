@@ -63,14 +63,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "data_grid_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'https://data-grid-142741d2a1cc.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => ENV["EMAIL_USERNAME"],
-    :password => ENV["MAILTRAP_PASSWORD"],
-    :address => 'sandbox.smtp.mailtrap.io',
-    :host => 'sandbox.smtp.mailtrap.io',
-    :port => '2525',
-    :authentication => :login
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "MYDOMAIN.mailgun.org",
+    :user_name => "postmaster@MYDOMAIN.mailgun.org",
+    :password => "MYPASSWORD"
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
