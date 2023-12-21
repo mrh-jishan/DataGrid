@@ -1,0 +1,10 @@
+= turbo_frame_tag "modal" do
+  = simple_form_for [@dashboard, @shared_dashboard] do |f|
+    .modal-header
+      %h1.modal-title.fs-5= t('.share_dashboard')
+      %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+    .modal-body
+      = f.input :expires_at, as: :string, wrapper: :input_group, input_html: { "data-controller": "flatpickr",  "data-flatpickr-options-value": { minDate: 'today'}.to_json}
+    .modal-footer
+      %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
+      = f.button :submit, t('.share'), class: 'btn btn-primary'

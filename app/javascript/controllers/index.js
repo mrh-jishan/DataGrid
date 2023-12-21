@@ -22,6 +22,9 @@ application.register("editable", EditableController)
 import FileUploadController from "./file_upload_controller"
 application.register("file-upload", FileUploadController)
 
+import FlatpickrController from "./flatpickr_controller"
+application.register("flatpickr", FlatpickrController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 

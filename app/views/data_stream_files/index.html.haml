@@ -4,8 +4,8 @@
   .ms-auto
     .d-flex.align-items-center
       .me-2
-        = render "common/token_sgid", data_stream: @data_stream
-      = render "common/connection_modal", data_stream: @data_stream
+        = render "common/token_sgid", sgid: @data_stream.to_global_id
+      = render "common/connection_modal"
 
 %hr
 

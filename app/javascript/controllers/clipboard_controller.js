@@ -2,13 +2,6 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="clipboard"
 export default class extends Controller {
-    // hasButtonTarget: boolean
-    // originalContent: string
-    // successDurationValue: number
-    // successContentValue: string
-    // timeout: number
-    // buttonTarget: HTMLElement
-    // sourceTarget: HTMLInputElement
 
     static targets = ['button', 'source']
     static values = {

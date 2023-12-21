@@ -13,7 +13,6 @@ class DashboardsController < ApplicationController
 
   def create
     @dashboard = current_user.dashboards.new(dashboard_params)
-
     respond_to do |format|
       if @dashboard.save
         format.turbo_stream { render turbo_stream: turbo_stream.redirect(dashboard_path(@dashboard)) }

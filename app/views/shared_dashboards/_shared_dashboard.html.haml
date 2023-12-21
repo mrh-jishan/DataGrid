@@ -1,0 +1,7 @@
+%tr{id: dom_id(shared_dashboard)}
+  %td{scope: "row"}= shared_dashboard.id
+  %td= render "common/token_sgid", sgid: shared_dashboard.to_sgid(expires_at: shared_dashboard.expires_at)
+  %td= shared_dashboard.expires_at
+  %td= shared_dashboard.created_at
+  %td
+    =link_to t('.destroy'), dashboard_shared_dashboard_path(@dashboard,shared_dashboard), data: { 'turbo-method' => :delete, confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger'

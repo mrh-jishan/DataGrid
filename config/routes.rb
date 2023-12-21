@@ -16,12 +16,12 @@ Rails.application.routes.draw do
     resources :csv_headers, :only => [:index, :update, :show]
   end
 
-  resources :dashboards, :only => [:index, :new, :create, :show, :destroy]
+  resources :dashboards, :only => [:index, :new, :create, :show, :destroy] do
+    resources :shared_dashboards
+  end
 
   resources :data_streams, :only => [:index, :new, :create, :edit, :destroy, :update] do
-    resources :data_stream_files do
-      patch 'import_again', on: :member
-    end
+    resources :data_stream_files
   end
 
   resources :profiles, :only => [:index, :edit, :update] do
@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   end
 
   root "datasets#index"
+
+  get '/s/:id', to: 'short_urls#show', as: :short_url
 
   # match '/500', to: 'errors#internal_server_error', via: :all
   # match '/404', to: 'errors#not_found', via: :all
