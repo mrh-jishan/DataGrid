@@ -1,7 +1,6 @@
 class ShortUrl < ApplicationRecord
 
   belongs_to :shareable, polymorphic: true
-  has_many :short_url_views, dependent: :destroy
 
   validates :slug, :presence => true, :uniqueness => { :case_sensitive => true }
   validates :expires_at, :presence => true

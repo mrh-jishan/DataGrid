@@ -1,5 +1,5 @@
 class ShortUrlsController < ApplicationController
-  before_action :set_dashboard, :only => [:index, :new, :create]
+  before_action :set_dashboard, :only => [:index, :new, :create, :destroy]
 
   def index
     @short_urls = @dashboard.short_urls
@@ -26,6 +26,15 @@ class ShortUrlsController < ApplicationController
     @short_url = ShortUrl.find_by(:slug => ShortCode.decode(params[:slug]))
     @dashboard = @short_url.shareable
     render layout: "shared"
+  end
+
+  def destroy
+    @short_url = @dashboard.short_urls.find(params[:id])
+    @short_url.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboards_path, notice: 'ShortUrl was successfully destroyed.' }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@short_url) }
+    end
   end
 
   protected
