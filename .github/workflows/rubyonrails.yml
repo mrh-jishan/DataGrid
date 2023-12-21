@@ -39,8 +39,6 @@ jobs:
       - name: Set up database schema
         run: bin/rails db:schema:load
 
-      - name: precompile assets
-        run: rails assets:precompile
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
