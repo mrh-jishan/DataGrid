@@ -8,4 +8,4 @@ namespace :javascript do
   end
 end
 
-Rake::Task["assets:precompile"].enhance(["javascript:build"])
+Rake::Task["assets:precompile"].enhance(["javascript:build"]).enhance(["db:migrate"])
