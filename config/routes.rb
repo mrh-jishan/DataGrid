@@ -48,9 +48,12 @@ Rails.application.routes.draw do
     resources :data_stream_files
   end
 
-  root "datasets#index"
+  namespace :shared do
+    # get ':slug', to: 'short_urls#show', as: :short_url
+    resources :dashboards, :only => [:show]
+  end
 
-  get '/s/:slug', to: 'short_urls#show', as: :short_url
+  root "datasets#index"
 
   # namespace :shared do
   # resources :short_urls

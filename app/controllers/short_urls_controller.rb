@@ -1,5 +1,5 @@
 class ShortUrlsController < ApplicationController
-  before_action :set_dashboard, :only => [:index, :new, :create, :destroy]
+  before_action :set_dashboard
 
   def index
     @short_urls = @dashboard.short_urls
@@ -20,12 +20,6 @@ class ShortUrlsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
-  end
-
-  def show
-    @short_url = ShortUrl.find_by(:slug => ShortCode.decode(params[:slug]))
-    @dashboard = @short_url.shareable
-    render layout: "shared"
   end
 
   def destroy
