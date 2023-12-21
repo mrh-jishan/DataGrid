@@ -7,10 +7,10 @@
   %thead
     %tr
       %th #
-      %th= t('.sgid')
+      %th= t('.slug')
       %th= t('.expires_at')
       %th= t('.created_at')
       %th= t('.action')
   %tbody{id: "data_stream_files"}
-    = render partial: "shared_dashboard", collection: @shared_dashboards
+    = render partial: "short_url", collection: @short_urls
 

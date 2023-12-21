@@ -114,14 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_051124) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "shared_dashboards", force: :cascade do |t|
-    t.bigint "dashboard_id"
-    t.datetime "expires_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dashboard_id"], name: "index_shared_dashboards_on_dashboard_id"
-  end
-
   create_table "short_url_views", force: :cascade do |t|
     t.bigint "link_id"
     t.string "user_agent"
@@ -134,13 +126,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_051124) do
   create_table "short_urls", force: :cascade do |t|
     t.string "shareable_type"
     t.bigint "shareable_id"
-    t.string "shared_url"
-    t.string "original_url"
+    t.string "slug"
     t.datetime "expires_at"
     t.integer "views_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shareable_type", "shareable_id"], name: "index_short_urls_on_shareable"
+    t.index ["slug"], name: "index_short_urls_on_slug", unique: true
   end
 
   create_table "user_roles", force: :cascade do |t|

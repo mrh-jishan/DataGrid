@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :dashboards, :only => [:index, :new, :create, :show, :destroy] do
-    resources :shared_dashboards
+    resources :short_urls
   end
 
   resources :data_streams, :only => [:index, :new, :create, :edit, :destroy, :update] do
@@ -50,7 +50,13 @@ Rails.application.routes.draw do
 
   root "datasets#index"
 
-  get '/s/:id', to: 'short_urls#show', as: :short_url
+  get '/s/:slug', to: 'short_urls#show', as: :short_url
+
+  # namespace :shared do
+  # resources :short_urls
+  # get ':id', to: 'shared/short_urls#show', as: :short_url
+  # end
+  # get '/s/:id', to: 'short_urls#show', as: :short_url
 
   # match '/500', to: 'errors#internal_server_error', via: :all
   # match '/404', to: 'errors#not_found', via: :all

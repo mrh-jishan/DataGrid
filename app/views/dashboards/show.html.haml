@@ -1,7 +1,7 @@
 .d-flex.align-items-center
-  = link_to t('.share_dashboard'), new_dashboard_shared_dashboard_path(@dashboard), class: "btn btn-sm btn-primary",  data: { turbo_frame: "modal" }
+  = link_to t('.share_dashboard'), new_dashboard_short_url_path(@dashboard), class: "btn btn-sm btn-primary",  data: { turbo_frame: "modal" }
   .ms-auto
-    = link_to dashboard_shared_dashboards_path(@dashboard), class: "btn btn-primary",  "data-bs-toggle": "tooltip", "data-bs-title":  t('.shared_links') do
+    = link_to dashboard_short_urls_path(@dashboard), class: "btn btn-primary",  "data-bs-toggle": "tooltip", "data-bs-title":  t('.shared_links') do
       %i.bi-info-circle
 
 

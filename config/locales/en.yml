@@ -93,6 +93,6 @@ en:
       connection_info: Connection Info
     data_table:
       data_table: DataTable
-  shared_dashboards:
+  short_urls:
     new:
       share: Share

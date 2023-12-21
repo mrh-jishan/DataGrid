@@ -1,5 +1,5 @@
 = turbo_frame_tag "modal" do
-  = simple_form_for [@dashboard, @shared_dashboard] do |f|
+  = simple_form_for [@dashboard, @short_url] do |f|
     .modal-header
       %h1.modal-title.fs-5= t('.share_dashboard')
       %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
