@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
 
   DEFAULT_ALERT_CLASS = "alert alert-primary alert-dismissible fade show".freeze
   ALERT_CLASS = {
