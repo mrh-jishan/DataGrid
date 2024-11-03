@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include ExceptionHandler
+  # include ExceptionHandler
   before_action :authenticate_user!
-
 end

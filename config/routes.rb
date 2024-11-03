@@ -1,6 +1,15 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
+
+  # Defines the root path route ("/")
+  # root "posts#index"
+
 
   # get 'errors/internal_server_error'
   # get 'errors/not_found'
@@ -37,12 +46,12 @@ Rails.application.routes.draw do
   #   resources :user_resources # Replace with your user-specific routes
   # end
 
-  authenticate :user, ->(user) { user.admin? } do
-    namespace :admin do
-      resources :platforms
-      mount Sidekiq::Web => "/sidekiq"
-    end
-  end
+  # authenticate :user, ->(user) { user.admin? } do
+  #   namespace :admin do
+  #     resources :platforms
+  #     mount Sidekiq::Web => "/sidekiq"
+  #   end
+  # end
 
   namespace :api, defaults: { format: :json } do
     resources :data_stream_files
@@ -65,5 +74,5 @@ Rails.application.routes.draw do
   # match '/404', to: 'errors#not_found', via: :all
   # match '/400', to: 'errors#bad_request', via: :all
   # match '*path', to: 'errors#not_found', via: :all
-
+  #
 end

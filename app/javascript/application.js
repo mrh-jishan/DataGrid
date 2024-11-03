@@ -1,8 +1,6 @@
 import "@hotwired/turbo-rails"
-// import '@popperjs/core'
-// import * as bootstrap from "bootstrap"
-import "chartkick/chart.js"
 import "./controllers"
+import {Tooltip} from "bootstrap"
 
 
 import {Turbo} from "@hotwired/turbo-rails";
@@ -22,7 +20,6 @@ document.addEventListener("turbo:before-stream-render", (event) => {
     };
 });
 
-import {Tooltip} from "bootstrap"
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))
@@ -53,5 +50,3 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(
 //         }
 //     };
 // });
-
-console.log('this si lig her')

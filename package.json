@@ -1,27 +1,33 @@
 {
-  "name": "data_grid",
-  "private": "true",
-  "dependencies": {
-    "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^7.3.0",
-    "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.1",
-    "bootstrap-icons": "^1.11.1",
-    "cable_ready": "^5.0.0",
-    "chart.js": "^4.3.0",
-    "chartkick": "^5.0.1",
-    "esbuild": "^0.18.11",
-    "flatpickr": "^4.6.13",
-    "mrujs": "^1.0.0",
-    "sass": "^1.65.1",
-    "slim-select": "^2.5.1",
-    "sortablejs": "^1.15.0",
-    "stimulus-rails-nested-form": "^4.1.0",
-    "tabulator-tables": "^5.5.0"
+  "name": "app",
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "sass": "^1.80.6"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build:css:compile": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
+    "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
+    "build:css": "yarn build:css:compile && yarn build:css:prefix",
+    "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\""
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.12",
+    "@popperjs/core": "^2.11.8",
+    "autoprefixer": "^10.4.20",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "chart.js": "^4.4.6",
+    "flatpickr": "^4.6.13",
+    "mrujs": "^1.0.2",
+    "nodemon": "^3.1.7",
+    "postcss": "^8.4.47",
+    "postcss-cli": "^11.0.0",
+    "slim-select": "^2.9.2",
+    "sortablejs": "^1.15.3",
+    "tabulator-tables": "^6.3.0"
   },
   "browserslist": [
     "defaults"

@@ -1,3 +1,3 @@
 module DatasetsHelper
-  include Pagy::Frontend
+  # include Pagy::Frontend
 end
