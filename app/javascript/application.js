@@ -53,3 +53,5 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(
 //         }
 //     };
 // });
+
+console.log('this si lig her')
